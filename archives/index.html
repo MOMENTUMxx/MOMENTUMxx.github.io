@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Gridea</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1597203685736">
+<link rel="shortcut icon" href="/favicon.ico?v=1597204217119">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -180,6 +180,12 @@
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
     <p class="site-author-name">适用 Gemini,Pisces 布局,版权说明需配置</p>
     
+    <div class="site-description right-motion">
+      
+        <p id="binft">嘻嘻哈哈的</p>
+      
+    </div>
+    
   </div>
   <div class="sidebar-item side-item-stat right-motion">
     <div class="sidebar-item-box">
@@ -203,6 +209,13 @@
     </div>
   </div>
   
+    
+      <div class="sidebar-item">
+        <span class="site-item-rss">
+            <i class="fa fa-rss"></i>
+            <a href="https://MOMENTUMxx.github.io/atom.xml" target="_blank">RSS</a>
+        </span>
+      </div>
     
   
   
@@ -308,7 +321,7 @@
   
 <link rel="stylesheet" href="/media/live2d/css/live2d.css" />
 <div class="box-scale">
-  <div id="landlord" style="left: 5px;bottom: px;"
+  <div id="landlord" style="left: 5px;bottom: 300px;"
     data-key="">
     <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
     
@@ -787,7 +800,7 @@
 		}
 		$(document).ready(function () {
 			var AIimgSrc = [];
-			let chooseLive2d = 'rem'
+			let chooseLive2d = 'histoire'
 			if (chooseLive2d === 'histoire') {
 				AIimgSrc.push(message_Path + "model/histoire/histoire.1024/texture_00.png");
 				AIimgSrc.push(message_Path + "model/histoire/histoire.1024/texture_01.png");
@@ -847,44 +860,8 @@
   
   
   
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-  <div class="aplayer" id="aplayer"></div>
-  <script>
-  let musics = JSON.parse('[]');
-  let mediaMusic = [];
-  for (let i = 0; i < musics.length; i++) {
-    let item = musics[i];
-    mediaMusic.push({
-      name: item.musicName,
-      artist: item.author,
-      url: item.musicLink,
-      lrc: item.lrc,
-      cover: item.cover
-    });
-  }
-
-  const ap = new APlayer({
-      container: document.getElementById('aplayer'),
-      fixed: true,
-      lrcType: 3,
-      listFolded: false,
-      listMaxHeight: 90,
-      audio: mediaMusic
-  });
-  window.addEventListener('load', function() {
-    let postBody = document.querySelector('#post_body');
-    let hs = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-    postBody && hs.forEach(h => {
-      let helems = postBody.querySelectorAll(h);
-      if (helems.length > 0) {
-        helems.forEach(elem => {
-          elem.id = encodeURI(elem.id);
-        })
-      }
-    })
-  })
-  </script>
+  <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://player.lmih.cn/player/js/player.js" id="myhk" key="demo" m="1"></script>
 
 
   
@@ -1387,6 +1364,15 @@
 </script>
 <script src="/media/js/motion.js"></script>
 
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script>
+  var scroll = new SmoothScroll('a[href*="#"]', {
+    speed: 200
+  });
+</script>
+
+
+<script src="/media/js/mouse/peace.js"></script>
 
 
 <script src="/media/js/cool.js"></script>
