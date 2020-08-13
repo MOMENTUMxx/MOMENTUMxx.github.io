@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MOMENTUMxx.github.io</id>
     <title>王璐杰的BLOG</title>
-    <updated>2020-08-13T04:30:27.253Z</updated>
+    <updated>2020-08-13T13:03:08.756Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MOMENTUMxx.github.io"/>
     <link rel="self" href="https://MOMENTUMxx.github.io/atom.xml"/>
@@ -10,6 +10,109 @@
     <logo>https://MOMENTUMxx.github.io/images/avatar.png</logo>
     <icon>https://MOMENTUMxx.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 王璐杰的BLOG</rights>
+    <entry>
+        <title type="html"><![CDATA[搭建你的专属博客]]></title>
+        <id>https://MOMENTUMxx.github.io/post/ge-ren-bo-ke-de-da-jian-ji-yu-dao-de-yi-xie-wen-ti/</id>
+        <link href="https://MOMENTUMxx.github.io/post/ge-ren-bo-ke-de-da-jian-ji-yu-dao-de-yi-xie-wen-ti/">
+        </link>
+        <updated>2020-08-13T07:45:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>最近搭建了一个简易的个人博客，正好有时间将这个过程大致记录下来，方便自己日后的查看，也希望能帮助到有需要的人😏😏<br>
+关键词：github pages，freenom，cloudflare，gridea</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>最近搭建了一个简易的个人博客，正好有时间将这个过程大致记录下来，方便自己日后的查看，也希望能帮助到有需要的人😏😏<br>
+关键词：github pages，freenom，cloudflare，gridea</p>
+<!-- more -->
+<h1 id="搭建github-pages">搭建GitHub Pages</h1>
+<p>GitHub Pages是一个轻量级的个人博客服务，具有以下的一些优势:</p>
+<ul>
+<li>完全免费</li>
+<li>无须购买云服务进行搭建，只需按步骤一步步操作</li>
+<li>支持的功能丰富，可以绑定域名、使用免费的HTTPS、DIY网站的主题、使用插件...</li>
+<li>GitHub会替我们处理系统维护、文件存储一类的事情，我们只需要专注于文章的创作<br>
+首先需要一个GitHub的账号，在个人主页中创建一个新的Repository<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597306995353.png" alt="" loading="lazy"><br>
+在 Repository name 的位置填写域名，格式：用户名.github.io<br>
+创建成功后点击右上角Settings,找到 GitHub Pages 选项，选择一个 GitHub 官方提供的主题<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597307223084.jpg" alt="" loading="lazy"><br>
+随意选择一个主题后GitHub Pages 就会自动帮你生成好网站，在跳转的界面点击 Commit changes 按钮，网站就可以访问了<br>
+在浏览器输入你的项目名称，也就是 用户名.github.io 即可看到你个人网站的主页啦~<br>
+接下来我们还需要配置自定义域名和开启HTTPS功能，稍后会说到如何申请一个免费的域名，将申请到的域名填写在Custom domain一栏，然后勾选Enforce HTTPS即可<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597313250998.png" alt="" loading="lazy"></li>
+</ul>
+<h1 id="注册freenom免费域名">注册freenom免费域名</h1>
+<p>个人博客的搭建少不了用到一枚域名，虽然现在的域名很便宜，但免费的还是香啊~<br>
+我们熟知的免费域名有.tk，.ml，.cf等。.tk是南太平洋岛国托克劳的顶级域名，.ml是马里的顶级域名，.cf是中非共和国的域名。以前这些免费域名都是分开注册的，后来都被托管到了freenom，更加方便大家的注册。<br>
+话不多说，直接开搞！<br>
+首先进入freenom的<a href="http://www.freenom.com">官网</a>，输入一个你喜欢的域名然后点击检查可用性<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597308712913.png" alt="" loading="lazy"><br>
+选择一个点击现在获取，然后点击右上角完成<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597308969452.png" alt="" loading="lazy"><br>
+选择最长有效期十二个月有效，然后点击continue；需要注意，务必在域名即将到期前，手动续期域名，否则你可能会失去你拥有的域名。<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597309052877.png" alt="" loading="lazy"><br>
+接下来需要进行邮件验证或是登录谷歌账号，我选择登录谷歌账户（不知道为什么每隔一会儿我的登录信息就会失效要求重新登陆，难道是人品不好？？）<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597309216978.png" alt="" loading="lazy"><br>
+登陆以后先别着急，有一个地方需要注意，我们需要处于科学上网的环境，并且地址需要在<strong>美国</strong>，一定要在美国，否则会出问题。所以接下来我们修改自己的个人信息<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597309728208.png" alt="" loading="lazy"><br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597309734629.png" alt="" loading="lazy"><br>
+地址这里我只是做一个演示，重点是要在美国<br>
+更改成功以后就可以进到购物车愉快的下单啦<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597310001604.png" alt="" loading="lazy"><br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597310006316.png" alt="" loading="lazy"><br>
+至此在freenom申请一个免费的域名就基本完成了，还留下一点点工作，就是配置DNS域名服务器，将其更改成CloudFlare提供给我们的地址（稍后会说到如何获取）<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597323177509.png" alt="" loading="lazy"><br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597312707981.png" alt="" loading="lazy"><br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597312713919.png" alt="" loading="lazy"><br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597312719261.png" alt="" loading="lazy"></p>
+<h1 id="给个人博客套上cdn加速">给个人博客套上CDN加速</h1>
+<p>CDN的全称是Content Delivery Network，即内容分发网络。简单来说就是套上CDN之后会隐藏你的真实IP，访客会通过访问就近CDN服务器再访问你的网站，能保证网站访问速度，降低延迟，能抵御一定的攻击。通俗一点来说就是网络加速器，但是目前国内的CDN加速服务都是收费的，包括腾讯云、阿里云都提供相关服务。而且国内需要备案。所以我们选择Cloudflare（也叫cf）<br>
+还是先来到<a href="https://www.cloudflare.com/">官网</a>，注册并登录<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597310725765.png" alt="" loading="lazy"><br>
+选择添加站点到下一步，这里的站点输入我们刚才在freenom免费申请的域名<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597310732345.png" alt="" loading="lazy"><br>
+之后会要求我们选择一个计划，我们选择一个免费的即可，跟着提示信息走就可以了<br>
+有两个地方是需要我们来关注的：</p>
+<ol>
+<li>我们需要添加DNS记录：<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597311520674.png" alt="" loading="lazy"><br>
+类型这里可以根据需求进行选择，如你想要解析到一个IPV4地址，则选择&quot;A&quot;;如你想要解析到一个IPV6地址，则选择&quot;AAAA&quot;;如你需要将域名指向另一个域名，再由另一个域名提供ip地址，则选择&quot;CNAME&quot;等等诸如此类，具体可查看类型介绍<br>
+因为我们的博客托管到GitHub Pages上，所以这里的类型选择CNAME，名称填写在freenom申请到的域名，目标填写在GitHub Pages上的项目地址也就是 用户名.github.io，TTL选择自动即可，然后将后面的云朵点亮表示通过通过 Cloudflare 代理流量</li>
+<li>另一个需要关注的地方就是Cloudflare为我们提供的域名服务器，把它们填写在之前提过的在freenom配置DNS的位置就可以了，同时修改成功后会收到dns服务器修改成功的邮件<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597312287482.png" alt="" loading="lazy"><br>
+CloudFlare有一些好用的功能，比如：</li>
+</ol>
+<ul>
+<li>免费且快速的DNS服务</li>
+<li>免费的SSL证书</li>
+<li>限制某些地区的IP访问等操作</li>
+<li>防止网络攻击</li>
+<li>网站缓存和加速</li>
+<li>一个cloudflare账户免费绑定多个网站<br>
+更加详细的使用教程可以参考<a href="https://www.jianshu.com/p/1e73c2d66ac8">这里</a></li>
+</ul>
+<h1 id="gridea-更方便的管理github-pages">Gridea--更方便的管理GitHub Pages</h1>
+<p>点击<a href="https://gridea.dev/">这里</a>进入官网下载Gridea的客户端，虽然搭建博客的过程可能让你觉得简单，但是管理和推送文章却相对麻烦不少，在<a href="https://pages.github.com/">官方教程</a>里，我们需要经历繁琐的步骤才能发布一篇文章和修改个人空间界面。相较于官方提供的 GitHub Desktop 和在终端使用 Git 的方法管理 Github Pages，Gridea 这款工具则更为的便捷和优雅，它能让作为创作者的你更专注于写作<br>
+接下来我们说一下Gridea的配置和基本使用方法<br>
+首先是基本配置<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597313686244.png" alt="" loading="lazy"><br>
+还是比较直观的，平台选择GitHub Pages，域名选择 https:// 然后填写 用户名.github.io，令牌在<a href="https://github.com/settings/tokens">这里</a>获取，CNAME填写我们在freenom申请到的域名<br>
+这里有个安全上的小 Tip，我们在创建 Personal access tokens 的时候，只需要赋予 repo 的权限即可，这样最大程度减少 Token 出现泄漏后可能造成的安全风险。<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597313962084.png" alt="" loading="lazy"><br>
+配置好后可以点击“检测远程连接”按钮进行测试<br>
+Gridea可以让你选择使用不同的主题来满足你的个性化需求，在<a href="https://gridea.dev/themes/">这里</a>可以看到官网上的主题市场，快去选择一款酷炫的主题并自定义它的配置吧~</p>
+<h1 id="可能遇到的问题及解决方法">可能遇到的问题及解决方法</h1>
+<ol>
+<li>使用CloudFlare后提示“将您重定向的次数过多”<br>
+原因：如果服务器设置了HTTP重定向到HTTPS，由于CloudFlare CDN默认SSL设置为“Flexible”模式（HTTP请求），这时服务器对于CloudFlare的响应会被加密，从而访问失败并不断重复发送相同请求。访问网站会提示“将您重定向的次数过多”或“ERR_TOO_MANY_REDIRECTS”错误，按提示清除浏览器Cookie也没用<br>
+解决方法：只需调整CloudFlare后台Crypto页面里的SSL设置，改为 Full 或 Full (strict) 模式（前者不验证服务器证书，后者则会）<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1597322269245.png" alt="" loading="lazy"></li>
+<li>打开网站后css的样式不对，F12的错误信息为：Mixed Content: The page at 'xxx' was loaded over HTTPS, but requested an insecure resource 'xxx'.<br>
+原因：HTTPS页面里动态的引入HTTP资源，比如引入一个js文件，会被直接block掉的.在HTTPS页面里通过AJAX的方式请求HTTP资源，也会被直接block掉的。<br>
+解决方法：页面的head中加入：<br>
+<code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;upgrade-insecure-requests&quot;&gt;</code><br>
+意思是自动将http的不安全请求升级为https</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://MOMENTUMxx.github.io/post/hello-gridea/</id>

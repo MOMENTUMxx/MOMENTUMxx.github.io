@@ -2147,23 +2147,23 @@ p > code {
       color: #f59f00;
       border-bottom-color: #f59f00;
     }.active-current > a {
-      color: #fa5252 !important;
-      border-bottom-color: #fa5252 !important;
+      color: #228be6 !important;
+      border-bottom-color: #228be6 !important;
     }
     .sidebar-title-active {
-      color: #fa5252;
-      border-bottom-color: #fa5252;
+      color: #228be6;
+      border-bottom-color: #228be6;
     }
     .sidebar-title-item:hover {
-      color: #fa5252 !important;
+      color: #228be6 !important;
     }
     .active-show > a {
-      color: #fa5252;
-      border-bottom-color: #fa5252;
+      color: #228be6;
+      border-bottom-color: #228be6;
     }
     .active-hidden > a {
-      color: #fa5252;
-      border-bottom-color: #fa5252;
+      color: #228be6;
+      border-bottom-color: #228be6;
     }.bg-color {
       background-color: #fff5f5cc;
     }
