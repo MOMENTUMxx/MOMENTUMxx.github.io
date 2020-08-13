@@ -2051,15 +2051,17 @@ p > code {
     margin-bottom: 10px;
   }
 }
-body {
+.bg-color .bg-color {
+      background: transparent !important;
+    }body {
       background-color: #eee;
     }.header {
-        width: 960px;
+        width: 1080px;
         margin: 0 auto;
       }
 
       .main-continer {
-        width: 960px;
+        width: 1080px;
         margin: 0 auto;
       }
     
@@ -2076,7 +2078,7 @@ body {
       border-bottom-color: #555;
     }
     .archive-timeline-box::after, .tag-timeline-wrapper::after {
-      background: #dee2e6fe;
+      background: #dee2e6cc;
     }h1, h2, h3, h4, h5, h6 {
       color: #868e96;
     }
@@ -2123,11 +2125,11 @@ body {
       }.nav-item a:hover {
         color: #37b24d;
       }.nav-item-active {
-      background: #f1f3f5fe;
+      background: #f1f3f5cc;
     }
 
     .nav-item:hover {
-      background: #f1f3f5fe;
+      background: #f1f3f5cc;
       color: rgba(0, 0, 0, 0.98);
     }.site-author-image {
       border-radius: 50%;
@@ -2163,7 +2165,13 @@ body {
       color: #fa5252;
       border-bottom-color: #fa5252;
     }.bg-color {
-      background-color: #fff5f5fe;
+      background-color: #fff5f5cc;
+    }
+    .gemini .blog-header, .gemini .sidebar-wrapper, .gemini .article-wrapper, .gemini .post, .gemini .page, .gemini .section, .gemini .section-box, .gemini .sidebar-box, .gemini .friends-section {
+      border-radius: 20px;
+    }
+    .pisces .blog-header, .pisces .sidebar-wrapper, .pisces .article-wrapper, .pisces .section, .pisces .sidebar-box, .pisces .friends-section {
+      border-radius: 20px;
     }
     .site-meta {
       background: #74c0fc !important;
@@ -2172,13 +2180,17 @@ body {
       background: #74c0fc;
     }
     .brand {
-      background: #a5d8fffe;
+      background: #a5d8ffcc;
     }
-    .main-title, .brand {
+    
+      .brand {
+        font-weight: bold;
+        transform: scale(1);
+      }.main-title, .brand {
       color: #0c8599 !important;
     }
     .mist .site-title i {
-      background: #0c8599fe;
+      background: #0c8599cc;
     }.box-shadow-wrapper {
       box-shadow: none !important;
     }body {
