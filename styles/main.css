@@ -2191,7 +2191,9 @@ p > code {
     }
     .mist .site-title i {
       background: #0c8599cc;
-    }.box-shadow-wrapper {
+    }.bg-img img {
+        filter: blur(2px)
+      }.box-shadow-wrapper {
       box-shadow: none !important;
     }body {
       cursor: default;
