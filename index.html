@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>王璐杰的BLOG</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1597669988363">
+<link rel="shortcut icon" href="/favicon.ico?v=1602146966045">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -190,19 +190,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-count">3</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-count">2</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">1</span>
+        <span class="site-item-stat-count">2</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -245,6 +245,68 @@
         <div class="section-box gemini">
           <section class="section  posts-expand slide-down-in">
             
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/">
+      JVM内存分配与回收策略
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-10-08 15:18:33">2020-10-08</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-folder-o"></i>
+      <span class="pc-show language" data-lan="category-in">分类于</span>
+      
+      
+      <a href="https://MOMENTUMxx.github.io/tag/v8JHH3IH6/">
+        <span>JVM</span>
+      </a>
+      
+      
+    </span>
+    <span class="post-meta-divider">|</span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>7<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>1929<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+      <div class="post-body">
+        
+        
+          
+            <p>Java技术体系的自动内存管理，最根本的目标是自动化的解决两个问题：自动给对象分配内存以及回收分配给对象的内存。关于回收内存，请见博客中JVM垃圾收集的相关文章，本文主要来探讨一下关于给对象分配内存的那些事儿😉</p>
+
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+    </div>
+  </article>
+
   <article class="post-list-box  post box-shadow-wrapper">
     <div class="article-wrapper bg-color">
       <section class="post-header">
@@ -1175,6 +1237,47 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/"" data-c="
+          &lt;p&gt;Java技术体系的自动内存管理，最根本的目标是自动化的解决两个问题：自动给对象分配内存以及回收分配给对象的内存。关于回收内存，请见博客中JVM垃圾收集的相关文章，本文主要来探讨一下关于给对象分配内存的那些事儿😉&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h1 id=&#34;jvm堆的结构分析新生代-老年代-永久代&#34;&gt;JVM堆的结构分析（新生代、老年代、永久代）&lt;/h1&gt;
+&lt;h2 id=&#34;堆分代的目的&#34;&gt;堆分代的目的&lt;/h2&gt;
+&lt;p&gt;为了优化GC时的性能。如果没有分代，所有的对象都是在一起的，GC的时候我们要找到那些对象没用，就需要对堆的所有区域进行扫描。而堆中的很多对象都是朝生夕死的，分代以后就可以把新创建的对象放到某一区域，当GC的时候先把这块存“朝生夕死”对象的区域进行回收，这样就会腾出很大的空间来。&lt;/p&gt;
+&lt;h2 id=&#34;年轻代中的gc&#34;&gt;年轻代中的GC&lt;/h2&gt;
+&lt;p&gt;HotSpot虚拟机把年轻代分为了三部分：1个Eden区和2个Survivor区（分别叫from和to）。默认比例为8：1。一般情况下，新创建的对象都会被分配到Eden区(一些大对象特殊处理),这些对象经过第一次Minor GC后，如果仍然存活，将会被移到Survivor区。对象在Survivor区中每熬过一次Minor GC，年龄就会增加1岁，当它的年龄增加到一定程度时，就会被移动到年老代中。&lt;br&gt;
+因为年轻代中的对象基本都是朝生夕死的(80%以上)，所以在年轻代的垃圾回收算法使用的是复制算法，复制算法的基本思想就是将内存分为两块，每次只用其中一块，当这一块内存用完，就将还活着的对象复制到另外一块上面。复制算法不会产生内存碎片。&lt;br&gt;
+在GC开始的时候，对象只会存在于Eden区和名为“From”的Survivor区，Survivor区“To”是空的。紧接着进行GC，Eden区中所有存活的对象都会被复制到“To”，而在“From”区中，仍存活的对象会根据他们的年龄值来决定去向。年龄达到一定值(年龄阈值，可以通过-XX:MaxTenuringThreshold来设置)的对象会被移动到年老代中，没有达到阈值的对象会被复制到“To”区域。经过这次GC后，Eden区和From区已经被清空。这个时候，“From”和“To”会交换他们的角色，也就是新的“To”就是上次GC前的“From”，新的“From”就是上次GC前的“To”。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，“To”区被填满之后，会将所有对象移动到年老代中。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602142893177.png&#34; alt=&#34;Minor GC示意图&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;有关年轻代的jvm参数&#34;&gt;有关年轻代的JVM参数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;-XX:NewSize和-XX:MaxNewSize&lt;br&gt;
+用于设置年轻代的大小，建议设为整个堆大小的1/3或者1/4,两个值设为一样大。&lt;/li&gt;
+&lt;li&gt;-XX:SurvivorRatio&lt;br&gt;
+用于设置Eden和其中一个Survivor的比值，这个值也比较重要。&lt;/li&gt;
+&lt;li&gt;-XX:+PrintTenuringDistribution&lt;br&gt;
+用于显示每次Minor GC时Survivor区中各个年龄段的对象的大小。&lt;/li&gt;
+&lt;li&gt;-XX:InitialTenuringThreshol和-XX:MaxTenuringThreshold&lt;br&gt;
+设置晋升到老年代的对象年龄的最小值和最大值，每个对象在坚持过一次Minor GC之后，年龄就加1。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;内存分配策略&#34;&gt;内存分配策略&lt;/h1&gt;
+&lt;h2 id=&#34;对象优先在eden分配&#34;&gt;对象优先在Eden分配&lt;/h2&gt;
+&lt;p&gt;大多数情况下，对象在新生代Eden中分配。当Eden区没有足够空间进行分配时，虚拟机将发起一次Minor GC。&lt;br&gt;
+&lt;strong&gt;Minor GC和Full GC的区别：&lt;/strong&gt;&lt;br&gt;
+- 新生代GC (Minor GC)：指发生在新生代的垃圾收集动作，因为Java时象大多都具备朝生夕灭的特性，所以 Minor GC非常倾繁，一般回收速度也比较快。&lt;br&gt;
+- 老年代GC (Major GC / Full GC )：指发生在老年代的GC，出现了 Major GC，经常会伴随至少一次的 Minor GC，Major GC的速度一般会比Minor GC慢10倍以上。&lt;/p&gt;
+&lt;h2 id=&#34;大对象直接进入老年代&#34;&gt;大对象直接进入老年代&lt;/h2&gt;
+&lt;p&gt;大对象就是指需要大量连续内存空间的Java对象，最典型的大对象就是很长的字符串，或者元素数量很庞大的数组。我们在写程序时要避免“朝生夕死”的“短命大对象”，原因是在分配空间时它容易导致内存明明还有不少空间时就提前触发垃圾收集，以获取足够的连续空间才能安置好它们，而当复制对象时，大对象就意味着高额的内存复制开销。虚拟机提供了一个-XX: PretenureSizeThreshold参数，令大于这个设置值的对象直接在老年代分配。这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制（新生代采用复制算法收集内存）。&lt;/p&gt;
+&lt;h2 id=&#34;长期存活的对象将进入老年代&#34;&gt;长期存活的对象将进入老年代&lt;/h2&gt;
+&lt;p&gt;HotSpot虚拟机采用分代收集的思想来管理虚拟机内存。虚拟机给每个对象定义了一个对象年龄（Age）计数器。如果对象在Eden出生并且经过第一次Minor GC后仍然存活，并且能被Survivor容纳的话，将被移动到Survivor空间中，并将其年龄设定为1岁。对象在Survivor区中每熬过一次Minor GC，年龄就增加1岁，当它的年龄增加到一定程度（默认15岁），就会被晋升到老年代。对象晋升到老年代的年龄阈值可以通过-XX:MaxTenuringThreshold设置。&lt;/p&gt;
+&lt;h2 id=&#34;动态对象年龄判定&#34;&gt;动态对象年龄判定&lt;/h2&gt;
+&lt;p&gt;虚拟并不是永远都要求对象年龄必须达到MaxTenuringThreshold才能晋升为老年代的，如果在Survivor的空间相同年龄的所有对象大小总和大于Survivor空间的一半时，年龄大于或者等于该年龄的对象直接进入老年代，无需要等到MaxTenuringThreshold中要求的年龄。&lt;/p&gt;
+&lt;h2 id=&#34;空间分配担保&#34;&gt;空间分配担保&lt;/h2&gt;
+&lt;p&gt;在发生Minor GC之前，虚拟机会先检查老年代可用的连续空间是否大于新生代所有对象总空间，如果条件成立，那么这次Minor GC就可以保证安全。否则虚拟机会查看-XX:HandlePromotionFailure参数的设置值是否允许担保失败；如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试进行一次Minor GC，尽管这次Minor GC是有风险的；如果小于，或者-XX:HandlePromotionFailure设置不允许冒险，那这时就要改为进行一次Full GC。&lt;br&gt;
+解释一下这里的“冒险”是指什么，新生代使用复制收集算法，但为了提高内存利用率，只用一个Survivor空间来作为轮换备份，当大量对象在Minor GC后都存活下来时（最极端情况是所有对象都存活），Survivor空间无法容纳所有活下来的对象，这时候需要老年代进行分配担保，来减轻Survivor的压力。担保的前提是老年代有足够的空间，但本次回收中一共有多少对象会存活下来是无法提前知道的，只能用历次晋升到老年代对象的平均大小作为经验值，这其实是一种赌概率的方法，如果出现了担保失败，就只好老老实实的发起一次Full GC。虽然有失败的风险，但通常还是会将-XX:HandlePromotionFailure开关打开，避免Full GC过于频繁。&lt;/p&gt;
+">JVM内存分配与回收策略</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/ge-ren-bo-ke-de-da-jian-ji-yu-dao-de-yi-xie-wen-ti/"" data-c="
