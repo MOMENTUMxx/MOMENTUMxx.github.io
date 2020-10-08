@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>JVM内存分配与回收策略 | 王璐杰的BLOG</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1602160982397">
+<link rel="shortcut icon" href="/favicon.ico?v=1602166263534">
 <link rel="stylesheet" href="/media/css/gemini.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -235,6 +235,31 @@
       </div>
     
   
+  
+    <div class="sidebar-item sidebar-item-social">
+      <div class="social-item">
+        
+          
+            <a href="https://github.com/MOMENTUMxx">
+              <i class="fa fa-github-alt" title=""></i>
+            </a>
+          
+        
+        
+          
+            <a class="social-img" href="#">
+              <img src="\media\images\custom-array-imgSocials-1602166263019-socialImg.jpg" />
+              <i class="fa fa-qq" title="" ></i>
+            </a>
+          
+            <a class="social-img" href="#">
+              <img src="\media\images\custom-array-imgSocials-1602166263024-socialImg.jpg" />
+              <i class="fa fa-wechat" title="" ></i>
+            </a>
+          
+        
+      </div>
+    </div>
   
 
 
@@ -619,6 +644,10 @@
 解释一下这里的“冒险”是指什么，<strong>新生代使用复制收集算法</strong>，但为了提高内存利用率，只用一个Survivor空间来作为轮换备份，当大量对象在Minor GC后都存活下来时（最极端情况是所有对象都存活），Survivor空间无法容纳所有活下来的对象，这时候需要老年代进行分配担保，来减轻Survivor的压力。担保的前提是老年代有足够的空间，但本次回收中一共有多少对象会存活下来是无法提前知道的，只能用历次晋升到老年代对象的平均大小作为经验值，这其实是一种赌概率的方法，如果出现了担保失败，就只好老老实实的发起一次Full GC。虽然有失败的风险，但通常还是会将-XX:HandlePromotionFailure开关打开，避免Full GC过于频繁。</p>
 
             </div>
+            
+              <div class="reward-btn">
+                <div class="reward-btn-text">赞赏</div>
+              </div>
             
             
               <div class="post-footer">
@@ -1488,6 +1517,10 @@
         <div style="position: relative; width: 140px; height: 140px;">
           
           
+            <img id="zfb" class="reward-img" src="\media\images\custom-zfbImg.jpg" alt="赞赏码">
+          
+          
+            <img id="wx" class="reward-img" src="\media\images\custom-wxImg.jpg" alt="赞赏码">
           
         </div>
       </div>
@@ -1496,6 +1529,14 @@
     </div>
     <div class="bottom">
       
+      <div id="zfbBtn" class="pay-text">
+        支付宝
+      </div>
+      
+      
+      <div id="wxBtn" class="pay-text">
+        微信支付
+      </div>
       
     </div>
   </div>
