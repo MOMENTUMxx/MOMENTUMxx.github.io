@@ -2187,10 +2187,10 @@ p > code {
         font-weight: bold;
         transform: scale(1);
       }.main-title, .brand {
-      color: #0c8599 !important;
+      color: #212529 !important;
     }
     .mist .site-title i {
-      background: #0c8599cc;
+      background: #212529cc;
     }.bg-img img {
         filter: blur(2px)
       }.box-shadow-wrapper {
