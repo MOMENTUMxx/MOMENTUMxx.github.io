@@ -2141,37 +2141,37 @@ p > code {
       transition-duration: 59s;
       transition-timing-function: cubic-bezier(.34,0,.84,1);
     }.markdownIt-TOC a {
-      color: #343a40;
-      border-bottom-color: #343a40;
+      color: #4dabf7;
+      border-bottom-color: #4dabf7;
     }.markdownIt-TOC a:hover {
-      color: #f59f00;
-      border-bottom-color: #f59f00;
+      color: #ff8787;
+      border-bottom-color: #ff8787;
     }.active-current > a {
-      color: #228be6 !important;
-      border-bottom-color: #228be6 !important;
+      color: #ae3ec9 !important;
+      border-bottom-color: #ae3ec9 !important;
     }
     .sidebar-title-active {
-      color: #228be6;
-      border-bottom-color: #228be6;
+      color: #ae3ec9;
+      border-bottom-color: #ae3ec9;
     }
     .sidebar-title-item:hover {
-      color: #228be6 !important;
+      color: #ae3ec9 !important;
     }
     .active-show > a {
-      color: #228be6;
-      border-bottom-color: #228be6;
+      color: #ae3ec9;
+      border-bottom-color: #ae3ec9;
     }
     .active-hidden > a {
-      color: #228be6;
-      border-bottom-color: #228be6;
+      color: #ae3ec9;
+      border-bottom-color: #ae3ec9;
     }.bg-color {
       background-color: #fff5f5cc;
     }
     .gemini .blog-header, .gemini .sidebar-wrapper, .gemini .article-wrapper, .gemini .post, .gemini .page, .gemini .section, .gemini .section-box, .gemini .sidebar-box, .gemini .friends-section {
-      border-radius: 20px;
+      border-radius: 15px;
     }
     .pisces .blog-header, .pisces .sidebar-wrapper, .pisces .article-wrapper, .pisces .section, .pisces .sidebar-box, .pisces .friends-section {
-      border-radius: 20px;
+      border-radius: 15px;
     }
     .site-meta {
       background: #74c0fc !important;
@@ -2182,18 +2182,16 @@ p > code {
     .brand {
       background: #a5d8ffcc;
     }
-    
-      .brand {
-        font-weight: bold;
-        transform: scale(1);
-      }.main-title, .brand {
+    .main-title, .brand {
       color: #212529 !important;
     }
     .mist .site-title i {
       background: #212529cc;
     }.bg-img img {
-        filter: blur(2px)
+        filter: blur(5px)
       }.box-shadow-wrapper {
+      padding: 10px;
+    }.box-shadow-wrapper {
       box-shadow: none !important;
     }body {
       cursor: default;
