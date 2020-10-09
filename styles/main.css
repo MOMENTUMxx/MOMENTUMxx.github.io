@@ -2189,7 +2189,9 @@ p > code {
       background: #212529cc;
     }.bg-img img {
         filter: blur(5px)
-      }.box-shadow-wrapper {
+      }.box-scale > #landlord {
+      transform: scale(1);
+    }.box-shadow-wrapper {
       padding: 10px;
     }.box-shadow-wrapper {
       box-shadow: none !important;
