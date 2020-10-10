@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>MySQL基础学习笔记 | 王璐杰的BLOG</title>
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602328536358">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602331496293">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/fonts/font-awesome.css">
 <link
@@ -208,7 +208,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">5</span>
+        <span class="site-item-stat-count">6</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -2609,6 +2609,10 @@ end repeat【标签】;
   <div class="nav">
     <div class="nav-prev">
       
+        <i class="fa fa-chevron-left"></i>
+        <a class="nav-pc-next" title="OutOfMemoryError异常--Java堆溢出" href="https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/">OutOfMemoryError异常--Java堆溢出</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="OutOfMemoryError异常--Java堆溢出" href="https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/">上一篇</a>
+      
     </div>
     <div class="nav-next">
       
@@ -3690,6 +3694,36 @@ end repeat【标签】;
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/"" data-c="
+          &lt;p&gt;在Java虚拟机规范的描述中，除了&lt;strong&gt;程序计数器&lt;/strong&gt;外，虚拟机内存的其他几个运行时区域都有发生OutOfMemoryError(下文简称OOM)异常的可能，本文简单介绍一下会导致OOM异常出现的几种场景。🍓&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h1 id=&#34;java堆溢出&#34;&gt;Java堆溢出&lt;/h1&gt;
+&lt;p&gt;Java堆用于存储对象实例，只要不断地创建对象，并且保证GC Roots到对象之间有可达路径来避免垃圾回收机制清除这些对象，那么在对象数量到达最大堆的容量限制后就会产生内存溢出异常。&lt;br&gt;
+下面的代码限制Java堆的大小为20MB，不可扩展（将堆的最小值-Xms参数与最大值-Xmx参数设置为一样即可避免堆自动扩展），通过参数-XX:+HeapDumpOnOutOfMemoryError可以让虚拟机在出现内存溢出异常时Dump出当前的&lt;strong&gt;内存堆转储快照&lt;/strong&gt;以便事后进行分析。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class HeapOOM {
+    static class OOMObject{}
+    public static void main(String[] args) {
+        List&amp;lt;OOMObject&amp;gt; list = new ArrayList&amp;lt;HeapOOM.OOMObject&amp;gt;();
+        while(true) {
+            list.add(new OOMObject());
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;运行结果：&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602330641069.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+Java堆内存的OOM异常是实际应用中常见的内存溢出异常情况。当出现Java堆内存溢出时，异常堆栈信息“java.lang.OutOfMemoryError”会跟着进一步提示“Java heap space”。&lt;br&gt;
+要解决这个区域的异常，一般的手段是先通过&lt;strong&gt;内存映像分析工具&lt;/strong&gt;（如Eclipse Memory Analyzer）对Dump出来的&lt;strong&gt;堆转储快照&lt;/strong&gt;进行分析，重点是确认内存中的对象是否是必要的，也就是要先分清除到底是出现了内存泄漏（Memory Leak）还是内存溢出（Memory Overflow）。下图显示了使用Eclipse Memory Analyzer打开的堆转储快照文件。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602330757091.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;堆&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;转&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;储&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;快&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;照&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;文&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;件&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;堆转储快照文件
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;堆&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;转&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;储&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;快&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;照&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;文&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;件&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;解决方案：&lt;br&gt;
+如果是内存泄漏，可进一步通过工具查看泄漏对象到GC Roots的&lt;strong&gt;引用链&lt;/strong&gt;。于是就能找到泄露对象是通过怎样的路径与GC Roots相关联并导致垃圾收集器无法自动回收他们的。掌握了泄漏对象的类型信息及GC Roots引用链的信息，就可以比较准确的定位出泄漏代码的位置。&lt;br&gt;
+如果不存在泄漏，换句话说，就是内存中的对象确实还必须存活着，那就应当检查虚拟机的堆参数（-Xmx与-Xms），与机器物理内存对比看是否还有向上调整的空间。再从代码上检查是否存在某些对象生命周期过长、持有状态时间过长、存储结构设计不合理等情况，尽量减少程序运行期的内存消耗。&lt;/p&gt;
+">OutOfMemoryError异常--Java堆溢出</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/mysql-ji-chu/"" data-c="
