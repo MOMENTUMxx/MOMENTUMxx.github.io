@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>王璐杰的BLOG</title>
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602229044820">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602328536358">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/fonts/font-awesome.css">
 <link
@@ -190,19 +190,19 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">4</span>
+        <span class="site-item-stat-count">5</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="">
-        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-count">3</span>
         <span class="site-item-stat-name language" data-lan="category">分类</span>
       </a>
     </div>
     <div class="sidebar-item-box">
       <a href="/tags/">
-        <span class="site-item-stat-count">2</span>
+        <span class="site-item-stat-count">3</span>
         <span class="site-item-stat-name language" data-lan="tag">标签</span>
       </a>
     </div>
@@ -1136,6 +1136,1806 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/mysql-ji-chu/"" data-c="
+          &lt;p&gt;整理了一下之前的MySQL笔记，方便随时查漏补缺🍉&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&#34;数据库相关概念&#34;&gt;数据库相关概念★&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;DB： 数据库，保存一组有组织的数据的容器&lt;/li&gt;
+&lt;li&gt;DBMS：数据库管理系统，用于管理DB中的数据&lt;/li&gt;
+&lt;li&gt;SQL：结构化查询语言，用于和DBMS通信&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;数据库存储数据的特点&#34;&gt;数据库存储数据的特点&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;将数据放到表中，表再放到库中&lt;/li&gt;
+&lt;li&gt;一个数据库中可以有多个表，每个表都有一个的名字，用来标识自己。表名具有唯一性。&lt;/li&gt;
+&lt;li&gt;表具有一些特性，这些特性定义了数据在表中如何存储，类似java中 “类”的设计。&lt;/li&gt;
+&lt;li&gt;表由列组成，我们也称为字段。所有表都是由一个或多个列组成的，每一列类似java 中的”属性”&lt;/li&gt;
+&lt;li&gt;表中的数据是按行存储的，每一行类似于java中的“对象”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;mysql打开方式&#34;&gt;MySQL打开方式&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;启动：net start mysql&lt;/li&gt;
+&lt;li&gt;关闭：net stop mysql&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;mysql服务的登录和退出&#34;&gt;MySQL服务的登录和退出&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;通过windows自带的客户端（管理员下的命令行）
+&lt;ul&gt;
+&lt;li&gt;登录：
+&lt;ul&gt;
+&lt;li&gt;mysql 【-h 主机名 -P 端口号】 -u 用户名 -p密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;退出：
+&lt;ul&gt;
+&lt;li&gt;exit或ctrl+c&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;mysql的常见命令&#34;&gt;MySQL的常见命令&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;查看当前所有的数据库&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show databases;&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开指定的库&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;use 库名&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看当前库的所有表&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show tables&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看其他库的所有表&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;show tables from 库名&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建表&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create tabel 表名(
+	列名 列类型，
+ 列名 列类型，
+    。。。
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看表结构&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;desc 表名；&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看服务器的版本&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;方式一：登录到mysql服务端&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;select version();&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;方式二：没有登录到mysql服务端&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mysql --version&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;或&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mysql --V&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;mysql的语法规范&#34;&gt;MySQL的语法规范&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;不区分大小写&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每条命令最好用分号结尾&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;每条命令可以根据需要进行缩进 或换行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注释&lt;/p&gt;
+&lt;p&gt;单行注释：#注释文字&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;sql的语言分类&#34;&gt;SQL的语言分类&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;DQL（Data Query Language）：数据查询语言
+&lt;ul&gt;
+&lt;li&gt;select&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DML(Data Manipulate Language):数据操作语言
+&lt;ul&gt;
+&lt;li&gt;insert 、update、delete&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DDL（Data Define Languge）：数据定义语言
+&lt;ul&gt;
+&lt;li&gt;create、drop、alter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;TCL（Transaction Control Language）：事务控制语言
+&lt;ul&gt;
+&lt;li&gt;commit、rollback&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dql语言&#34;&gt;DQL语言&lt;/h2&gt;
+&lt;h3 id=&#34;基础查询&#34;&gt;基础查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;语法：select 查询列表 from 表名；&lt;/li&gt;
+&lt;li&gt;特点：
+&lt;ul&gt;
+&lt;li&gt;查询列表可以是：表中的字段、常量值、表达式、函数&lt;/li&gt;
+&lt;li&gt;通过select查询完的结果 ，是一个虚拟的表格，不是真实存在&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;查询多个字段时用逗号隔开，最后一个字段不加逗号，语句的最后才加分号&lt;/li&gt;
+&lt;li&gt;起别名用AS，去重用DISTINCT，拼接用CONCAT(null和任意字符串拼接都为null)&lt;/li&gt;
+&lt;li&gt;+号的作用：
+&lt;ul&gt;
+&lt;li&gt;仅有一个功能：运算符&lt;/li&gt;
+&lt;li&gt;如果两个操作数都为数值型，则做加法运算&lt;/li&gt;
+&lt;li&gt;只要其中一方为字符型，试图将字符型数值转换成数值型
+&lt;ul&gt;
+&lt;li&gt;如果转换成功，则继续做加法运算&lt;/li&gt;
+&lt;li&gt;如果转换失败，则将字符型数值转换成0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;只要其中一方为null，则结果肯定为null&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;条件查询&#34;&gt;条件查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;语法：select 查询列表 from 表名 where 筛选条件；（执行顺序231）&lt;/li&gt;
+&lt;li&gt;模糊查询：like（可用通配符：%任意多个字符，包含0个；_任意单个字符），between and（含边界，顺序不能换），in（列表中的值必须一致或兼容），is (not)null&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;排序查询&#34;&gt;排序查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;语法：select 要查询的东西 from 表 where 条件 order by 排序的字段|表达式|函数|别名【asc|desc】&lt;/li&gt;
+&lt;li&gt;特点：默认升序，order by一般放在查询语句的最后(limit语句除外)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常见函数&#34;&gt;常见函数&lt;/h3&gt;
+&lt;h4 id=&#34;一-单行函数&#34;&gt;一、单行函数&lt;/h4&gt;
+&lt;h5 id=&#34;1-字符函数&#34;&gt;1、字符函数&lt;/h5&gt;
+&lt;p&gt;concat,substr,upper,lower,trim,ltrim,rtrim,,replace,lpad,rpad,instr,length(获取字节个数)&lt;/p&gt;
+&lt;h5 id=&#34;2-数学函数&#34;&gt;2、数学函数&lt;/h5&gt;
+&lt;p&gt;round,rand,floor,ceil,mod,truncate(截断)&lt;/p&gt;
+&lt;h5 id=&#34;3-日期函数&#34;&gt;3、日期函数&lt;/h5&gt;
+&lt;p&gt;now,curdate,curtime,str_to_date(将字符转换成日期),date_format(将日期转换成字符)，datediff(返回两个日期相差的天数),monthname(以英文形式返回月)&lt;/p&gt;
+&lt;h5 id=&#34;4-流程控制函数&#34;&gt;4、流程控制函数&lt;/h5&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;if(条件表达式，表达式1，表达式2)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;case&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;case 变量或表达式或字段
+      when 常量1 then 值1
+      when 常量2 then 值2
+       ...
+      else 值a
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;case
+      when 条件1 then 值1
+      when 条件2 then 值2
+        ...
+      else 值a
+  end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;二-分组函数&#34;&gt;二、分组函数&lt;/h4&gt;
+&lt;p&gt;sum,max,min,avg,count&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;特点：
+&lt;ol&gt;
+&lt;li&gt;以上五个分组函数都忽略null值，除了count(*)&lt;/li&gt;
+&lt;li&gt;sum和avg一般用于处理数值型，max、min、count可以处理任何数据类型&lt;/li&gt;
+&lt;li&gt;都可以搭配distinct使用，用于统计去重后的结果&lt;/li&gt;
+&lt;li&gt;count(字段):统计该字段非空值的个数；通常用count(*)来计数&lt;/li&gt;
+&lt;li&gt;和分组函数一同查询的字段必须是分组后的（group by后）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;分组查询&#34;&gt;分组查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：select 分组函数，分组的字段 from 表 【where 筛选条件】 group by 分组的字段 【having 分组后的筛选】 【order by 排序列表】&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;分组筛选&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;针对的表&lt;/th&gt;
+&lt;th&gt;位置&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;关键字&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;分组前筛选&lt;/td&gt;
+&lt;td&gt;原始表&lt;/td&gt;
+&lt;td&gt;group by的前面&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;where&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;分组后筛选&lt;/td&gt;
+&lt;td&gt;分组后的结果集&lt;/td&gt;
+&lt;td&gt;group by的后面&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;having&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以按多个字段分组，字段之间用逗号隔开&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以支持排序&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;having后可以支持别名&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;多表连接查询&#34;&gt;多表连接查询&lt;/h3&gt;
+&lt;h4 id=&#34;一-含义&#34;&gt;一、含义&lt;/h4&gt;
+&lt;p&gt;​	当查询中涉及到了多个表的字段，需要使用多表连接。&lt;/p&gt;
+&lt;p&gt;​	&lt;code&gt;select 字段1，字段2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;​	&lt;code&gt;from 表1，表2...;&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;二-分类&#34;&gt;二、分类：&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;sql92&lt;/p&gt;
+&lt;p&gt;等值连接，非等值连接，自连接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sql99&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;内连接：等值，非等值，自连接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;外连接：左外，右外，全外&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;交叉连接：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;三-sql92语法&#34;&gt;三、SQL92语法&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;等值连接&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt; select 查询列表
+from 表1 别名，表2 别名
+ where 表1.key=表2.key
+【and 筛选条件】
+ 【group by 分组字段】
+【having 分组后的字段】
+ 【order by 排序字段】
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;等值连接的结果等于多个表的交集
+&lt;ul&gt;
+&lt;li&gt;n表连接，至少需要n-1个连接条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;多个表不分主次，没有顺序要求
+&lt;ul&gt;
+&lt;li&gt;一般为表起别名，起别名后所有位置的表名都要用别名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;非等值连接&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 查询列表
+from 表1 别名，表2 别名
+where 非等值的连接条件
+【and 筛选条件】
+【group by 分组字段】
+【having 分组后的字段】
+【order by 排序字段】
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自连接&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 查询列表
+from 表 别名1，表 别名2
+where 等值的连接条件
+【and 筛选条件】
+【group by 分组字段】
+【having 分组后的字段】
+【order by 排序字段】
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;四-sql99语法&#34;&gt;四、SQL99语法&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;	select 查询列表
+	from 表1 别名 【连接类型】
+	join 表2 别名 
+	on 连接条件
+	【where 筛选条件】
+	【group by 分组】
+	【having 筛选条件】
+	【order by 排序列表】
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;内连接：inner&lt;/li&gt;
+&lt;li&gt;外连接
+&lt;ul&gt;
+&lt;li&gt;左外：left outer&lt;/li&gt;
+&lt;li&gt;右外：right outer&lt;/li&gt;
+&lt;li&gt;全外：full outer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;交叉连接（笛卡尔乘积）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;1内连接&#34;&gt;1）内连接&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 查询列表
+from 表1 别名
+inner join 表2 别名
+on 连接条件
+where 筛选条件
+group by 分组列表
+having 分组后的筛选
+order by 排序列表
+limit 子句；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分类：等值，非等值，自连接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;筛选条件放在where后面，连接条件放在on后面，提高分离性&lt;/li&gt;
+&lt;li&gt;表的顺序可以调换&lt;/li&gt;
+&lt;li&gt;内连接的结果=多表的交集&lt;/li&gt;
+&lt;li&gt;n表连接至少需要n-1个连接条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;2外连接&#34;&gt;2）外连接&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;应用场景：用于查询一个表中有，另一个表没有的记录&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 查询列表
+from 表1 别名
+left|right|full join 表2 别名
+on 连接条件
+where 筛选条件
+group by 分组列表
+having 分组后的筛选
+order by 排序列表
+limit 子句
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;外连接查询结果=内连接结果+主表有而从表没有的记录&lt;/p&gt;
+&lt;p&gt;或者说，查询结果=主表中所有的行，如果从表有匹配的将显示匹配行，否则显示null&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;左外连接，left join左边的是主表；右外连接，right join右边的是主表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;全外连接=内连接+表1中有但表2没有的+表2中有但表1没有的&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;图解：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602325044299.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602325053596.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;子查询&#34;&gt;子查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;含义：出现在其他语句中的select语句称为子查询或内查询；&lt;/p&gt;
+&lt;p&gt;外部的查询语句（select较多），称为主查询或外查询&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按子查询出现的位置：
+&lt;ul&gt;
+&lt;li&gt;select后面：仅支持标量子查询&lt;/li&gt;
+&lt;li&gt;from后面：支持表子查询&lt;/li&gt;
+&lt;li&gt;where或having后面：一般用到标量子查询和列子查询&lt;/li&gt;
+&lt;li&gt;exists后面：表子查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;按结果集的行列数不同：
+&lt;ul&gt;
+&lt;li&gt;标量子查询：一行一列&lt;/li&gt;
+&lt;li&gt;列子查询：一列多行&lt;/li&gt;
+&lt;li&gt;行子查询：一行多列&lt;/li&gt;
+&lt;li&gt;表子查询：一般多行多列&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;一-where或having后面&#34;&gt;一、where或having后面&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;特点：
+&lt;ul&gt;
+&lt;li&gt;子查询放在小括号里&lt;/li&gt;
+&lt;li&gt;标量子查询一般搭配单行操作符使用：&amp;gt; &amp;lt; &amp;gt;= &amp;lt;=  = &amp;lt;&amp;gt;&lt;/li&gt;
+&lt;li&gt;列子查询一般搭配多行操作符使用：in any/some all&lt;/li&gt;
+&lt;li&gt;子查询的执行优先于主查询进行，主查询的条件用到了子查询的结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;二-select后面&#34;&gt;二、select后面&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;仅仅支持标量子查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;三-from后面&#34;&gt;三、from后面&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;将子查询结果充当一张表，要求必须起别名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;分页查询&#34;&gt;分页查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;应用场景：当要显示的数据，一页显示不全，需要分页提交sql请求&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 查询列表
+from 表
+【join type join 表2
+on 连接条件
+where 筛选条件
+group by 分组字段
+having 分组后的筛选
+order by 排序的字段】
+limit 【offset,】size;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;offset为要显示条目的起始索引（从0开始，默认为0）&lt;/p&gt;
+&lt;p&gt;size为要显示的条目个数&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;limit语句放在查询语句的最后&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;要显示的页数 page，每页的条目数size&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 查询列表
+from 表
+limit (page-1)*size,size;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;联合查询&#34;&gt;联合查询&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;含义：将多条查询语句的结果合并成一个结果&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;查询语句1
+union
+查询语句2
+union
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;应用场景：要查询的结果来自多个表，且多个表没有直接的连接关系，但查询的信息一致时&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;要求多条查询语句的查询列数是一致的&lt;/li&gt;
+&lt;li&gt;要求多条查询语句查询的每一列的类型和顺序最好一致&lt;/li&gt;
+&lt;li&gt;union关键字默认去重，如果使用union all可以包含重复项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dql语言执行顺序总结&#34;&gt;DQL语言执行顺序总结&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 查询列表			7
+from 表             	  1
+连接类型 join 表2	   2 
+on 连接条件				3
+where 筛选条件          4
+group by 分组列表       5
+having 分组后的筛选      6
+order by 排序列表       8
+limit 起始索引，条目数   9	
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;dml语言&#34;&gt;DML语言&lt;/h2&gt;
+&lt;p&gt;​		插入：insert&lt;/p&gt;
+&lt;p&gt;​		修改：update&lt;/p&gt;
+&lt;p&gt;​		删除：delete&lt;/p&gt;
+&lt;h3 id=&#34;一-插入语句&#34;&gt;一、插入语句&lt;/h3&gt;
+&lt;h4 id=&#34;方式一经典的插入&#34;&gt;方式一：经典的插入&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;insert into 表名(列名,...) values(值,...),values(值,...),...;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;插入的值的类型要与列的类型一致或兼容&lt;/li&gt;
+&lt;li&gt;不可以为null的列必须插入值，可以为null的列能够通过两种方式插入null值
+&lt;ul&gt;
+&lt;li&gt;字段和值都省略&lt;/li&gt;
+&lt;li&gt;写字段，值使用null&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;列的顺序可以调换&lt;/li&gt;
+&lt;li&gt;列数和值的个数必须一致&lt;/li&gt;
+&lt;li&gt;可以省略列名，默认为所有列，而且的列的顺序和表中列的顺序一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方式二&#34;&gt;方式二&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;insert into 表名
+set 列名=值，列名=值...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;两种方式的比较&#34;&gt;两种方式的比较&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;方式一支持插入多行，方式二不支持&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;方式一支持子查询，方式二不支持&lt;/p&gt;
+&lt;p&gt;如：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;INSERT INTO beauty(id,NAME,phone)
+SELECT id,boyname,&#39;1234567&#39;
+FROM boys WHERE id&amp;lt;3;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;二-修改语句&#34;&gt;二、修改语句&lt;/h3&gt;
+&lt;h4 id=&#34;1-修改单表的记录&#34;&gt;1. 修改单表的记录★&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;update 表名
+set 列=新值，列=新值...
+where 筛选条件；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-修改多表的记录&#34;&gt;2. 修改多表的记录&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;update 表1 别名
+inner|left|right join 表2 别名
+on 连接条件
+set 列=值,...
+where 筛选条件;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-删除语句&#34;&gt;三、删除语句&lt;/h3&gt;
+&lt;h4 id=&#34;方式一delete&#34;&gt;方式一：delete&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;单表的删除★&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;delete from 表名 where 筛选条件【limit 条目数】；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多表的删除&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;delete 表1的别名,表2的别名
+from 表1 别名
+inner|left|right join 表2 别名
+on 连接条件
+where 筛选条件；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方式二truncate&#34;&gt;方式二：truncate&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;truncate table 表名；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;delete和truncate比较&#34;&gt;delete和truncate比较★&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;delete可以加筛选条件，truncate不能加&lt;/li&gt;
+&lt;li&gt;truncate效率略高一点&lt;/li&gt;
+&lt;li&gt;加入要删除的表中有自增长列，如果用delete删除后，再插入数据，自增长列的值从断点开始，而truncate删除后，再插入数据，自增长列的值从1开始&lt;/li&gt;
+&lt;li&gt;truncate删除没有返回值，delete删除有返回值&lt;/li&gt;
+&lt;li&gt;truncate删除不能回滚，delete删除可以回滚&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;ddl语言&#34;&gt;DDL语言&lt;/h2&gt;
+&lt;p&gt;​		创建：create&lt;/p&gt;
+&lt;p&gt;​		修改：alter&lt;/p&gt;
+&lt;p&gt;​		删除：drop&lt;/p&gt;
+&lt;h3 id=&#34;一-库的管理&#34;&gt;一、库的管理&lt;/h3&gt;
+&lt;h4 id=&#34;1-库的创建&#34;&gt;1. 库的创建&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create database 【if not exists】 库名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-库的修改&#34;&gt;2. 库的修改&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;更改库的字符集&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter database 库名 character set 字符集名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-库的删除&#34;&gt;3. 库的删除&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;drop database if exists 库名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-表的管理&#34;&gt;二、表的管理&lt;/h3&gt;
+&lt;h4 id=&#34;1-表的创建&#34;&gt;1. 表的创建★&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create table 表名(
+	列名 列的类型【(长度) 约束】,
+	列名 列的类型【(长度) 约束】,
+	列名 列的类型【(长度) 约束】,
+	...
+	列名 列的类型【(长度) 约束】
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-表的修改&#34;&gt;2. 表的修改&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加列：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 add column 列名 类型 【first|alter 字段名】;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改列的类型或约束&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 modify column 列名 新类型 【新约束】;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改列名&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 change column 旧列名 新列名 类型;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除列&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 drop column 列名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改表名&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 rename 【to】 新表名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;3-表的删除&#34;&gt;3. 表的删除&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;drop table 【if exists】 表名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-表的复制&#34;&gt;4. 表的复制&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;仅仅复制表的结构&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create table 新表 like 旧表;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;复制表的结构+数据&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;全部数据&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create table 新表
+select * from 旧表;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;部分数据&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create table 新表
+select 字段1,字段2... 
+from 旧表
+where 筛选条件;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;仅仅复制某些字段&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create table 新表
+select 字段1,字段2... 
+from 旧表
+where 0; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;常见的数据类型&#34;&gt;常见的数据类型&lt;/h3&gt;
+&lt;h4 id=&#34;一-数值型&#34;&gt;一、数值型&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;整形&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分类：tinyint(1),smallint(2),mediumint(3),int/integer(4),bigint(8)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果不设置无符号还是有符号，默认是有符号，设置无符号要添加关键字unsigned&lt;/li&gt;
+&lt;li&gt;如果插入的数值超出了整型的范围，会报out of range异常，并且插入临界值&lt;/li&gt;
+&lt;li&gt;如果不设置长度，会有默认的长度（长度代表了显示的最大宽度，如果不够会用0在左边填充，但必须搭配zerofill使用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;浮点型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浮点型：float(M,D),double(M,D)&lt;/li&gt;
+&lt;li&gt;定点型：decimal(M,D)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;M：整数部位+小数部位的个数&lt;/p&gt;
+&lt;p&gt;D：小数部位的个数&lt;/p&gt;
+&lt;p&gt;如果超过范围，则插入临界值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;M和D都可以省略&lt;/p&gt;
+&lt;p&gt;如果是decimal，则M默认为10，D默认为0&lt;/p&gt;
+&lt;p&gt;如果是float和double，则会根据插入的数值的精度来决定精度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;定点型的精确度较高，如果要求插入数值的精度较高如货币运算等则考虑使用&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;原则：&lt;/p&gt;
+&lt;p&gt;所选择的类型越简单越好，能保存数值的类型越小越好&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;二-字符型&#34;&gt;二、字符型&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;较短的文本：char和varchar&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th&gt;写法&lt;/th&gt;
+&lt;th&gt;M的意思&lt;/th&gt;
+&lt;th&gt;特点&lt;/th&gt;
+&lt;th&gt;空间的耗费&lt;/th&gt;
+&lt;th&gt;效率&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;char&lt;/td&gt;
+&lt;td&gt;char(M)&lt;/td&gt;
+&lt;td&gt;最大的字符数&lt;/td&gt;
+&lt;td&gt;可以省略，默认为1，长度固定&lt;/td&gt;
+&lt;td&gt;比较耗费&lt;/td&gt;
+&lt;td&gt;高&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;varchar&lt;/td&gt;
+&lt;td&gt;varchar(M)&lt;/td&gt;
+&lt;td&gt;最大的字符数&lt;/td&gt;
+&lt;td&gt;不可以省略，长度可变&lt;/td&gt;
+&lt;td&gt;比较节省&lt;/td&gt;
+&lt;td&gt;低&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;较长的文本：text，blob（较大的二进制）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;其他：binary和varbinary用于保存较短的二进制&lt;/p&gt;
+&lt;p&gt;​			enum用于保存枚举&lt;/p&gt;
+&lt;p&gt;​			set用于保存集合&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;三-日期型&#34;&gt;三、日期型&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分类：date,time,year,datetime,timestamp&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;字节&lt;/th&gt;
+&lt;th&gt;范围&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;时区等的影响&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;datetime&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;1000-9999&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不受&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;timestamp&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;1970-2038&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;受&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常见约束&#34;&gt;常见约束&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;含义：一种限制，用于限制表中的数据，为了保证表中数据的准确和可靠性&lt;/li&gt;
+&lt;li&gt;分类：六大约束
+&lt;ul&gt;
+&lt;li&gt;NOT NULL:非空，用于保证该字段的值不能为空&lt;/li&gt;
+&lt;li&gt;DEFAULT:默认，用于保证该字段有默认值&lt;/li&gt;
+&lt;li&gt;PRIMARY KEY:主键，用于保证该字段的值具有唯一性，并且非空&lt;/li&gt;
+&lt;li&gt;UNIQUE:唯一，用于保证该字段的值具有唯一性，可以为null&lt;/li&gt;
+&lt;li&gt;CHECK:检查约束【mysql不支持】&lt;/li&gt;
+&lt;li&gt;FOREIGN KEY:外键，用于限制两个表的关系，用于保证该字段的值必须来自主表的关联列的值。在从表添加外键约束，用于引用主表中某列的值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;添加约束的时机：
+&lt;ol&gt;
+&lt;li&gt;创建表时&lt;/li&gt;
+&lt;li&gt;修改表时&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;约束的添加分类：
+&lt;ul&gt;
+&lt;li&gt;列级约束：六大约束语法上都支持，但外键约束没有效果&lt;/li&gt;
+&lt;li&gt;表级约束：除了NOT NULL和DEFAULT其他都支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;一-创建表时添加约束&#34;&gt;一、创建表时添加约束&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;添加列级约束&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;语法:直接在字段名和类型后面追加约束类型即可，只支持：默认、非空、主键、唯一
+&lt;ul&gt;
+&lt;li&gt;列级约束可以在一个字段上追加多个，中间用空格隔开，没有顺序要求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;添加表级约束&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：在各个字段的最下面&lt;/p&gt;
+&lt;p&gt;【constraint 约束名】 约束类型(字段名)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通用写法示例&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;CREATE TABLE stuinfo(
+	字段名 字段类型 PRIMARY KEY,
+	字段名 字段类型 NOT NULL,
+	字段名 字段类型 UNIQUE,
+	字段名 字段类型 DEFAULT 值,
+	CONSTRAINT 约束名 FOREIGN KEY(字段名) REFERENCES 主表(被引用列)
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;主键和唯一的比较&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;保证唯一性&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;是否允许为空&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;一个表中可以有多少个&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;是否允许组合&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;主键&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;×&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;至多有一个&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√（不推荐）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;唯一&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;可以有多个&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√（不推荐）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;外键：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;要求在从表设置外键关系&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从表的外键列的类型和主表的关联列的类型要求一致或兼容，名称无要求&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;主表的关联列必须是一个key（一般是主键或唯一）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;插入数据时，先插入主表，再插入从表；&lt;/p&gt;
+&lt;p&gt;删除数据时，先删除从表，在删除主表&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;级联删除：设置外键时追加ON DELETE CASCADE&lt;/p&gt;
+&lt;p&gt;级联置空：设置外键时追加ON DELETE SET NULL&lt;/p&gt;
+&lt;p&gt;这两种删除方式不受上一点的约束&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;二-修改表时添加删除约束&#34;&gt;二、修改表时添加/删除约束&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;非空&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;添加非空&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 modify column 字段名 字段类型 not null;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除非空&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 modify column 字段名 字段类型;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;默认&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;添加默认&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 modify column 字段名 字段类型 default 值;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除默认&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 modify column 字段名 字段类型;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;主键&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;添加主键&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 add【constraint 约束名】primary key(字段名);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除主键&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 drop primary key;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;唯一&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;添加唯一&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 add【constraint 约束名】unique(字段名);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除唯一&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 drop index 索引名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;外键&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;添加外键&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 add【constraint 约束名】foreign key(字段名) references 主表(被引用列);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除外键&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 drop foreign key 约束名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;列级约束和表级约束比较&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;位置&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;支持的约束类型&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;是否可以起约束名&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;列级约束&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;列的后面&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;语法都支持，但外键没有效果&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不可以&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;表级约束&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;所有列的下面&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;默认和非空不支持，其他支持&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;可以（主键没有效果）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;标识列自增长列&#34;&gt;标识列（自增长列）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;含义：可以不用手动的插入值，系统提供默认的序列&lt;/li&gt;
+&lt;li&gt;特点：
+&lt;ul&gt;
+&lt;li&gt;默认从1开始，步长为1&lt;/li&gt;
+&lt;li&gt;标识列必须和一个key（主键，唯一，外键）搭配&lt;/li&gt;
+&lt;li&gt;一个表中至多有一个标识列&lt;/li&gt;
+&lt;li&gt;标识列的类型只能是数值型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;一-创建表时设置标识列&#34;&gt;一、创建表时设置标识列&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create table 表名(
+	字段名 字段类型 约束条件 AUTO_INCREMENT,
+	...
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;二-修改表时设置标识列&#34;&gt;二、修改表时设置标识列&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 modify column 字段名 字段类型 约束条件 AUTO_INCREMENT;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;三-修改表时删除标识列&#34;&gt;三、修改表时删除标识列&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter table 表名 modify column 字段名 字段类型 约束条件;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;tcl语言&#34;&gt;TCL语言&lt;/h2&gt;
+&lt;h3 id=&#34;事务&#34;&gt;事务&lt;/h3&gt;
+&lt;p&gt;​		事务由单独单元的一个或多个SQL语句组成，在这个单元中，每个MySQL语句是相互依赖的。而整个单独单元作为一个不可分割的整体，如果单元中某条SQL语句一旦执行失败或产生错误，整个单元将会回滚。所有受到影响的数据将返回到事务开始以前的状态；如果单元中的所有SQL语句均执行成功，则事务被顺利执行。&lt;/p&gt;
+&lt;h4 id=&#34;事务的acid属性&#34;&gt;事务的ACID属性&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;原子性(Atomicity):事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生&lt;/li&gt;
+&lt;li&gt;一致性(Consistency):事务必须使数据库从一个一致性状态变换到另一个一致性状态&lt;/li&gt;
+&lt;li&gt;隔离性(Isolation):一个事务的执行不能被其他事务干扰&lt;/li&gt;
+&lt;li&gt;持久性(Durability):一个事务一旦被提交，它对数据库中数据的改变就是永久性的&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;事务的创建&#34;&gt;事务的创建★&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;隐式事务：事务没有明显的开启和结束的标记；比如insert,update,delete&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显式事务：事务具有明显的开启和结束的标记；前提：必须先设置自动提交功能为禁用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;步骤1：开启事务&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set autocommit=0;
+start transaction;（可选的）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤2：编写事务中的sql语句(select,insert,update,delete)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;语句1，
+语句2，
+savepoint 节点名;（设置保存点）
+......
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;步骤3：结束事务&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;commit;（提交事务）
+rollback;（回滚事务）
+rollback to 回滚点名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;并发事务&#34;&gt;并发事务&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;事务的并发问题是如何发生的？&lt;/p&gt;
+&lt;p&gt;多个事务同时操作同一个数据库的相同数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;并发问题有哪些？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;脏读：一个事务读取了其他事务还没有提交的数据，读到的是其他事务“更新”的数据&lt;/li&gt;
+&lt;li&gt;不可重复读：一个事务多次读取，结果不一样&lt;/li&gt;
+&lt;li&gt;幻读：一个事务读取了其他事务还没有提交的数据，读到的是其他事务“插入”的数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如何解决并发问题？&lt;/p&gt;
+&lt;p&gt;设置隔离级别&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;事务的隔离级别&#34;&gt;事务的隔离级别&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;脏读&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;不可重复读&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;幻读&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;read uncommitted（读未提交）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;read committed（读已提交）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;×&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;repeatable read（可重复读）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;×&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;×&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;√&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;serializable（串行化）&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;×&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;×&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;×&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;mysql中默认隔离级别是repeatable read&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看隔离级别的命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select @@tx_isolation;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置隔离级别的命令：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set session|global transaction isolation level 隔离级别;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;视图&#34;&gt;视图&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;含义：虚拟表，行和列的数据来自定义视图的查询中使用的表，并且是在使用视图时动态生成的，只保存了sql逻辑，不保存查询结果。&lt;/li&gt;
+&lt;li&gt;应用场景：多个地方用到同样的查询结果，该查询结果使用的sql语句较复杂&lt;/li&gt;
+&lt;li&gt;好处：
+&lt;ul&gt;
+&lt;li&gt;简化sql语句&lt;/li&gt;
+&lt;li&gt;提高了sql的重用性&lt;/li&gt;
+&lt;li&gt;保护基表的数据，提高了安全性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;一-创建视图&#34;&gt;一、创建视图&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create view 视图名
+as
+查询语句;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;二-视图的修改&#34;&gt;二、视图的修改&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;方式一：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create or replace view 视图名
+as
+查询语句;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;方式二：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;alter view 视图名
+as
+查询语句;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;三-删除视图&#34;&gt;三、删除视图&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;drop view 视图名,视图名,...;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;四-查看视图&#34;&gt;四、查看视图&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;desc 视图名;
+或
+show create view 视图名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;五-视图的更新&#34;&gt;五、视图的更新&lt;/h4&gt;
+&lt;p&gt;与表类似，&lt;strong&gt;但视图一般用于查询&lt;/strong&gt;，而不是更新，所以具备以下特点的视图都不允许更新：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;包含分组函数、group by、distinct、having、union&lt;/li&gt;
+&lt;li&gt;join&lt;/li&gt;
+&lt;li&gt;常量视图&lt;/li&gt;
+&lt;li&gt;where后的子查询用到了from中的表&lt;/li&gt;
+&lt;li&gt;用到了不可更新的视图&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;六-视图和表的对比&#34;&gt;六、视图和表的对比&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;创建语法的关键字&lt;/th&gt;
+&lt;th&gt;保存的内容&lt;/th&gt;
+&lt;th&gt;使用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;视图&lt;/td&gt;
+&lt;td&gt;create view&lt;/td&gt;
+&lt;td&gt;sql逻辑&lt;/td&gt;
+&lt;td&gt;增删改查（一般只查）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;表&lt;/td&gt;
+&lt;td&gt;create table&lt;/td&gt;
+&lt;td&gt;实际数据&lt;/td&gt;
+&lt;td&gt;增删改查&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;变量&#34;&gt;变量&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;系统变量
+&lt;ul&gt;
+&lt;li&gt;全局变量&lt;/li&gt;
+&lt;li&gt;会话变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;自定义变量
+&lt;ul&gt;
+&lt;li&gt;用户变量&lt;/li&gt;
+&lt;li&gt;局部变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;一-系统变量&#34;&gt;一、系统变量&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;说明：变量由系统提供，不是用户定义，属于服务器层面&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;查看所有的系统变量&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;show global|【session】 variables;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看满足条件的部分系统变量&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;show global|【session】 variables like &#39;%char%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;查看指定的某个系统变量的值&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select @@global|【session】.系统变量名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为某个系统变量赋值&lt;/p&gt;
+&lt;p&gt;方式一：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set global|【session】 系统变量名=值；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;方式二：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set @@global|【session】.系统变量名=值;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;注意：如果是全局级别，则需要加global，如果是会话级别，则需要加session，如果不写，则默认session&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;1-全局变量&#34;&gt;1. 全局变量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;作用域：服务器每次启动将为所有的全局变量赋初始值，针对于所有的会话（连接）有效，但不能跨重启&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-会话变量&#34;&gt;2. 会话变量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;作用域：仅仅针对当前会话（连接）有效，应用在任何地方，也就是begin end里面外面均可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-自定义变量&#34;&gt;二、自定义变量&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;说明：变量是用户自定义的，不是由系统提供&lt;/li&gt;
+&lt;li&gt;使用步骤：声明，赋值，使用（查看、比较、运算等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;1-用户变量&#34;&gt;1. 用户变量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;作用域：针对于当前会话（连接）有效&lt;/li&gt;
+&lt;li&gt;位置：可以放在begin end里面或外面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;声明并初始化，赋值的操作符：=或:=&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set @用户变量名=值;
+或
+set @用户变量名:=值;
+或
+select @用户变量名:=值;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;赋值（更新用户变量的值）&lt;/p&gt;
+&lt;p&gt;方式一：通过set或select&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set @用户变量名=值;
+或
+set @用户变量名:=值;
+或
+select @用户变量名:=值;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;方式二：通过select into&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 字段 into @变量名
+from 表;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用（查看）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select @用户变量名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;2-局部变量&#34;&gt;2. 局部变量&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;作用域：仅仅在定义它的begin end中有效，应用在begin end中的第一句话！！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;声明&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;declare 变量名 类型;
+或
+declare 变量名 类型 default 值;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;赋值&lt;/p&gt;
+&lt;p&gt;方式一：通过set或select&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set 局部变量名=值;
+或
+set 局部变量名:=值;
+或
+select @局部变量名:=值;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;方式二：通过select into&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 字段 into 局部变量名
+from 表;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 局部变量名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;3-对比用户变量和局部变量&#34;&gt;3. 对比用户变量和局部变量&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;作用域&lt;/th&gt;
+&lt;th&gt;定义和使用的位置&lt;/th&gt;
+&lt;th&gt;语法&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;用户变量&lt;/td&gt;
+&lt;td&gt;当前会话&lt;/td&gt;
+&lt;td&gt;会话中的任何地方&lt;/td&gt;
+&lt;td&gt;必须加@，不用限定类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;局部变量&lt;/td&gt;
+&lt;td&gt;begin end中&lt;/td&gt;
+&lt;td&gt;只能在begin end中，且为第一句话&lt;/td&gt;
+&lt;td&gt;除select外一般不用加@，需要限定类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;存储过程和函数&#34;&gt;存储过程和函数&lt;/h2&gt;
+&lt;p&gt;存储过程和函数的结尾可以使用delimiter重新设置&lt;/p&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;demiliter 结束标记
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;设置完成后end后面和每次调用存储过程和函数的结尾都要加上结束标记&lt;/p&gt;
+&lt;h3 id=&#34;存储过程&#34;&gt;存储过程&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;含义：一组预先编译好的SQL语句的集合，理解成批处理语句&lt;/li&gt;
+&lt;li&gt;好处：
+&lt;ul&gt;
+&lt;li&gt;提高代码的重用性&lt;/li&gt;
+&lt;li&gt;简化操作&lt;/li&gt;
+&lt;li&gt;减少了编译次数并且减少了和数据库服务器的连接次数，提高了效率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;一-创建语法&#34;&gt;一、创建语法★&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create procedure 存储过程名(参数列表)
+begin
+	存储过程体（一组合法的SQL语句）
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;注意&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;参数列表包含三部分：参数模式，参数名，参数类型&lt;/p&gt;
+&lt;p&gt;参数模式：&lt;/p&gt;
+&lt;p&gt;IN：该参数可以作为输入，需要调用方传入值&lt;/p&gt;
+&lt;p&gt;OUT：该参数可以作为输出，也就是可以作为返回值&lt;/p&gt;
+&lt;p&gt;INOUT：该参数既可以作为输入又可以作为输出，也就是该参数既需要传入值，又可以返回值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果存储过程体只有一句话，begin end可以省略&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;存储过程体中的每条SQL语句的结尾要求必须加分号&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;二-调用语法&#34;&gt;二、调用语法&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;调用in模式的参数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;call 存储过程名(&#39;值&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调用out模式的参数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set @变量名;
+call 存储过程名(@变量名);
+select @变量名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调用inout模式的参数：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;set @变量名=值;
+call 存储过程名(@变量名);
+select @变量名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;三-删除存储过程&#34;&gt;三、删除存储过程&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;drop procedure 存储过程名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;四-查看存储过程的信息&#34;&gt;四、查看存储过程的信息&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;show create procedure 存储过程名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;函数&#34;&gt;函数&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;与存储过程的区别
+&lt;ul&gt;
+&lt;li&gt;存储过程可以有0个或多个返回，适合批量插入、批量更新&lt;/li&gt;
+&lt;li&gt;函数有且仅有1个返回，适合处理数据后返回一个结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;一-创建语法-2&#34;&gt;一、创建语法&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;create function 函数名(参数列表) returns 返回类型
+begin
+	函数体
+end
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;注意
+&lt;ol&gt;
+&lt;li&gt;参数列表包含两部分：参数名 参数类型&lt;/li&gt;
+&lt;li&gt;函数体：肯定有return语句，一般放在函数体最后&lt;/li&gt;
+&lt;li&gt;如果函数体中只有一句话，则可以省略begin end&lt;/li&gt;
+&lt;li&gt;使用delimiter语句设置结束标记&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;二-调用语法-2&#34;&gt;二、调用语法&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;select 函数名(实参列表);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;三-查看函数&#34;&gt;三、查看函数&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;show create function 函数名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;四-删除函数&#34;&gt;四、删除函数&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;drop function 函数名;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;流程控制结构&#34;&gt;流程控制结构&lt;/h2&gt;
+&lt;h3 id=&#34;一-分支结构&#34;&gt;一、分支结构&lt;/h3&gt;
+&lt;h4 id=&#34;1-if函数&#34;&gt;1. if函数&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;功能：简单实现的双分支&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;位置：可以作为表达式放在begin end里面或外面&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;if(表达式1,表达式2,表达式3)
+执行顺序：如果表达式1成立则if函数返回表达式2的值，否则返回表达式3的值
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-case结构&#34;&gt;2、case结构&lt;/h4&gt;
+&lt;p&gt;情况1：类似于Java中的switch语句，一般用于实现等值判断&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;作为表达式&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;case 变量|表达式|字段
+when 要判断的值 then 返回的值1
+when 要判断的值 then 返回的值2
+...
+else 要返回的值n
+end;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;作为独立的语句&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;case 变量|表达式|字段
+when 要判断的值 then 返回的语句1;
+when 要判断的值 then 返回的语句2;
+...
+else 要返回的语句n;
+end case;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;情况2：类似于Java中的多重if语句，一般用于实现区间判断&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;作为表达式&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;case
+when 要判断的条件1 then 返回的值1
+when 要判断的条件2 then 返回的值2
+...
+else 要返回的值n
+end;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;作为独立的语句&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;case
+when 要判断的条件1 then 返回的语句1;
+when 要判断的条件2 then 返回的语句2;
+...
+else 要返回的语句n;
+end case;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;特点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;可以作为表达式，嵌套在其他语句中使用，此时可以放在任何地方，begin end中或begin end的外面；&lt;/p&gt;
+&lt;p&gt;可以作为独立的语句去使用，此时只能放在begin end中&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果when中的值满足或条件成立，则执行对应的then后面的语句，并且结束case；&lt;/p&gt;
+&lt;p&gt;如果都不满足，则执行else中的语句或值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;else可以省略，如果省略else并且所有的when条件都不满足，则返回null&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;3-if结构&#34;&gt;3. if结构&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;功能：实现多重分支&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;if 条件1 then 语句1;
+elseif 条件2 then 语句2;
+...
+【else 语句n;】
+end if;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：只能用在begin end中&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-循环结构&#34;&gt;二、循环结构&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;分类：while,loop,repeat&lt;/li&gt;
+&lt;li&gt;位置：只能放在begin end中&lt;/li&gt;
+&lt;li&gt;循环控制：
+&lt;ul&gt;
+&lt;li&gt;iterate：类似于continue，结束本次循环，继续下一次&lt;/li&gt;
+&lt;li&gt;leave：类似于break，结束当前所在的循环&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;三种循环都可以省略名称，但如果循环中添加了循环控制语句（leave或iterate）则必须添加名称&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;1-while&#34;&gt;1. while&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;【标签:】while 循环条件 do
+		循环体;
+end while【标签】;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：先判断后执行&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-loop&#34;&gt;2. loop&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;【标签:】loop
+		循环体;
+end loop【标签】;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以用来实现简单的死循环&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-repeat&#34;&gt;3. repeat&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;语法：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mySQL&#34;&gt;【标签:】repeat
+		循环体;
+until 结束循环的条件
+end repeat【标签】;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;特点：先执行后判断，无条件至少执行一次&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+">MySQL基础学习笔记</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/java-nei-cun-mo-xing-ji-fen-qu/"" data-c="
