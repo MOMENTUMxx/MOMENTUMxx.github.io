@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
-<title>OutOfMemoryError异常--Java堆溢出 | 王璐杰的BLOG</title>
+<title>LeetCode刷题 | 王璐杰的BLOG</title>
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602559821310">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="OutOfMemoryError异常--Java堆溢出" />
-  <meta name="keywords" content="JVM" />
+  <meta name="description" content="LeetCode刷题" />
+  <meta name="keywords" content="算法" />
 </head>
 
 <body>
@@ -276,7 +276,43 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li><a href="#java%E5%A0%86%E6%BA%A2%E5%87%BA">Java堆溢出</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">动态规划</a>
+<ul>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%920-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98">动态规划0-1背包问题</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85">动态规划完全背包</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%8D%9A%E5%BC%88%E8%AE%BA">动态规划博弈论</a></li>
+</ul>
+</li>
+<li><a href="#%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84">旋转排序数组</a></li>
+<li><a href="#%E5%9B%9E%E6%96%87">回文</a></li>
+<li><a href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%B7%A6%E5%8F%B3%E8%BE%B9%E7%95%8C">二分查找左右边界</a></li>
+<li><a href="#%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6">缓存机制</a></li>
+<li><a href="#%E6%A0%91">树</a>
+<ul>
+<li><a href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E4%B9%8B%E8%BF%AD%E4%BB%A3">二叉树遍历之迭代</a>
+<ul>
+<li><a href="#1-%E5%89%8D%E5%BA%8F">1. 前序</a></li>
+<li><a href="#2-%E4%B8%AD%E5%BA%8F">2. 中序</a></li>
+<li><a href="#3-%E5%90%8E%E5%BA%8F">3. 后序</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C">二叉树搜索树的插入操作</a></li>
+<li><a href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0">完全二叉树的节点个数</a></li>
+<li><a href="#%E5%89%8D%E7%BC%80%E6%A0%91">前缀树</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%E6%89%BE%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9">快慢指针找中间节点</a></li>
+<li><a href="#%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97lis">最长递增子序列（LIS）</a></li>
+<li><a href="#%E8%AE%B0%E5%BF%86%E5%8C%96dfs%E8%BF%94%E5%9B%9E%E5%80%BCint">记忆化DFS（返回值int）</a></li>
+<li><a href="#%E5%B9%B6%E6%9F%A5%E9%9B%86">并查集</a></li>
+<li><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a></li>
+<li><a href="#%E5%8D%95%E8%B0%83%E6%A0%88">单调栈</a></li>
+<li><a href="#%E6%8E%92%E5%BA%8F">排序</a>
+<ul>
+<li><a href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">归并排序</a></li>
+<li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a></li>
+</ul>
+</li>
 </ul>
 
   </div>
@@ -542,8 +578,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/">
-      OutOfMemoryError异常--Java堆溢出
+    <a class="post-title-link" href="https://MOMENTUMxx.github.io/post/leetcode-shua-ti/">
+      LeetCode刷题
     </a>
   </h1>
   <div class="post-meta">
@@ -551,7 +587,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-10-10 19:40:52">2020-10-10</span>
+      <span class="publish-time" data-t="2020-10-12 10:39:47">2020-10-12</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -560,8 +596,8 @@
       <span class="pc-show language" data-lan="category-in">分类于</span>
       
       
-      <a href="https://MOMENTUMxx.github.io/tag/v8JHH3IH6/">
-        <span>JVM</span>
+      <a href="https://MOMENTUMxx.github.io/tag/FbwWhcrmf/">
+        <span>算法</span>
       </a>
       
       
@@ -570,17 +606,17 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>3<span class="language" data-lan="minute">分钟</span></span>
+      <span>11<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>688<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>2040<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
     
-    <span id="/post/outofmemoryerror-yi-chang-java-dui-yi-chu/" data-flag-title="OutOfMemoryError异常--Java堆溢出" class="meta-item pc-show leancloud_visitors">
+    <span id="/post/leetcode-shua-ti/" data-flag-title="LeetCode刷题" class="meta-item pc-show leancloud_visitors">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-eye"></i>
       <span><span class="language" data-lan="view">浏览量</span>：<span class="leancloud-visitors-count"></span></span>
@@ -589,31 +625,416 @@
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>在Java虚拟机规范的描述中，除了<strong>程序计数器</strong>外，虚拟机内存的其他几个运行时区域都有发生OutOfMemoryError(下文简称OOM)异常的可能，本文简单介绍一下会导致OOM异常出现的Java堆溢出。🍓</p>
+              <p>将刷力扣过程中的一些有代表性的类型题和常用的算法做了总结😊</p>
 <!-- more -->
-<h1 id="java堆溢出">Java堆溢出</h1>
-<p>Java堆用于存储对象实例，只要不断地创建对象，并且保证GC Roots到对象之间有可达路径来避免垃圾回收机制清除这些对象，那么在对象数量到达最大堆的容量限制后就会产生内存溢出异常。<br>
-下面的代码限制Java堆的大小为20MB，不可扩展（将堆的最小值-Xms参数与最大值-Xmx参数设置为一样即可避免堆自动扩展），通过参数-XX:+HeapDumpOnOutOfMemoryError可以让虚拟机在出现内存溢出异常时Dump出当前的<strong>内存堆转储快照</strong>以便事后进行分析。</p>
-<pre><code class="language-java">public class HeapOOM {
-    static class OOMObject{}
-    public static void main(String[] args) {
-        List&lt;OOMObject&gt; list = new ArrayList&lt;HeapOOM.OOMObject&gt;();
-        while(true) {
-            list.add(new OOMObject());
+<h1 id="动态规划">动态规划</h1>
+<h2 id="动态规划0-1背包问题">动态规划0-1背包问题</h2>
+<p>1、背包容量为cap，有n个物品，给定体积和价值的两个一维数组w和v，其中w[i]表示第i件物品的体积，v[i]表示第i件物品的价值，在不超过背包容量的前提下使装入背包的物品具有最大的价值总和，返回最大价值</p>
+<p>二维dp：</p>
+<pre><code class="language-java">class Solution {
+    public int bag(int[] w, int[] v, int cap, int n) {
+        //dp[i][j]表示当前有i个物品可选,选择其中一些放入容量为j的背包,能得到的最大价值
+        int[][] dp = new int[n][cap + 1];
+        dp[0][w[0]] = v[0];
+        for (int i = 1; i &lt; n; i++) {
+            for (int j = 0; j &lt; cap + 1; j++) {
+                //先复制再修改
+                //背包容量小于第i个物体的体积时,不能放入第i个物体,总价值与物品数量为i-1,背包容量为j时相同
+                dp[i][j] = dp[i - 1][j];
+                if (j &gt;= w[i]) {
+                    //此时有足够的空间来装当前物品,但装了当前物品也不一定达到当前最优价值(可能会让更有价值的物品放不进背包),因此在装与不装之间选择一个最优策略
+                    //dp[i-1][j]表示不装当前物品,dp[i-1][j-w[i]]表示装当前物品
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
+                }
+            }
+        }
+        //计算背包内商品的编号
+        int[] item = new int[n];
+        int j = cap;
+        for (int i = n - 1; i &gt; 0; i--) {
+            if (dp[i][j] &gt; dp[i - 1][j]) {
+                item[i] = 1;
+                j -= w[i];
+            }
+        }
+        for (int i = 0; i &lt; n; i++) {
+            if (item[i] == 1) {
+                System.out.println(i);
+            }
+        }
+        return dp[n - 1][cap];
+    }
+}
+</code></pre>
+<p>一维dp：</p>
+<pre><code class="language-java">class Solution {
+    public int bag(int[] w, int[] v, int cap, int n) {
+        int[] dp = new int[cap + 1];
+        dp[w[0]] = v[0];
+        for (int i = 1; i &lt; n; i++) {
+            for (int j = cap; j &gt;= w[i]; j--) {
+                dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
+            }
+        }
+        return dp[cap];
+    }
+}
+</code></pre>
+<p>2、<a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">分割等和子集</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/target-sum/">目标和</a></p>
+<h2 id="动态规划完全背包">动态规划完全背包</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/coin-change/">零钱兑换</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/coin-lcci/">硬币</a></p>
+<h2 id="动态规划博弈论">动态规划博弈论</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/predict-the-winner/">预测赢家</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/stone-game/">石子游戏</a></p>
+<h1 id="旋转排序数组">旋转排序数组</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/search-rotate-array-lcci/">搜索旋转数组</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/">旋转数组的最小数字</a></p>
+<h1 id="回文">回文</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">最长回文子序列</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">最长回文子串</a></p>
+<h1 id="二分查找左右边界">二分查找左右边界</h1>
+<pre><code class="language-java">private int binarySearch(int[] array, int target) {
+        int leftBound, rightBound, left = 0, right = array.length;
+        //找左边界
+        while (left &lt; right) {
+            int mid = ((right - left) &gt;&gt; 1) + left;
+            if (array[mid] &gt;= target) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        leftBound = left &gt;= array.length ? -1 : left;
+        System.out.println(&quot;leftBound:&quot; + leftBound);
+        //没找到左边界,说明没有要查找的数,直接退出
+        if (leftBound == -1) {
+            return 0;
+        }
+        left = leftBound;
+        right = array.length;
+        //找右边界
+        while (left &lt; right) {
+            int mid = ((right - left) &gt;&gt; 1) + left;
+            if (array[mid] &lt;= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        rightBound = left - 1;
+        System.out.println(&quot;rightBound:&quot; + rightBound);
+        System.out.println(rightBound - leftBound + 1);
+        return rightBound - leftBound + 1;
+    }
+</code></pre>
+<h1 id="缓存机制">缓存机制</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/lru-cache/">LRU （Least Recently Used）</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/lfu-cache/">LFU （Least Frequently Used）</a></p>
+<h1 id="树">树</h1>
+<h2 id="二叉树遍历之迭代">二叉树遍历之迭代</h2>
+<h3 id="1-前序">1. 前序</h3>
+<pre><code class="language-java">class Solution {
+    public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        if (root == null) {
+            return ans;
+        }
+        Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            ans.add(node.val);
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+        return ans;
+    }
+}
+</code></pre>
+<h3 id="2-中序">2. 中序</h3>
+<pre><code class="language-java">class Solution {
+    public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            //向左走到底
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            ans.add(cur.val);
+            //向右走一步
+            cur = cur.right;
+        }
+        return ans;
+    }
+}
+</code></pre>
+<h3 id="3-后序">3. 后序</h3>
+<pre><code class="language-java">class Solution {
+    public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        if (root == null) {
+            return ans;q
+        }
+        Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();
+        stack.add(root);
+        //保存后续遍历的倒序:根-&gt;右-&gt;左
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.removeFirst();
+            ans.add(node.val);
+            if (node.left != null) {
+                stack.addFirst(node.left);
+            }
+            if (node.right != null) {
+                stack.addFirst(node.right);
+            }
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+}
+</code></pre>
+<h2 id="二叉树搜索树的插入操作">二叉树搜索树的插入操作</h2>
+<ol>
+<li>
+<p>迭代</p>
+<pre><code class="language-java">class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        TreeNode node = new TreeNode(val);
+        if (root == null) {
+            return node;
+        }
+        TreeNode cur = root;
+        while (true) {
+            if (cur.val &gt; val) {
+                if (cur.left == null) {
+                    cur.left = node;
+                    break;
+                }
+                cur = cur.left;
+            } else {
+                if (cur.right == null) {
+                    cur.right = node;
+                    break;
+                }
+                cur = cur.right;
+            }
+        }
+        return root;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>递归</p>
+<pre><code class="language-java">class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if (root == null) {
+            return new TreeNode(val);
+        }
+        if (root.val &lt; val) {
+            root.right = insertIntoBST(root.right, val);
+        } else {
+            root.left = insertIntoBST(root.left, val);
+        }
+        return root;
+    }
+} 
+</code></pre>
+</li>
+</ol>
+<h2 id="完全二叉树的节点个数">完全二叉树的节点个数</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/count-complete-tree-nodes/">完全二叉树的节点个数</a></p>
+<h2 id="前缀树">前缀树</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/">实现 Trie (前缀树)</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/t9-lcci/">T9键盘</a></p>
+<h1 id="快慢指针找中间节点">快慢指针找中间节点</h1>
+<pre><code class="language-java">//找第一个中间节点
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast.next != null &amp;&amp; fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+
+//找第二个中间节点
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast != null &amp;&amp; fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+</code></pre>
+<h1 id="最长递增子序列lis">最长递增子序列（LIS）</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">最长上升子序列</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">俄罗斯套娃信封问题</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/comments/">最长递增子序列的个数</a></p>
+<h1 id="记忆化dfs返回值int">记忆化DFS（返回值int）</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/">矩阵中的最长递增路径</a></p>
+<h1 id="并查集">并查集</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/friend-circles/">朋友圈</a></p>
+<h1 id="滑动窗口">滑动窗口</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-repeating-character-replacement/submissions/">替换后的最长重复字符</a></p>
+<h1 id="单调栈">单调栈</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">柱状图中最大的矩形</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/trapping-rain-water/submissions/">接雨水</a></p>
+<h1 id="排序">排序</h1>
+<h2 id="归并排序">归并排序</h2>
+<pre><code class="language-java">//自顶向下的归并排序
+class Solution {
+    //数组小于等于这个临界值将优先使用插入排序
+    private static final int INSERTION_SORT_THRESHOLD = 7;
+
+    public int[] sortArray(int[] nums) {
+        int len = nums.length;
+        //用于合并两个有序数组的辅助数组,全局使用一份,避免多次创建和销毁
+        int[] tmp = new int[len];
+        mergeSort(nums, 0, len - 1, tmp);
+        return nums;
+    }
+
+    //对数组nums的子区间[left,right]进行归并排序
+    private void mergeSort(int[] nums, int left, int right, int[] tmp) {
+        //小区间使用插入排序
+        if (right - left &lt;= INSERTION_SORT_THRESHOLD) {
+            insertionSort(nums, left, right);
+            return;
+        }
+        int mid = left + ((right - left) &gt;&gt; 1);
+        mergeSort(nums, left, mid, tmp);
+        mergeSort(nums, mid + 1, right, tmp);
+        //如果数组的这个子区间本身有序,无需合并
+        if (nums[mid] &lt;= nums[mid + 1]) {
+            return;
+        }
+        mergeOfTwoSortedArray(nums, left, mid, right, tmp);
+    }
+
+    //合并两个有序数组:先把值复制到临时数组,再合并回去
+    private void mergeOfTwoSortedArray(int[] nums, int left, int mid, int right, int[] tmp) {
+        System.arraycopy(nums, left, tmp, left, right - left + 1);
+        int i = left;
+        int j = mid + 1;
+        for (int k = left; k &lt;= right; k++) {
+            //左半边用尽,取右边的值
+            if (i == mid + 1) {
+                nums[k] = tmp[j++];
+            } else if (j == right + 1) {
+                //右半边用尽,取左边的值
+                nums[k] = tmp[i++];
+            } else if (tmp[i] &lt;= tmp[j]) {
+                //注意如果写成&lt;就丢失了稳定性(相同元素原来靠前的排序后依然靠前)
+                nums[k] = tmp[i++];
+            } else {
+                nums[k] = tmp[j++];
+            }
+        }
+    }
+
+    //插入排序,左右边界均能取到
+    private void insertionSort(int[] arr, int left, int right) {
+        for (int i = left + 1; i &lt;= right; i++) {
+            int tmp = arr[i], j = i;
+            //将较大的元素向右移动
+            while (j &gt; left &amp;&amp; arr[j - 1] &gt; tmp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = tmp;
         }
     }
 }
 </code></pre>
-<p>运行结果：<br>
-<img src="https://MOMENTUMxx.github.io/post-images/1602330641069.png" alt="" loading="lazy"><br>
-Java堆内存的OOM异常是实际应用中常见的内存溢出异常情况。当出现Java堆内存溢出时，异常堆栈信息“java.lang.OutOfMemoryError”会跟着进一步提示“Java heap space”。<br>
-要解决这个区域的异常，一般的手段是先通过<strong>内存映像分析工具</strong>（如Eclipse Memory Analyzer）对Dump出来的<strong>堆转储快照</strong>进行分析，重点是确认内存中的对象是否是必要的，也就是要先分清除到底是出现了内存泄漏（Memory Leak）还是内存溢出（Memory Overflow）。下图显示了使用Eclipse Memory Analyzer打开的堆转储快照文件。<br>
-<img src="https://MOMENTUMxx.github.io/post-images/1602330757091.png" alt="" loading="lazy"></p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">堆</mi><mi mathvariant="normal">转</mi><mi mathvariant="normal">储</mi><mi mathvariant="normal">快</mi><mi mathvariant="normal">照</mi><mi mathvariant="normal">文</mi><mi mathvariant="normal">件</mi></mrow><annotation encoding="application/x-tex">堆转储快照文件
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord cjk_fallback">堆</span><span class="mord cjk_fallback">转</span><span class="mord cjk_fallback">储</span><span class="mord cjk_fallback">快</span><span class="mord cjk_fallback">照</span><span class="mord cjk_fallback">文</span><span class="mord cjk_fallback">件</span></span></span></span></span></p>
-<p>解决方案：<br>
-如果是内存泄漏，可进一步通过工具查看泄漏对象到GC Roots的<strong>引用链</strong>。于是就能找到泄露对象是通过怎样的路径与GC Roots相关联并导致垃圾收集器无法自动回收他们的。掌握了泄漏对象的类型信息及GC Roots引用链的信息，就可以比较准确的定位出泄漏代码的位置。<br>
-如果不存在泄漏，换句话说，就是内存中的对象确实还必须存活着，那就应当检查虚拟机的堆参数（-Xmx与-Xms），与机器物理内存对比看是否还有向上调整的空间。再从代码上检查是否存在某些对象生命周期过长、持有状态时间过长、存储结构设计不合理等情况，尽量减少程序运行期的内存消耗。</p>
+<h2 id="快速排序">快速排序</h2>
+<pre><code class="language-java">//双指针(指针对撞)快速排序
+public class Solution {
+    //数组小于等于这个临界值将优先使用插入排序
+    private static final int INSERTION_SORT_THRESHOLD = 7;
+    private static final Random RANDOM = new Random();
+
+    public int[] sortArray(int[] nums) {
+        int len = nums.length;
+        quickSort(nums, 0, len - 1);
+        return nums;
+    }
+
+    private void quickSort(int[] nums, int left, int right) {
+        //小区间使用插入排序
+        if (right - left &lt;= INSERTION_SORT_THRESHOLD) {
+            insertionSort(nums, left, right);
+            return;
+        }
+        int pIndex = partition(nums, left, right);
+        quickSort(nums, left, pIndex - 1);
+        quickSort(nums, pIndex + 1, right);
+    }
+
+    private int partition(int[] nums, int left, int right) {
+        int randomIndex = RANDOM.nextInt(right - left + 1) + left;
+        swap(nums, left, randomIndex);
+        //基准值
+        int pivot = nums[left];
+        int lt = left + 1, gt = right;
+        while (true) {
+            //all in [left + 1, lt) &lt;= pivot
+            while (lt &lt;= right &amp;&amp; nums[lt] &lt; pivot) {
+                lt++;
+            }
+            //all in (gt, right] &gt;= pivot
+            while (gt &gt; left &amp;&amp; nums[gt] &gt; pivot) {
+                gt--;
+            }
+            if (lt &gt;= gt) {
+                break;
+            }
+            //细节：交换相等的元素，等概率分到数组两边，可以保证在某些应用中避免运行时间变为平方级别
+            swap(nums, lt, gt);
+            lt++;
+            gt--;
+        }
+        swap(nums, left, gt);
+        return gt;
+    }
+
+    private void swap(int[] nums, int idx1, int idx2) {
+        int tmp = nums[idx1];
+        nums[idx1] = nums[idx2];
+        nums[idx2] = tmp;
+    }
+
+    //插入排序,左右边界均能取到
+    private void insertionSort(int[] arr, int left, int right) {
+        for (int i = left + 1; i &lt;= right; i++) {
+            int tmp = arr[i], j = i;
+            //将较大的元素向右移动
+            while (j &gt; left &amp;&amp; arr[j - 1] &gt; tmp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = tmp;
+        }
+    }
+}
+</code></pre>
+<p>1、<a href="https://leetcode-cn.com/problems/sort-colors/">颜色分类</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">数组中的第K个最大元素</a></p>
 
             </div>
             
@@ -630,7 +1051,7 @@ Java堆内存的OOM异常是实际应用中常见的内存溢出异常情况。�
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/" title="OutOfMemoryError异常--Java堆溢出">https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/</a>
+      <a href="https://MOMENTUMxx.github.io/post/leetcode-shua-ti/" title="LeetCode刷题">https://MOMENTUMxx.github.io/post/leetcode-shua-ti/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -639,21 +1060,17 @@ Java堆内存的OOM异常是实际应用中常见的内存溢出异常情况。�
   </ul>
   <div class="tags">
     
-      <a href="https://MOMENTUMxx.github.io/tag/v8JHH3IH6/"># JVM</a>
+      <a href="https://MOMENTUMxx.github.io/tag/FbwWhcrmf/"># 算法</a>
     
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Java垃圾收集" href="https://MOMENTUMxx.github.io/post/java-la-ji-shou-ji/">Java垃圾收集</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Java垃圾收集" href="https://MOMENTUMxx.github.io/post/java-la-ji-shou-ji/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="MySQL基础学习笔记" href="https://MOMENTUMxx.github.io/post/mysql-ji-chu/">MySQL基础学习笔记</a>
-        <a class="nav-mobile-next" title="MySQL基础学习笔记" href="https://MOMENTUMxx.github.io/post/mysql-ji-chu/">下一篇</a>
+        <a class="nav-pc-next" title="Java垃圾收集" href="https://MOMENTUMxx.github.io/post/java-la-ji-shou-ji/">Java垃圾收集</a>
+        <a class="nav-mobile-next" title="Java垃圾收集" href="https://MOMENTUMxx.github.io/post/java-la-ji-shou-ji/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

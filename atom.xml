@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MOMENTUMxx.github.io</id>
     <title>王璐杰的BLOG</title>
-    <updated>2020-10-10T12:08:41.289Z</updated>
+    <updated>2020-10-13T03:31:25.915Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MOMENTUMxx.github.io"/>
     <link rel="self" href="https://MOMENTUMxx.github.io/atom.xml"/>
@@ -11,14 +11,532 @@
     <icon>https://MOMENTUMxx.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 王璐杰的BLOG</rights>
     <entry>
+        <title type="html"><![CDATA[LeetCode刷题]]></title>
+        <id>https://MOMENTUMxx.github.io/post/leetcode-shua-ti/</id>
+        <link href="https://MOMENTUMxx.github.io/post/leetcode-shua-ti/">
+        </link>
+        <updated>2020-10-12T02:39:47.000Z</updated>
+        <summary type="html"><![CDATA[<p>将刷力扣过程中的一些有代表性的类型题和常用的算法做了总结😊</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>将刷力扣过程中的一些有代表性的类型题和常用的算法做了总结😊</p>
+<!-- more -->
+<h1 id="动态规划">动态规划</h1>
+<h2 id="动态规划0-1背包问题">动态规划0-1背包问题</h2>
+<p>1、背包容量为cap，有n个物品，给定体积和价值的两个一维数组w和v，其中w[i]表示第i件物品的体积，v[i]表示第i件物品的价值，在不超过背包容量的前提下使装入背包的物品具有最大的价值总和，返回最大价值</p>
+<p>二维dp：</p>
+<pre><code class="language-java">class Solution {
+    public int bag(int[] w, int[] v, int cap, int n) {
+        //dp[i][j]表示当前有i个物品可选,选择其中一些放入容量为j的背包,能得到的最大价值
+        int[][] dp = new int[n][cap + 1];
+        dp[0][w[0]] = v[0];
+        for (int i = 1; i &lt; n; i++) {
+            for (int j = 0; j &lt; cap + 1; j++) {
+                //先复制再修改
+                //背包容量小于第i个物体的体积时,不能放入第i个物体,总价值与物品数量为i-1,背包容量为j时相同
+                dp[i][j] = dp[i - 1][j];
+                if (j &gt;= w[i]) {
+                    //此时有足够的空间来装当前物品,但装了当前物品也不一定达到当前最优价值(可能会让更有价值的物品放不进背包),因此在装与不装之间选择一个最优策略
+                    //dp[i-1][j]表示不装当前物品,dp[i-1][j-w[i]]表示装当前物品
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - w[i]] + v[i]);
+                }
+            }
+        }
+        //计算背包内商品的编号
+        int[] item = new int[n];
+        int j = cap;
+        for (int i = n - 1; i &gt; 0; i--) {
+            if (dp[i][j] &gt; dp[i - 1][j]) {
+                item[i] = 1;
+                j -= w[i];
+            }
+        }
+        for (int i = 0; i &lt; n; i++) {
+            if (item[i] == 1) {
+                System.out.println(i);
+            }
+        }
+        return dp[n - 1][cap];
+    }
+}
+</code></pre>
+<p>一维dp：</p>
+<pre><code class="language-java">class Solution {
+    public int bag(int[] w, int[] v, int cap, int n) {
+        int[] dp = new int[cap + 1];
+        dp[w[0]] = v[0];
+        for (int i = 1; i &lt; n; i++) {
+            for (int j = cap; j &gt;= w[i]; j--) {
+                dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
+            }
+        }
+        return dp[cap];
+    }
+}
+</code></pre>
+<p>2、<a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">分割等和子集</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/target-sum/">目标和</a></p>
+<h2 id="动态规划完全背包">动态规划完全背包</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/coin-change/">零钱兑换</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/coin-lcci/">硬币</a></p>
+<h2 id="动态规划博弈论">动态规划博弈论</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/predict-the-winner/">预测赢家</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/stone-game/">石子游戏</a></p>
+<h1 id="旋转排序数组">旋转排序数组</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/search-rotate-array-lcci/">搜索旋转数组</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/">旋转数组的最小数字</a></p>
+<h1 id="回文">回文</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">最长回文子序列</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">最长回文子串</a></p>
+<h1 id="二分查找左右边界">二分查找左右边界</h1>
+<pre><code class="language-java">private int binarySearch(int[] array, int target) {
+        int leftBound, rightBound, left = 0, right = array.length;
+        //找左边界
+        while (left &lt; right) {
+            int mid = ((right - left) &gt;&gt; 1) + left;
+            if (array[mid] &gt;= target) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+        leftBound = left &gt;= array.length ? -1 : left;
+        System.out.println(&quot;leftBound:&quot; + leftBound);
+        //没找到左边界,说明没有要查找的数,直接退出
+        if (leftBound == -1) {
+            return 0;
+        }
+        left = leftBound;
+        right = array.length;
+        //找右边界
+        while (left &lt; right) {
+            int mid = ((right - left) &gt;&gt; 1) + left;
+            if (array[mid] &lt;= target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        rightBound = left - 1;
+        System.out.println(&quot;rightBound:&quot; + rightBound);
+        System.out.println(rightBound - leftBound + 1);
+        return rightBound - leftBound + 1;
+    }
+</code></pre>
+<h1 id="缓存机制">缓存机制</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/lru-cache/">LRU （Least Recently Used）</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/lfu-cache/">LFU （Least Frequently Used）</a></p>
+<h1 id="树">树</h1>
+<h2 id="二叉树遍历之迭代">二叉树遍历之迭代</h2>
+<h3 id="1-前序">1. 前序</h3>
+<pre><code class="language-java">class Solution {
+    public List&lt;Integer&gt; preorderTraversal(TreeNode root) {
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        if (root == null) {
+            return ans;
+        }
+        Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            ans.add(node.val);
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+        return ans;
+    }
+}
+</code></pre>
+<h3 id="2-中序">2. 中序</h3>
+<pre><code class="language-java">class Solution {
+    public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            //向左走到底
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            ans.add(cur.val);
+            //向右走一步
+            cur = cur.right;
+        }
+        return ans;
+    }
+}
+</code></pre>
+<h3 id="3-后序">3. 后序</h3>
+<pre><code class="language-java">class Solution {
+    public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
+        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
+        if (root == null) {
+            return ans;q
+        }
+        Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();
+        stack.add(root);
+        //保存后续遍历的倒序:根-&gt;右-&gt;左
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.removeFirst();
+            ans.add(node.val);
+            if (node.left != null) {
+                stack.addFirst(node.left);
+            }
+            if (node.right != null) {
+                stack.addFirst(node.right);
+            }
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+}
+</code></pre>
+<h2 id="二叉树搜索树的插入操作">二叉树搜索树的插入操作</h2>
+<ol>
+<li>
+<p>迭代</p>
+<pre><code class="language-java">class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        TreeNode node = new TreeNode(val);
+        if (root == null) {
+            return node;
+        }
+        TreeNode cur = root;
+        while (true) {
+            if (cur.val &gt; val) {
+                if (cur.left == null) {
+                    cur.left = node;
+                    break;
+                }
+                cur = cur.left;
+            } else {
+                if (cur.right == null) {
+                    cur.right = node;
+                    break;
+                }
+                cur = cur.right;
+            }
+        }
+        return root;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>递归</p>
+<pre><code class="language-java">class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if (root == null) {
+            return new TreeNode(val);
+        }
+        if (root.val &lt; val) {
+            root.right = insertIntoBST(root.right, val);
+        } else {
+            root.left = insertIntoBST(root.left, val);
+        }
+        return root;
+    }
+} 
+</code></pre>
+</li>
+</ol>
+<h2 id="完全二叉树的节点个数">完全二叉树的节点个数</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/count-complete-tree-nodes/">完全二叉树的节点个数</a></p>
+<h2 id="前缀树">前缀树</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/">实现 Trie (前缀树)</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/t9-lcci/">T9键盘</a></p>
+<h1 id="快慢指针找中间节点">快慢指针找中间节点</h1>
+<pre><code class="language-java">//找第一个中间节点
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast.next != null &amp;&amp; fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+
+//找第二个中间节点
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast != null &amp;&amp; fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+</code></pre>
+<h1 id="最长递增子序列lis">最长递增子序列（LIS）</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">最长上升子序列</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">俄罗斯套娃信封问题</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/comments/">最长递增子序列的个数</a></p>
+<h1 id="记忆化dfs返回值int">记忆化DFS（返回值int）</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/">矩阵中的最长递增路径</a></p>
+<h1 id="并查集">并查集</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/friend-circles/">朋友圈</a></p>
+<h1 id="滑动窗口">滑动窗口</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/longest-repeating-character-replacement/submissions/">替换后的最长重复字符</a></p>
+<h1 id="单调栈">单调栈</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">柱状图中最大的矩形</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/trapping-rain-water/submissions/">接雨水</a></p>
+<h1 id="排序">排序</h1>
+<h2 id="归并排序">归并排序</h2>
+<pre><code class="language-java">//自顶向下的归并排序
+class Solution {
+    //数组小于等于这个临界值将优先使用插入排序
+    private static final int INSERTION_SORT_THRESHOLD = 7;
+
+    public int[] sortArray(int[] nums) {
+        int len = nums.length;
+        //用于合并两个有序数组的辅助数组,全局使用一份,避免多次创建和销毁
+        int[] tmp = new int[len];
+        mergeSort(nums, 0, len - 1, tmp);
+        return nums;
+    }
+
+    //对数组nums的子区间[left,right]进行归并排序
+    private void mergeSort(int[] nums, int left, int right, int[] tmp) {
+        //小区间使用插入排序
+        if (right - left &lt;= INSERTION_SORT_THRESHOLD) {
+            insertionSort(nums, left, right);
+            return;
+        }
+        int mid = left + ((right - left) &gt;&gt; 1);
+        mergeSort(nums, left, mid, tmp);
+        mergeSort(nums, mid + 1, right, tmp);
+        //如果数组的这个子区间本身有序,无需合并
+        if (nums[mid] &lt;= nums[mid + 1]) {
+            return;
+        }
+        mergeOfTwoSortedArray(nums, left, mid, right, tmp);
+    }
+
+    //合并两个有序数组:先把值复制到临时数组,再合并回去
+    private void mergeOfTwoSortedArray(int[] nums, int left, int mid, int right, int[] tmp) {
+        System.arraycopy(nums, left, tmp, left, right - left + 1);
+        int i = left;
+        int j = mid + 1;
+        for (int k = left; k &lt;= right; k++) {
+            //左半边用尽,取右边的值
+            if (i == mid + 1) {
+                nums[k] = tmp[j++];
+            } else if (j == right + 1) {
+                //右半边用尽,取左边的值
+                nums[k] = tmp[i++];
+            } else if (tmp[i] &lt;= tmp[j]) {
+                //注意如果写成&lt;就丢失了稳定性(相同元素原来靠前的排序后依然靠前)
+                nums[k] = tmp[i++];
+            } else {
+                nums[k] = tmp[j++];
+            }
+        }
+    }
+
+    //插入排序,左右边界均能取到
+    private void insertionSort(int[] arr, int left, int right) {
+        for (int i = left + 1; i &lt;= right; i++) {
+            int tmp = arr[i], j = i;
+            //将较大的元素向右移动
+            while (j &gt; left &amp;&amp; arr[j - 1] &gt; tmp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = tmp;
+        }
+    }
+}
+</code></pre>
+<h2 id="快速排序">快速排序</h2>
+<pre><code class="language-java">//双指针(指针对撞)快速排序
+public class Solution {
+    //数组小于等于这个临界值将优先使用插入排序
+    private static final int INSERTION_SORT_THRESHOLD = 7;
+    private static final Random RANDOM = new Random();
+
+    public int[] sortArray(int[] nums) {
+        int len = nums.length;
+        quickSort(nums, 0, len - 1);
+        return nums;
+    }
+
+    private void quickSort(int[] nums, int left, int right) {
+        //小区间使用插入排序
+        if (right - left &lt;= INSERTION_SORT_THRESHOLD) {
+            insertionSort(nums, left, right);
+            return;
+        }
+        int pIndex = partition(nums, left, right);
+        quickSort(nums, left, pIndex - 1);
+        quickSort(nums, pIndex + 1, right);
+    }
+
+    private int partition(int[] nums, int left, int right) {
+        int randomIndex = RANDOM.nextInt(right - left + 1) + left;
+        swap(nums, left, randomIndex);
+        //基准值
+        int pivot = nums[left];
+        int lt = left + 1, gt = right;
+        while (true) {
+            //all in [left + 1, lt) &lt;= pivot
+            while (lt &lt;= right &amp;&amp; nums[lt] &lt; pivot) {
+                lt++;
+            }
+            //all in (gt, right] &gt;= pivot
+            while (gt &gt; left &amp;&amp; nums[gt] &gt; pivot) {
+                gt--;
+            }
+            if (lt &gt;= gt) {
+                break;
+            }
+            //细节：交换相等的元素，等概率分到数组两边，可以保证在某些应用中避免运行时间变为平方级别
+            swap(nums, lt, gt);
+            lt++;
+            gt--;
+        }
+        swap(nums, left, gt);
+        return gt;
+    }
+
+    private void swap(int[] nums, int idx1, int idx2) {
+        int tmp = nums[idx1];
+        nums[idx1] = nums[idx2];
+        nums[idx2] = tmp;
+    }
+
+    //插入排序,左右边界均能取到
+    private void insertionSort(int[] arr, int left, int right) {
+        for (int i = left + 1; i &lt;= right; i++) {
+            int tmp = arr[i], j = i;
+            //将较大的元素向右移动
+            while (j &gt; left &amp;&amp; arr[j - 1] &gt; tmp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = tmp;
+        }
+    }
+}
+</code></pre>
+<p>1、<a href="https://leetcode-cn.com/problems/sort-colors/">颜色分类</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">数组中的第K个最大元素</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java垃圾收集]]></title>
+        <id>https://MOMENTUMxx.github.io/post/java-la-ji-shou-ji/</id>
+        <link href="https://MOMENTUMxx.github.io/post/java-la-ji-shou-ji/">
+        </link>
+        <updated>2020-10-11T08:21:21.000Z</updated>
+        <summary type="html"><![CDATA[<p>垃圾收集需要完成三件事情：哪些内存需要回收？什么时候回收？如何回收？之前说过Java内存运行时区域的各个部分，其中程序计数器、虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭，栈中的栈帧随着方法的进入和退出执行入栈和出栈的操作。每一个栈帧分配多少内存是在编译期就<strong>已知</strong>的，因此这几个区域的内存分配和回收都具有确定性，不需要过多考虑如何回收的问题，当方法结束或线程结束时，内存自然就跟着回收了。<br>
+而Java堆和方法区则有很大的不确定性，如一个接口的多个实现类或一个方法执行的不同条件分支所需要的内存都是不确定的，只有在运行期才能知晓，这部分内存的分配和回收是动态的。垃圾收集器所关注的正是这部分内存该如何管理。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>垃圾收集需要完成三件事情：哪些内存需要回收？什么时候回收？如何回收？之前说过Java内存运行时区域的各个部分，其中程序计数器、虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭，栈中的栈帧随着方法的进入和退出执行入栈和出栈的操作。每一个栈帧分配多少内存是在编译期就<strong>已知</strong>的，因此这几个区域的内存分配和回收都具有确定性，不需要过多考虑如何回收的问题，当方法结束或线程结束时，内存自然就跟着回收了。<br>
+而Java堆和方法区则有很大的不确定性，如一个接口的多个实现类或一个方法执行的不同条件分支所需要的内存都是不确定的，只有在运行期才能知晓，这部分内存的分配和回收是动态的。垃圾收集器所关注的正是这部分内存该如何管理。</p>
+<!-- more -->
+<h1 id="判断对象是否死去">判断对象是否死去</h1>
+<p>在堆里面存放着Java世界中几乎所有的对象实例，垃圾收集器对堆内存进行回收前，都会先判断这些对象之中哪些还“存活”着，哪些已经“死去”(即不可能在被任何途径使用的对象)。</p>
+<h2 id="引用计数算法">引用计数算法</h2>
+<p>给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。<br>
+优点：原理简单，判定效率高<br>
+缺点：难以解决对象之间相互<strong>循环引用</strong>的问题<br>
+主流的Java虚拟机都没有选用引用计数算法来管理内存。</p>
+<h2 id="可达性分析算法">可达性分析算法</h2>
+<p>通过一系列的称为“<strong>GC Roots</strong>”的对象作为起始点，从这些节点开始向下搜索，搜索过程所走过的路径称为<strong>引用链</strong>(Reference Chain)，当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1602423136679.png" alt="" loading="lazy"><br>
+在Java语言中，可作为GC Roots的对象包括下面几种：</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
+<li>方法区中类静态属性引用的对象。</li>
+<li>方法区中常量引用的对象。</li>
+<li>本地方法栈中JNI（即一般说的Native方法）引用的对象。</li>
+<li>Java虚拟机内部的引用。</li>
+<li>所有被同步锁持有的对象。</li>
+<li>反映Java虚拟机内部情况的JMXBean、JVMTI中注册的回调、本地代码缓存等。</li>
+</ul>
+<h2 id="引用">引用</h2>
+<p>推荐参考文章<em>https://blog.csdn.net/baidu_22254181/article/details/82555485</em></p>
+<ol>
+<li>强引用：强引用是在程序代码之中普遍存在的引用赋值，类似<code>Object o = new Object()</code>这种引用关系。无论任何情况下，只要强引用关系还在，垃圾收集器就永远不会回收掉被引用的对象。</li>
+<li>软引用：用来描述一些还有用但<strong>非必须</strong>的对象。只被软引用关联的对象，在系统要发生内存溢出异常前，会把这些对象列进回收范围之中进行二次回收，如果这次回收还是没有足够的内存，才会抛出溢出异常。<br>
+应用场景：浏览器的后退按钮。</li>
+<li>弱引用：也是用来描述那些<strong>非必须</strong>对象，但它的强度比软引用更弱一些，被弱引用关联的对象只能生存到下一次垃圾收集发生为止。当垃圾收集器开始工作时，<strong>无论当前内存是否足够，都会回收掉只被弱引用关联的对象</strong>。</li>
+<li>虚引用：最弱的一种引用关系，一个对象是否有虚引用的存在，<strong>完全不会对其生存时间构成影响</strong>，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用的唯一目的只是为了在这个对象被收集器回收时收到一个系统通知。</li>
+</ol>
+<h2 id="对象的生存与死亡">对象的生存与死亡</h2>
+<p>在可达性分析算法中判定为不可达的对象，也不是非死不可，要宣告一个对象真正死亡，至少要经历两次标记过程：</p>
+<ol>
+<li>对象在可达性分析后发现没有与GC Roots相连接的引用链会被第一次标记，然后进行一次筛选，筛选的条件是此对象是否有必要执行finalise()方法，当对象没有覆盖finalize()方法或者finalize()方法已经被JVM调用过，那么就没必要执行finalize()方法；</li>
+<li>如果被判定为有必要执行finalize()方法，那么此对象将会放置在一个叫做<strong>F-Queue</strong>的队列之中，并在稍后由一个虚拟机自动建立的、低优先级的Finalize线程去触发这个方法。**finalize()**方法是对象逃脱死亡的最后一次机会，稍后GC将对F-Queue中的对象进行第二次小规模的标记，如果对象要在finalize()中成功拯救自己——只要重新与引用链上的任何一个对象建立关系即可，譬如把自己(this关键字)赋值给某个类变量或者对象的成员变量，那么在第二次标记时它将被移出“即将回收”集合；如果对象这时候还没有成功逃脱，那他就会真的被回收了。</li>
+</ol>
+<pre><code class="language-java">/**
+ * 此代码演示了两点： 
+ * 1.对象可以被GC时自我拯救 
+ * 2.这种自救的机会只有一次，因为一个对象的finzlize()方法最多只会被系统自动调用一次
+ */
+public class FinalizeEscapeGC {
+    public static FinalizeEscapeGC SAVE_HOOK = null;
+
+    public void isAlive() {
+        System.out.println(&quot;yes, i am still alive :)&quot;);
+    }
+
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.out.println(&quot;finalize method executed!&quot;);
+        FinalizeEscapeGC.SAVE_HOOK = this;
+    }
+
+    public static void main(String[] args) throws Throwable {
+        SAVE_HOOK = new FinalizeEscapeGC();
+
+        // 对象第一次成功拯救自己
+        SAVE_HOOK = null;
+        System.gc();
+        // 因为finalize方法优先级很低，所以暂停0.5s以等待它
+        Thread.sleep(500);
+        if (SAVE_HOOK != null) {
+            SAVE_HOOK.isAlive();
+        } else {
+            System.out.println(&quot;no, i am dead :(&quot;);
+        }
+
+        // 下面这段代码与上面的完全相同，但是这次自救却失败了
+        SAVE_HOOK = null;
+        System.gc();
+        // 因为finalize方法优先级很低，所以暂停0.5s以等待它
+        Thread.sleep(500);
+        if (SAVE_HOOK != null) {
+            SAVE_HOOK.isAlive();
+        } else {
+            System.out.println(&quot;no, i am dead :(&quot;);
+        }
+    }
+}
+</code></pre>
+<p>运行结果：<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1602422845509.png" alt="" loading="lazy"><br>
+可以看到SAVE_HOOK对象的finalize()方法确实被GC收集器触发了，并且在被收集前成功逃脱了。<br>
+注意代码中有两段完全一样的代码片段，执行结果确实一次成功逃脱，一次失败，这是因为任何一个对象的finalize()方法都<strong>只会被系统自动调用一次</strong>，如果对象面临下一次回收，它的finalize()方法不会被再次执行，因此第二段代码的自救行动失败了。</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[OutOfMemoryError异常--Java堆溢出]]></title>
         <id>https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/</id>
         <link href="https://MOMENTUMxx.github.io/post/outofmemoryerror-yi-chang-java-dui-yi-chu/">
         </link>
         <updated>2020-10-10T11:40:52.000Z</updated>
-        <summary type="html"><![CDATA[<p>在Java虚拟机规范的描述中，除了<strong>程序计数器</strong>外，虚拟机内存的其他几个运行时区域都有发生OutOfMemoryError(下文简称OOM)异常的可能，本文简单介绍一下会导致OOM异常出现的几种场景。🍓</p>
+        <summary type="html"><![CDATA[<p>在Java虚拟机规范的描述中，除了<strong>程序计数器</strong>外，虚拟机内存的其他几个运行时区域都有发生OutOfMemoryError(下文简称OOM)异常的可能，本文简单介绍一下会导致OOM异常出现的Java堆溢出。🍓</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>在Java虚拟机规范的描述中，除了<strong>程序计数器</strong>外，虚拟机内存的其他几个运行时区域都有发生OutOfMemoryError(下文简称OOM)异常的可能，本文简单介绍一下会导致OOM异常出现的几种场景。🍓</p>
+        <content type="html"><![CDATA[<p>在Java虚拟机规范的描述中，除了<strong>程序计数器</strong>外，虚拟机内存的其他几个运行时区域都有发生OutOfMemoryError(下文简称OOM)异常的可能，本文简单介绍一下会导致OOM异常出现的Java堆溢出。🍓</p>
 <!-- more -->
 <h1 id="java堆溢出">Java堆溢出</h1>
 <p>Java堆用于存储对象实例，只要不断地创建对象，并且保证GC Roots到对象之间有可达路径来避免垃圾回收机制清除这些对象，那么在对象数量到达最大堆的容量限制后就会产生内存溢出异常。<br>
