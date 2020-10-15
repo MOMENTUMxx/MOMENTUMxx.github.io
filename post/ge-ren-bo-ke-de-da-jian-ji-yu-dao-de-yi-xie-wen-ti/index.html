@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>搭建你的专属博客 | 王璐杰的BLOG</title>
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602559821310">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602753084675">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/fonts/font-awesome.css">
 <link
@@ -717,8 +717,8 @@ Gridea可以让你选择使用不同的主题来满足你的个性化需求，�
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="JVM内存分配与回收策略" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/">JVM内存分配与回收策略</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="JVM内存分配与回收策略" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/">上一篇</a>
+        <a class="nav-pc-next" title="JVM内存分配" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/">JVM内存分配</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="JVM内存分配" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/">上一篇</a>
       
     </div>
     <div class="nav-next">
@@ -2219,9 +2219,10 @@ public class Solution {
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/java-la-ji-shou-ji/"" data-c="
-          &lt;p&gt;垃圾收集需要完成三件事情：哪些内存需要回收？什么时候回收？如何回收？之前说过Java内存运行时区域的各个部分，其中程序计数器、虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭，栈中的栈帧随着方法的进入和退出执行入栈和出栈的操作。每一个栈帧分配多少内存是在编译期就&lt;strong&gt;已知&lt;/strong&gt;的，因此这几个区域的内存分配和回收都具有确定性，不需要过多考虑如何回收的问题，当方法结束或线程结束时，内存自然就跟着回收了。&lt;br&gt;
-而Java堆和方法区则有很大的不确定性，如一个接口的多个实现类或一个方法执行的不同条件分支所需要的内存都是不确定的，只有在运行期才能知晓，这部分内存的分配和回收是动态的。垃圾收集器所关注的正是这部分内存该如何管理。&lt;/p&gt;
+          &lt;p&gt;🚀本文主要总结了有关JVM垃圾收集的那些事儿，包括判断对象是否存活、各种引用方式、垃圾收集算法以及常用的垃圾收集器...&lt;/p&gt;
 &lt;!-- more --&gt;
+&lt;p&gt;垃圾收集需要完成三件事情：哪些内存需要回收？什么时候回收？如何回收？之前说过Java内存运行时区域的各个部分，其中程序计数器、虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭，栈中的栈帧随着方法的进入和退出执行入栈和出栈的操作。每一个栈帧分配多少内存是在编译期就&lt;strong&gt;已知&lt;/strong&gt;的，因此这几个区域的内存分配和回收都具有确定性，不需要过多考虑如何回收的问题，当方法结束或线程结束时，内存自然就跟着回收了。&lt;br&gt;
+而Java堆和方法区则有很大的不确定性，如一个接口的多个实现类或一个方法执行的不同条件分支所需要的内存都是不确定的，只有在运行期才能知晓，这部分内存的分配和回收是动态的。垃圾收集器所关注的正是这部分内存该如何管理。&lt;/p&gt;
 &lt;h1 id=&#34;判断对象是否死去&#34;&gt;判断对象是否死去&lt;/h1&gt;
 &lt;p&gt;在堆里面存放着Java世界中几乎所有的对象实例，垃圾收集器对堆内存进行回收前，都会先判断这些对象之中哪些还“存活”着，哪些已经“死去”(即不可能在被任何途径使用的对象)。&lt;/p&gt;
 &lt;h2 id=&#34;引用计数算法&#34;&gt;引用计数算法&lt;/h2&gt;
@@ -2231,8 +2232,10 @@ public class Solution {
 主流的Java虚拟机都没有选用引用计数算法来管理内存。&lt;/p&gt;
 &lt;h2 id=&#34;可达性分析算法&#34;&gt;可达性分析算法&lt;/h2&gt;
 &lt;p&gt;通过一系列的称为“&lt;strong&gt;GC Roots&lt;/strong&gt;”的对象作为起始点，从这些节点开始向下搜索，搜索过程所走过的路径称为&lt;strong&gt;引用链&lt;/strong&gt;(Reference Chain)，当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。&lt;br&gt;
-&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602423136679.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
-在Java语言中，可作为GC Roots的对象包括下面几种：&lt;/p&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602663773077.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;利&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;用&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;可&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;达&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;性&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;分&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;析&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;算&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;法&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;判&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;断&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;对&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;象&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;是&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;否&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;可&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;回&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;利用可达性分析算法判断对象是否可回收
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;利&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;用&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;可&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;达&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;性&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;分&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;析&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;算&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;法&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;判&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;断&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;对&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;象&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;是&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;否&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;可&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;回&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;在Java语言中，可作为GC Roots的对象包括下面几种：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;虚拟机栈（栈帧中的本地变量表）中引用的对象。&lt;/li&gt;
 &lt;li&gt;方法区中类静态属性引用的对象。&lt;/li&gt;
@@ -2247,7 +2250,7 @@ public class Solution {
 &lt;ol&gt;
 &lt;li&gt;强引用：强引用是在程序代码之中普遍存在的引用赋值，类似&lt;code&gt;Object o = new Object()&lt;/code&gt;这种引用关系。无论任何情况下，只要强引用关系还在，垃圾收集器就永远不会回收掉被引用的对象。&lt;/li&gt;
 &lt;li&gt;软引用：用来描述一些还有用但&lt;strong&gt;非必须&lt;/strong&gt;的对象。只被软引用关联的对象，在系统要发生内存溢出异常前，会把这些对象列进回收范围之中进行二次回收，如果这次回收还是没有足够的内存，才会抛出溢出异常。&lt;br&gt;
-应用场景：浏览器的后退按钮。&lt;/li&gt;
+应用场景：做缓存（浏览器的后退按钮）&lt;/li&gt;
 &lt;li&gt;弱引用：也是用来描述那些&lt;strong&gt;非必须&lt;/strong&gt;对象，但它的强度比软引用更弱一些，被弱引用关联的对象只能生存到下一次垃圾收集发生为止。当垃圾收集器开始工作时，&lt;strong&gt;无论当前内存是否足够，都会回收掉只被弱引用关联的对象&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;虚引用：最弱的一种引用关系，一个对象是否有虚引用的存在，&lt;strong&gt;完全不会对其生存时间构成影响&lt;/strong&gt;，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用的唯一目的只是为了在这个对象被收集器回收时收到一个系统通知。&lt;/li&gt;
 &lt;/ol&gt;
@@ -2255,7 +2258,7 @@ public class Solution {
 &lt;p&gt;在可达性分析算法中判定为不可达的对象，也不是非死不可，要宣告一个对象真正死亡，至少要经历两次标记过程：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;对象在可达性分析后发现没有与GC Roots相连接的引用链会被第一次标记，然后进行一次筛选，筛选的条件是此对象是否有必要执行finalise()方法，当对象没有覆盖finalize()方法或者finalize()方法已经被JVM调用过，那么就没必要执行finalize()方法；&lt;/li&gt;
-&lt;li&gt;如果被判定为有必要执行finalize()方法，那么此对象将会放置在一个叫做&lt;strong&gt;F-Queue&lt;/strong&gt;的队列之中，并在稍后由一个虚拟机自动建立的、低优先级的Finalize线程去触发这个方法。**finalize()**方法是对象逃脱死亡的最后一次机会，稍后GC将对F-Queue中的对象进行第二次小规模的标记，如果对象要在finalize()中成功拯救自己——只要重新与引用链上的任何一个对象建立关系即可，譬如把自己(this关键字)赋值给某个类变量或者对象的成员变量，那么在第二次标记时它将被移出“即将回收”集合；如果对象这时候还没有成功逃脱，那他就会真的被回收了。&lt;/li&gt;
+&lt;li&gt;如果被判定为有必要执行finalize()方法，那么此对象将会放置在一个叫做&lt;strong&gt;F-Queue&lt;/strong&gt;的队列之中，并在稍后由一个虚拟机自动建立的、低优先级的Finalize线程去触发这个方法。&lt;strong&gt;finalize()&lt;strong&gt;方法是对象逃脱死亡的&lt;/strong&gt;最后一次机会&lt;/strong&gt;，稍后GC将对F-Queue中的对象进行&lt;strong&gt;第二次小规模的标记&lt;/strong&gt;，如果对象要在finalize()中成功拯救自己——只要&lt;strong&gt;重新与引用链上的任何一个对象建立关系&lt;/strong&gt;即可，譬如把自己(this关键字)赋值给某个类变量或者对象的成员变量，那么在第二次标记时它将被移出“即将回收”集合；如果对象这时候还没有成功逃脱，那他就会真的被回收了。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
  * 此代码演示了两点： 
@@ -2306,6 +2309,60 @@ public class FinalizeEscapeGC {
 &lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602422845509.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
 可以看到SAVE_HOOK对象的finalize()方法确实被GC收集器触发了，并且在被收集前成功逃脱了。&lt;br&gt;
 注意代码中有两段完全一样的代码片段，执行结果确实一次成功逃脱，一次失败，这是因为任何一个对象的finalize()方法都&lt;strong&gt;只会被系统自动调用一次&lt;/strong&gt;，如果对象面临下一次回收，它的finalize()方法不会被再次执行，因此第二段代码的自救行动失败了。&lt;/p&gt;
+&lt;h1 id=&#34;垃圾收集算法&#34;&gt;垃圾收集算法&lt;/h1&gt;
+&lt;p&gt;垃圾收集算法可以划分为“引用计数式垃圾收集”(Reference Counting GC,直接垃圾收集)和“追踪式垃圾收集”(Tracing GC,间接垃圾收集)两大类，本文的所有垃圾收集算法均属于追踪式垃圾收集的范畴。&lt;/p&gt;
+&lt;h2 id=&#34;分代收集理论&#34;&gt;分代收集理论&lt;/h2&gt;
+&lt;p&gt;分代假说：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;弱分代假说：绝大多数对象都是朝生夕灭的。&lt;/li&gt;
+&lt;li&gt;强分代假说：熬过越多次垃圾收集过程的对象就越难以消亡。&lt;/li&gt;
+&lt;li&gt;跨代引用对于同代引用来说仅占极少数。&lt;br&gt;
+上面的假说奠定了多款垃圾收集器一致的设计原则：&lt;strong&gt;收集器应该将Java堆划分出不同的区域，然后将回收对象依据其年龄（熬过GC的次数）分配到不同的区域之中存储。&lt;/strong&gt;&lt;br&gt;
+解释：如果把区域中大多数朝生夕灭的对象集中放在一起，每次回收只关注少量存活而不去标记那些大量将要被回收的对象，就能以较低代价回收到大量的空间；把难以消亡的对象集中放在一起，虚拟机便可以使用较低的频率来回收这个区域，同时兼顾了垃圾收集的时间开销和内存的空间有效利用。&lt;br&gt;
+设计者一般至少会把Java堆划分为新生代和老年代两个区域。&lt;strong&gt;在新生代中，每次垃圾收集时都发现有大批对象死去，而每次回收后存活的少量对象，将会逐步晋升到老年代中存放。&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;概念辨析：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;部分收集(Partial GC):指目标不是完整收集整个Java堆的垃圾收集，其中又分为：
+&lt;ul&gt;
+&lt;li&gt;新生代收集(Minor GC/Young GC):指目标只是新生代的垃圾收集。&lt;/li&gt;
+&lt;li&gt;老年代收集(Major GC/Old GC):指目标只是老年代的垃圾收集，目前只有&lt;strong&gt;CMS&lt;/strong&gt;收集器会有单独收集老年代的行为。&lt;strong&gt;注意&lt;/strong&gt;：&amp;quot;Major GC&amp;quot;这个说法需要按上下文区分是指老年代的收集还是整堆收集。&lt;/li&gt;
+&lt;li&gt;混合收集(Mixed GC):指目标是收集整个新生代以及部分老年代的垃圾收集。目前只有&lt;strong&gt;G1&lt;/strong&gt;收集器会有这种行为。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;整堆收集(Full GC):收集整个Java堆和方法区的垃圾收集。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;标记-清除算法&#34;&gt;标记-清除算法&lt;/h2&gt;
+&lt;p&gt;“标记-清除”算法是最基础的算法，分为“标记”和“清除”两个阶段：&lt;strong&gt;首先标记出所有需要回收的对象，在标记完成后统一回收掉所有被标记的对象。&lt;/strong&gt;&lt;br&gt;
+缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;执行效率不稳定；标记和清除两个过程的执行效率随对象数量增长而降低。&lt;/li&gt;
+&lt;li&gt;内存空间的碎片化问题；标记、清除之后会产生大量不连续的内存碎片，导致当需要分配较大对象时无法找到足够的连续空间而不得不提前触发另一次垃圾收集动作。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602746030129.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;标&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;记&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;清&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;除&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;算&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;法&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;&amp;quot;标记-清除&amp;quot;算法示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.77777em;vertical-align:-0.08333em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;标&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;记&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.69444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;清&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;除&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;算&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;法&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;标记-复制算法针对新生代&#34;&gt;标记-复制算法（针对新生代）&lt;/h2&gt;
+&lt;p&gt;标记-复制算法将可用内存按容量划分为大小相等的两块，每次使用其中的一块。当这块的内存用完了，就将还存活着的对象复制到另一块上面，然后再把已使用过的内存空间一次清理掉。&lt;br&gt;
+优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分配内存时不用考虑空间碎片的复杂情况，只要移动堆顶指针，按顺序分配即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将可用内存缩小为了原来的一半，空间浪费多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;现在的商业虚拟机都采用复制收集算法来回收新生代&lt;/strong&gt;，有研究表明，新生代中的对象98%是朝生夕死的，所以并不需要按照1:1的比例来划分内存空间，而是将内存分为一块较大的Eden空间和两块较小的Survivor空间，每次使用Eden和其中的一块Survivor。当回收时，将Eden和Survivor中还存活着的对象一次性地拷贝到另外一块Survivor空间上，最后清理掉Eden和刚才用过的Survivor空间。&lt;strong&gt;HotSpot虚拟机默认Eden和Survivor的大小比例是8:1&lt;/strong&gt;，也就是每次新生代中可用内存空间为整个新生代容量的90%（80%+10%），只有10%的内存是会被“浪费”的。当然，并不能保证每次回收都只有10%的对象存活，当Survivor空间不够用时，需要依赖其他内存（这里指老年代）进行&lt;strong&gt;分配担保（Handle Promotion）&lt;/strong&gt;。即如果另外一块Survivor空间没有足够的空间存放上一次新生代收集下来的存活对象，这些对象将直接通过分配担保机制进入老年代。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602750063509.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;标&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;记&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;复&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;制&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;算&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;法&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;&amp;quot;标记-复制&amp;quot;算法示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.77777em;vertical-align:-0.08333em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;标&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;记&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.69444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;复&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;制&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;算&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;法&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;标记-整理算法针对老年代&#34;&gt;标记-整理算法（针对老年代）&lt;/h2&gt;
+&lt;p&gt;复制算法在对象存活率较高时就需要执行较多的复制操作，效率将会变低。更关键的是，如果不想浪费50%的空间，就需要有额外的空间进行分配担保，以应对被使用的内存中所有对象都100%存活的极端情况，所以在老年代一般不能直接选用复制算法。&lt;br&gt;
+根据老年代的特点提出了“标记-整理”算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向空间一端移动，然后直接清理掉边界以外的内存。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602752646619.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;标&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;记&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;整&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;理&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;算&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;法&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;&amp;quot;标记-整理&amp;quot;算法示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.77777em;vertical-align:-0.08333em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;标&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;记&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.69444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;整&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;理&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;算&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;法&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;标记-清除算法与标记-整理算法的本质差异在于前者是一种非移动式的回收算法，而后者是移动式的&lt;/strong&gt;。是否移动对象都存在弊端，移动对象操作必须全程暂停用户应用程序才能进行(&amp;quot;Stop The World&amp;quot;)，不移动对象会影响应用程序的吞吐量。&lt;/p&gt;
 ">Java垃圾收集</a>
       </div>
       
@@ -4141,7 +4198,7 @@ end repeat【标签】;
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/java-nei-cun-mo-xing-ji-fen-qu/"" data-c="
-          &lt;p&gt;Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的高墙，墙外面的人想进去，墙里面的人想出来。&lt;/p&gt;
+          &lt;p&gt;🎧Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的高墙，墙外面的人想进去，墙里面的人想出来。&lt;/p&gt;
 &lt;!-- more --&gt;
 &lt;p&gt;Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域，如图所示。&lt;br&gt;
 &lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602150845291.png&#34; alt=&#34;Java虚拟机运行时数据区&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
@@ -4179,7 +4236,7 @@ end repeat【标签】;
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://MOMENTUMxx.github.io/post/jvm-nei-cun-fen-pei-yu-hui-shou-ce-lue/"" data-c="
-          &lt;p&gt;Java技术体系的自动内存管理，最根本的目标是自动化的解决两个问题：自动给对象分配内存以及回收分配给对象的内存。关于回收内存，请见博客中JVM垃圾收集的相关文章，本文主要来探讨一下关于给对象分配内存的那些事儿😉&lt;/p&gt;
+          &lt;p&gt;Java技术体系的自动内存管理，最根本的目标是自动化的解决两个问题：自动给对象分配内存以及回收分配给对象的内存。关于回收内存，请见博文《Java垃圾收集》，本文主要来探讨一下关于给对象分配内存的那些事儿😉&lt;/p&gt;
 &lt;!-- more --&gt;
 &lt;h1 id=&#34;jvm堆的结构分析新生代-老年代-永久代&#34;&gt;JVM堆的结构分析（新生代、老年代、永久代）&lt;/h1&gt;
 &lt;h2 id=&#34;堆分代的目的&#34;&gt;堆分代的目的&lt;/h2&gt;
@@ -4217,7 +4274,7 @@ end repeat【标签】;
 &lt;h2 id=&#34;空间分配担保&#34;&gt;空间分配担保&lt;/h2&gt;
 &lt;p&gt;在发生Minor GC之前，虚拟机会先检查老年代可用的连续空间是否大于新生代所有对象总空间，如果条件成立，那么这次Minor GC就可以保证安全。否则虚拟机会查看-XX:HandlePromotionFailure参数的设置值是否允许担保失败；如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试进行一次Minor GC，尽管这次Minor GC是有风险的；如果小于，或者-XX:HandlePromotionFailure设置不允许冒险，那这时就要改为进行一次Full GC。&lt;br&gt;
 解释一下这里的“冒险”是指什么，&lt;strong&gt;新生代使用复制收集算法&lt;/strong&gt;，但为了提高内存利用率，只用一个Survivor空间来作为轮换备份，当大量对象在Minor GC后都存活下来时（最极端情况是所有对象都存活），Survivor空间无法容纳所有活下来的对象，这时候需要老年代进行分配担保，来减轻Survivor的压力。担保的前提是老年代有足够的空间，但本次回收中一共有多少对象会存活下来是无法提前知道的，只能用历次晋升到老年代对象的平均大小作为经验值，这其实是一种赌概率的方法，如果出现了担保失败，就只好老老实实的发起一次Full GC。虽然有失败的风险，但通常还是会将-XX:HandlePromotionFailure开关打开，避免Full GC过于频繁。&lt;/p&gt;
-">JVM内存分配与回收策略</a>
+">JVM内存分配</a>
       </div>
       
       <div class="item">
