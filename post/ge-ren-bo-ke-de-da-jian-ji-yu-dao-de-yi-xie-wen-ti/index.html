@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>搭建你的专属博客 | 王璐杰的BLOG</title>
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1602753084675">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1603278327043">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/fonts/font-awesome.css">
 <link
@@ -2036,31 +2036,6 @@ Gridea可以让你选择使用不同的主题来满足你的个性化需求，�
 &lt;h2 id=&#34;前缀树&#34;&gt;前缀树&lt;/h2&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/implement-trie-prefix-tree/&#34;&gt;实现 Trie (前缀树)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/t9-lcci/&#34;&gt;T9键盘&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;快慢指针找中间节点&#34;&gt;快慢指针找中间节点&lt;/h1&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//找第一个中间节点
-class Solution {
-    public ListNode middleNode(ListNode head) {
-        ListNode slow = head, fast = head;
-        while (fast.next != null &amp;amp;&amp;amp; fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
-}
-
-//找第二个中间节点
-class Solution {
-    public ListNode middleNode(ListNode head) {
-        ListNode slow = head, fast = head;
-        while (fast != null &amp;amp;&amp;amp; fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;最长递增子序列lis&#34;&gt;最长递增子序列（LIS）&lt;/h1&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-increasing-subsequence/&#34;&gt;最长上升子序列&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/russian-doll-envelopes/&#34;&gt;俄罗斯套娃信封问题&lt;/a&gt;&lt;/p&gt;
@@ -2114,15 +2089,19 @@ class Solution {
         for (int k = left; k &amp;lt;= right; k++) {
             //左半边用尽,取右边的值
             if (i == mid + 1) {
-                nums[k] = tmp[j++];
+                nums[k] = tmp[j];
+                j++;
             } else if (j == right + 1) {
                 //右半边用尽,取左边的值
-                nums[k] = tmp[i++];
+                nums[k] = tmp[i];
+                i++;
             } else if (tmp[i] &amp;lt;= tmp[j]) {
                 //注意如果写成&amp;lt;就丢失了稳定性(相同元素原来靠前的排序后依然靠前)
-                nums[k] = tmp[i++];
+                nums[k] = tmp[i];
+                i++;
             } else {
-                nums[k] = tmp[j++];
+                nums[k] = tmp[j];
+                j++;
             }
         }
     }
@@ -2141,6 +2120,7 @@ class Solution {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/&#34;&gt;数组中的逆序对&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;快速排序&#34;&gt;快速排序&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//双指针(指针对撞)快速排序
 public class Solution {
@@ -2185,11 +2165,81 @@ public class Solution {
             }
             //细节：交换相等的元素，等概率分到数组两边，可以保证在某些应用中避免运行时间变为平方级别
             swap(nums, lt, gt);
+            //这里更新是为了避免两个相等元素陷入死循环
             lt++;
             gt--;
         }
+        //gt所在位置的值小于pivot
         swap(nums, left, gt);
         return gt;
+    }
+
+    private void swap(int[] nums, int idx1, int idx2) {
+        int tmp = nums[idx1];
+        nums[idx1] = nums[idx2];
+        nums[idx2] = tmp;
+    }
+    
+    //插入排序,左右边界均能取到
+    private void insertionSort(int[] arr, int left, int right) {
+        for (int i = left + 1; i &amp;lt;= right; i++) {
+            int tmp = arr[i], j = i;
+            //将较大的元素向右移动
+            while (j &amp;gt; left &amp;amp;&amp;amp; arr[j - 1] &amp;gt; tmp) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = tmp;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//三指针快速排序
+public class Solution {
+    //数组小于等于这个临界值将优先使用插入排序
+    private static final int INSERTION_SORT_THRESHOLD = 7;
+    private static final Random RANDOM = new Random();
+
+    public int[] sortArray(int[] nums) {
+        int len = nums.length;
+        quickSort(nums, 0, len - 1);
+        return nums;
+    }
+
+    private void quickSort(int[] nums, int left, int right) {
+        if (right - left &amp;lt;= INSERTION_SORT_THRESHOLD) {
+            insertionSort(nums, left, right);
+            return;
+        }
+        int randomIndex = RANDOM.nextInt(right - left + 1) + left;
+        swap(nums, left, randomIndex);
+        //基准值
+        int pivot = nums[left];
+        // 循环不变量：
+        // all in [left + 1, lt] &amp;lt; pivot
+        // all in [lt + 1, i) = pivot
+        // all in [gt, right] &amp;gt; pivot
+        int lt = left;
+        int gt = right + 1;
+
+        int i = left + 1;
+        while (i &amp;lt; gt) {
+            if (nums[i] &amp;lt; pivot) {
+                lt++;
+                swap(nums, i, lt);
+                i++;
+            } else if (nums[i] == pivot) {
+                i++;
+            } else {
+                gt--;
+                swap(nums, i, gt);
+            }
+        }
+        //lt所在位置的值小于pivot
+        swap(nums, left, lt);
+        //大大减少两侧分治的区间
+        quickSort(nums, left, lt - 1);
+        quickSort(nums, gt, right);
     }
 
     private void swap(int[] nums, int idx1, int idx2) {
@@ -2214,6 +2264,57 @@ public class Solution {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/sort-colors/&#34;&gt;颜色分类&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/kth-largest-element-in-an-array/&#34;&gt;数组中的第K个最大元素&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/&#34;&gt;最小的k个数&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;链表&#34;&gt;链表&lt;/h1&gt;
+&lt;h2 id=&#34;快慢指针找中间节点&#34;&gt;快慢指针找中间节点&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//找第一个中间节点
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast.next != null &amp;amp;&amp;amp; fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+
+//找第二个中间节点
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head, fast = head;
+        while (fast != null &amp;amp;&amp;amp; fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;翻转链表&#34;&gt;翻转链表&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//以1-&amp;gt;2-&amp;gt;3-&amp;gt;4为例，翻转过程如下
+//1. 1   2-&amp;gt;3-&amp;gt;4
+//2. 2-&amp;gt;1   3-&amp;gt;4
+//3. 3-&amp;gt;2-&amp;gt;1   4
+//4. 4-&amp;gt;3-&amp;gt;2-&amp;gt;1
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode tmp, ans = null;
+        while (head != null) {
+            tmp = head.next;
+            head.next = ans;
+            ans = head;
+            head = tmp;
+        }
+        return ans;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/&#34;&gt;删除链表的倒数第N个节点&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/reorder-list/&#34;&gt;重排链表&lt;/a&gt;&lt;/p&gt;
 ">LeetCode刷题</a>
       </div>
       
@@ -2246,7 +2347,7 @@ public class Solution {
 &lt;li&gt;反映Java虚拟机内部情况的JMXBean、JVMTI中注册的回调、本地代码缓存等。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;引用&#34;&gt;引用&lt;/h2&gt;
-&lt;p&gt;推荐参考文章&lt;em&gt;https://blog.csdn.net/baidu_22254181/article/details/82555485&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;推荐参考文章&lt;a href=&#34;https://blog.csdn.net/baidu_22254181/article/details/82555485&#34;&gt;https://blog.csdn.net/baidu_22254181/article/details/82555485&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;强引用：强引用是在程序代码之中普遍存在的引用赋值，类似&lt;code&gt;Object o = new Object()&lt;/code&gt;这种引用关系。无论任何情况下，只要强引用关系还在，垃圾收集器就永远不会回收掉被引用的对象。&lt;/li&gt;
 &lt;li&gt;软引用：用来描述一些还有用但&lt;strong&gt;非必须&lt;/strong&gt;的对象。只被软引用关联的对象，在系统要发生内存溢出异常前，会把这些对象列进回收范围之中进行二次回收，如果这次回收还是没有足够的内存，才会抛出溢出异常。&lt;br&gt;
@@ -2363,6 +2464,112 @@ public class FinalizeEscapeGC {
 &lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;标&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;记&lt;/mi&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;整&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;理&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;&amp;quot;&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;算&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;法&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;&amp;quot;标记-整理&amp;quot;算法示意图
 &lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.77777em;vertical-align:-0.08333em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;标&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;记&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;−&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.69444em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;整&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;理&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;算&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;法&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;标记-清除算法与标记-整理算法的本质差异在于前者是一种非移动式的回收算法，而后者是移动式的&lt;/strong&gt;。是否移动对象都存在弊端，移动对象操作必须全程暂停用户应用程序才能进行(&amp;quot;Stop The World&amp;quot;)，不移动对象会影响应用程序的吞吐量。&lt;/p&gt;
+&lt;h1 id=&#34;经典垃圾收集器&#34;&gt;经典垃圾收集器&lt;/h1&gt;
+&lt;p&gt;如果说收集算法是内存回收的方法论，那垃圾收集器就是内存回收的实践者。《Java虚拟机规范》中对垃圾收集器应该如何实现并没有任何规定，因此不同的厂商、版本的虚拟机所提供的垃圾收集器都可能会有很大差别，并且一般都会提供参数供用户根据自己的应用特点和要求组合出各个内存分代所使用的收集器。&lt;br&gt;
+接下来讨论的是在JDK7 Update 4之后、JDK11正式发布之前，OracleJDK中的HotSpot虚拟机所包含的全部可用的垃圾收集器。&lt;br&gt;
+各款经典收集器之间的关系如图所示：&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602837323649.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;H&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;虚&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;拟&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;机&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;的&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;垃&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;圾&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;HotSpot虚拟机的垃圾收集器
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8777699999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.08125em;&#34;&gt;H&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;虚&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;拟&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;机&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;的&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;垃&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;圾&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;图中展示了七种作用于不同分代的收集器，如果两个收集器之间存在连线，就说明它们可以搭配使用，收集器所处的区域，则表明它是属于新生代收集器或是老年代收集器。&lt;/p&gt;
+&lt;h2 id=&#34;serial-收集器&#34;&gt;Serial 收集器&lt;/h2&gt;
+&lt;p&gt;Serial 收集器是最基本、发展历史最悠久的收集器，是采用&lt;strong&gt;复制算法&lt;/strong&gt;的&lt;strong&gt;新生代收集器&lt;/strong&gt;，曾经（JDK 1.3.1之前）是虚拟机新生代收集的唯一选择。它是一个单线程收集器，并不仅仅说明它只会使用一个CPU或一条收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集时，必须&lt;strong&gt;暂停其他所有的工作线程&lt;/strong&gt;，直至收集结束为止(“Stop The World”)。这项工作是由虚拟机在后台自动发起和自动完成的，在用户不可见的情况下把用户正常工作的线程全部停掉，这对很多应用来说是难以接收的。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602839104052.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Serial/Serial Old收集器运行示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;为了消除或减少工作线程因内存回收而导致的停顿，HotSpot虚拟机开发团队在JDK 1.3之后的Java发展历程中研发出了各种其他的优秀收集器，这些将在稍后介绍。但是这些收集器的诞生并不意味着Serial收集器已经“老而无用”，实际上到现在为止，它依然是&lt;strong&gt;HotSpot虚拟机运行在客户端模式下的默认的新生代收集器&lt;/strong&gt;。它也有着优于其他收集器的地方：简单而高效（与其他收集器的单线程相比），对于限定单个CPU的环境来说，Serial收集器由于没有线程交互的开销，专心做垃圾收集自然可以获得更高的单线程收集效率。&lt;br&gt;
+在用户的桌面应用场景中，分配给虚拟机管理的内存一般不会很大，收集几十兆甚至一两百兆的新生代（仅仅是新生代使用的内存，桌面应用基本不会再大了），停顿时间完全可以控制在几十毫秒最多一百毫秒以内，只要不频繁发生，这点停顿时间可以接收。所以，Serial收集器对于运行在Client模式下的虚拟机来说是一个很好的选择。&lt;/p&gt;
+&lt;h2 id=&#34;parnew收集器&#34;&gt;ParNew收集器&lt;/h2&gt;
+&lt;p&gt;ParNew收集器就是&lt;strong&gt;Serial收集器的多线程并行版本&lt;/strong&gt;，它也是一个&lt;strong&gt;新生代收集器&lt;/strong&gt;。除了使用多线程进行垃圾收集外，其余行为包括Serial收集器可用的所有控制参数、收集算法（&lt;strong&gt;复制算法&lt;/strong&gt;）、Stop The World、对象分配规则、回收策略等与Serial收集器完全相同，两者共用了相当多的代码。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1603079279595.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;P&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;ParNew/Serial Old 收集器运行示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;P&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10903em;&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02691em;&#34;&gt;w&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;ParNew收集器除了支持多线程并行收集外，其他与Serial收集器相比并无太多创新之处，但它却是许多运行在&lt;strong&gt;Server模式下的虚拟机中首选的新生代收集器&lt;/strong&gt;，其中有一个与性能无关的重要原因是，除了Serial收集器外，目前只有它能和CMS收集器（Concurrent Mark Sweep）配合工作。&lt;br&gt;
+ParNew 收集器在单CPU的环境中绝对不会有比Serial收集器有更好的效果，在多CPU环境下，随着CPU的数量增加，ParNew对于GC时系统资源的有效利用是很有好处的。它默认开启的收集线程数与CPU的数量相同，在CPU非常多的情况下可使用&lt;code&gt;-XX:ParallerGCThreads&lt;/code&gt;参数来限制垃圾收集的线程数。&lt;br&gt;
+概念辨析：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;并行(Parallel)：&lt;strong&gt;并行描述的是多条垃圾收集器线程之间的关系&lt;/strong&gt;，说明同一时间有多条这样的线程在协同工作，通常默认此时用户线程是处于等待状态。&lt;/li&gt;
+&lt;li&gt;并发(Concurrent)：&lt;strong&gt;并发描述的是垃圾收集器线程与用户线程之间的关系&lt;/strong&gt;，说明同一时间垃圾收集器线程与用户线程都在运行。程序仍然能响应服务请求，但由于垃圾收集器线程占用了一部分系统资源，此时应用程序处理的吞吐量将受到一定影响。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;parallel-scavenge收集器&#34;&gt;Parallel Scavenge收集器&lt;/h2&gt;
+&lt;p&gt;Parallel Scavenge收集器也是一款&lt;strong&gt;新生代收集器&lt;/strong&gt;，它同样是基于&lt;strong&gt;标记-复制算法&lt;/strong&gt;实现的收集器，也是能够&lt;strong&gt;并行收集的多线程收集器&lt;/strong&gt;。&lt;br&gt;
+Parallel Scavenge收集器的特点是它的关注点与其他收集器不同，CMS等收集器的关注点是尽可能&lt;strong&gt;缩短垃圾收集时用户线程的停顿时间&lt;/strong&gt;，而Parallel Scavenge收集器的目标是达到一个&lt;strong&gt;可控制的吞吐量&lt;/strong&gt;（Throughput）。&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;吞&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;吐&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;量&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;用&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;户&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;代&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;码&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;时&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;间&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;用&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;户&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;代&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;码&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;时&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;间&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;垃&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;圾&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;时&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;间&lt;/mi&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;吞吐量=运行用户代码时间/(运行用户代码时间+运行垃圾收集时间)
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.36687em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;吞&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;吐&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;量&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mrel&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2777777777777778em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;用&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;户&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;代&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;码&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;时&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;间&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mopen&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;用&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;户&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;代&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;码&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;时&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;间&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mbin&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.2222222222222222em;&#34;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;垃&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;圾&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;时&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;间&lt;/span&gt;&lt;span class=&#34;mclose&#34;&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;停顿时间越短就越适合需要&lt;strong&gt;与用户交互或需要保证服务响应质量的程序&lt;/strong&gt;，良好的响应速度能提升用户体验。而高吞吐量则可以高效率地利用CPU资源，尽快完成程序的运算任务，主要适合&lt;strong&gt;在后台运算而不需要太多交互的分析任务&lt;/strong&gt;。&lt;br&gt;
+Parallel Scavenge收集器提供了两个参数用于精确控制吞吐量，分别是控制最大垃圾收集停顿时间的&lt;code&gt;-XX:MaxGCPauseMillis&lt;/code&gt;参数以及直接设置吞吐量大小的&lt;code&gt;-XX:GCTimeRatio&lt;/code&gt;参数。由于与吞吐量关系密切，Parallel Scavenge收集器也被称作“吞吐量优先收集器”。Parallel Scavenge收集器还有一个参数&lt;code&gt;-XX:+UseAdaptiveSizePolicy&lt;/code&gt;，这是一个开关参数，打开参数后，就不需要手工指定新生代的大小（-Xmn）、Eden和Survivor区的比例（-XX:SurvivorRatio）、晋升老年代对象年龄（-XX:PretenureSizeThreshold）等细节参数了，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间或者最大的吞吐量，这种方式称为GC的&lt;strong&gt;自适应的调节策略&lt;/strong&gt;（GC Ergonomics）。自适应调节策略也是Parallel Scavenge收集器与ParNew收集器的一个&lt;strong&gt;重要区别&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;serial-old收集器&#34;&gt;Serial Old收集器&lt;/h2&gt;
+&lt;p&gt;Serial Old是&lt;strong&gt;Serial的老年代版本&lt;/strong&gt;，它同样是一个&lt;strong&gt;单线程收集器&lt;/strong&gt;，使用&lt;strong&gt;标记-整理&lt;/strong&gt;算法。此收集器的主要意义也是在于给Client模式下的虚拟机使用。如果在Server模式下，它可能有两种用途：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在JDK1.5 以及之前版本（Parallel Old诞生以前）中与Parallel Scavenge收集器搭配使用。&lt;/li&gt;
+&lt;li&gt;作为CMS收集器的后备预案，在并发收集发生Concurrent Mode Failure时使用。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1603091499747.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Serial/Serial Old收集器运行示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;parallel-old收集器&#34;&gt;Parallel Old收集器&lt;/h2&gt;
+&lt;p&gt;Parallel Old收集器是&lt;em&gt;&lt;strong&gt;Parallel Scavenge收集器的老年代版本&lt;/strong&gt;，支持&lt;/em&gt;&lt;em&gt;多线程并发收集&lt;/em&gt;*，&lt;br&gt;
+基于&lt;strong&gt;标记-整理&lt;/strong&gt;算法实现。在注重吞吐量或者处理器资源较为稀缺的场合，可以优先考虑Parallel Scavenge加Parallel Old收集器这个组合。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1603092374800.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;P&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;v&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;P&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Parallel Scavenge/Parallel Old收集器运行示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;P&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;v&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.13889em;&#34;&gt;P&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cms收集器&#34;&gt;CMS收集器&lt;/h2&gt;
+&lt;p&gt;CMS（Concurrent Mark Sweep）收集器是一种&lt;strong&gt;以获取最短回收停顿时间为目标的收集器&lt;/strong&gt;，基于&lt;strong&gt;标记-清除&lt;/strong&gt;算法实现，是一款&lt;strong&gt;老年代收集器&lt;/strong&gt;，它非常符合那些集中在互联网站或者B/S系统的服务端上的Java应用，这些应用都非常重视服务的响应速度。&lt;br&gt;
+整个工作流程包括四个步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;初始标记&lt;/strong&gt;：仅仅标记GC Roots能直接关联到的对象，速度很快，需要“Stop The World”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并发标记&lt;/strong&gt;：从GC Roots的直接关联对象开始遍历整个对象图的过程，耗时较长但不需要停顿用户线程，可以与垃圾收集线程一起并发运行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重新标记&lt;/strong&gt;：修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，需要“Stop The World”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并发清除&lt;/strong&gt;：清理删除标记阶段判断的已经死亡的对象，不需要移动存活对象，可以与用户线程同时并发。&lt;br&gt;
+&lt;strong&gt;由于整个过程中耗时最长的并发标记和并发清除过程收集器线程都可以与用户线程一起工作，所以，从总体上来说，CMS收集器的内存回收过程是与用户线程一起并发执行的。&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1603093355695.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;C&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;c&lt;/mi&gt;&lt;mi&gt;u&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mi&gt;M&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;k&lt;/mi&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;w&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Concurrent Mark Sweep 收集器运行示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8888799999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.07153em;&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;u&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.10903em;&#34;&gt;M&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03148em;&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02691em;&#34;&gt;w&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;并发收集、低停顿，CMS收集器也被称为&lt;strong&gt;并发低停顿收集器&lt;/strong&gt;（Concurrent Low Pause Collector）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;对CPU资源非常敏感&lt;/strong&gt;。面向并发设计的程序都对CPU资源比较敏感。在并发阶段，它虽然不会导致用户线程停顿，但会因为占用了一部分线程（或者说CPU计算能力）而导致应用程序变慢，&lt;strong&gt;总吞吐量会降低&lt;/strong&gt;。&lt;strong&gt;CMS默认启动的回收线程数是（CPU数量+3）/4&lt;/strong&gt;，也就是当CPU在4个或以上时，并发回收时垃圾收集线程占用不超过25%的CPU资源，并且随着CPU数量的增加而下降。但是当CPU不足4个时（比如2个），CMS对用户程序的影响就可能变得很大。如果本来CPU负载就比较大，还要分出一半的运算能力去执行收集器线程，就可能导致用户程序的执行速度忽然大幅降低。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无法处理浮动垃圾&lt;/strong&gt;（Floating Garbage） ,可能出现“Concurrent Mode Failure”失败而导致另一次&lt;strong&gt;Full GC&lt;/strong&gt;的产生。由于CMS并发清理阶段用户线程还在运行着，伴随程序运行自然就还会有新的垃圾不断产生。这一部分垃圾出现在标记过程之后，CMS无法再当次收集中处理掉它们，只好留待下一次GC时再清理掉。这一部分垃圾就被称为“浮动垃圾”。也是由于在垃圾收集阶段用户线程还需要运行，那也就还需要预留有足够的内存空间给用户线程使用，因此CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，需要预留一部分空间提供并发收集时的程序运作使用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;标记-清除算法导致的空间碎片&lt;/strong&gt;。CMS是一款基于“标记-清除”算法实现的收集器，这意味着收集结束时会有大量空间碎片产生。空间碎片过多时，将会给大对象分配带来很大麻烦，往往出现老年代空间剩余，但无法找到足够大连续空间来分配当前对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;garbage-first收集器&#34;&gt;Garbage First收集器&lt;/h2&gt;
+&lt;p&gt;Garbage First(简称G1)收集器是垃圾收集器技术发展历史上的里程碑式的成果，它开创了收集器&lt;strong&gt;面向局部收集的设计思路&lt;/strong&gt;和&lt;strong&gt;基于Region的内存布局形式&lt;/strong&gt;。G1是一款主要面向服务端应用的垃圾收集器。HotSpot开发团队赋予它的期望是未来可以替换掉JDK 1.5中发布的CMS收集器。设计师希望建立起“&lt;strong&gt;停顿时间模型&lt;/strong&gt;”的收集器，意思是支持在长度为M毫秒的时间片段内，消耗在垃圾收集上的时间大概率不超过N毫秒这样的目标。&lt;br&gt;
+实现这个目标首先要有一个思想上的转变，对于G1来说，垃圾收集的目标范围不再是新生代、老年代或整个Java堆，它可以面向&lt;strong&gt;堆内存任何部分&lt;/strong&gt;来组成回收集(Collection Set)进行回收，衡量标准不再是它属于哪个分代，而是&lt;strong&gt;哪块内存中存放的垃圾数量最多，收益最大&lt;/strong&gt;，这就是G1收集器的&lt;strong&gt;Mixed GC&lt;/strong&gt;模式。&lt;br&gt;
+G1开创的&lt;strong&gt;基于Region的堆内存布局&lt;/strong&gt;是它能够实现这个目标的关键。G1不再坚持固定大小以及固定数量的分代区域划分，而是把连续的Java堆划分为多个大小相等的独立区域(Region)。每一个Region都可以根据需要，扮演新生代的Eden空间、Survivor空间或是老年代空间。&lt;br&gt;
+Region中还有一类用来存储大对象的Humongous区域，G1认为只要大小超过了一个Region容量一半的对象即可判定为大对象。Region的大小可以通过参数&lt;code&gt;-XX:G1HeapRegionSize&lt;/code&gt;设定，取值范围为1MB～32MB，且应为2的N次幂，默认值为0。超过了整个Region容量的超级大对象，将会被存放在N个连续的Humongous Region之中，G1的大多数行为都把Humongous Region作为老年代的一部分来进行看待。&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1603179932644.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;G&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi&gt;R&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;g&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;分&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;区&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;G1收集器Region分区示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8777699999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;G&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.00773em;&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.03588em;&#34;&gt;g&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;分&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;区&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;G1收集器的运作过程大致可划分为以下四个步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;初始标记&lt;/strong&gt;：标记GC Roots能直接关联到的对象，需要Stop The World。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并发标记&lt;/strong&gt;：从GC Roots开始对堆中对象进行可达性分析，找出要回收的对象，耗时长，但可与用户程序&lt;strong&gt;并发&lt;/strong&gt;执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最终标记&lt;/strong&gt;：修正在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，需要Stop The World，但可以&lt;strong&gt;并行&lt;/strong&gt;执行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;筛选回收&lt;/strong&gt;：对各个Region的回收价值和成本进行排序，根据期望的停顿时间制定回收计划，可以自由选择多个Region构成回收集，将决定回收的Region的存活对象复制到空的Region中，清理掉旧Region的全部空间，涉及到存活对象的移动，需要Stop The World，可以&lt;strong&gt;并行&lt;/strong&gt;执行。&lt;br&gt;
+&lt;strong&gt;G1收集器除了并发标记外，其余阶段也是要完全暂停用户线程，它并非纯粹的追求低延迟，官方给它设定的目标是在延迟可控的情况下获得尽量高的吞吐量，所以才能担当起“全功能收集器”的重任与期望。&lt;/strong&gt;&lt;br&gt;
+&lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1603181221504.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;G&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;G1收集器运行示意图
+&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.68333em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;G&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;从G1开始，最先进的垃圾收集器的设计导向都不约而同的变为追求能够应付应用的&lt;strong&gt;内存分配速率&lt;/strong&gt;(Allocation Rate),而不追求一次把整个Java堆全部清理干净。&lt;br&gt;
+&lt;strong&gt;G1收集器与CMS收集器的比较&lt;/strong&gt;：&lt;br&gt;
+优点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以指定最大停顿时间&lt;/li&gt;
+&lt;li&gt;分Region的内存布局&lt;/li&gt;
+&lt;li&gt;按收益动态确定回收集&lt;/li&gt;
+&lt;li&gt;整体基于标记-整理算法，局部(两个Region之间)基于标记-复制算法，意味着G1运作期间不会产生内存空间碎片&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;缺点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应用程序运行过程中，G1无论是为了垃圾收集产生的内存占用还是程序运行时的额外负载都要比CMS高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;依照实践经验，在小内存应用上CMS的表现大概率会优于G1，而在大内存应用上G1则大多能表现更出色，这个优劣势的Java堆容量平衡点通常在6GB至8GB之间。&lt;/strong&gt;&lt;br&gt;
+衡量垃圾收集器的三项最重要的指标是：&lt;strong&gt;内存占用(Footprint)、吞吐量(Throughout)和延迟(Latency)&lt;/strong&gt;，三者共同构成了一个“不可能三角”，一款优秀的收集器最多可以同时达成其中的两项。&lt;/p&gt;
 ">Java垃圾收集</a>
       </div>
       
