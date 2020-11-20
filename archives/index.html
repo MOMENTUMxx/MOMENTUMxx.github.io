@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>王璐杰的BLOG</title>
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1603278327043">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1605855716515">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/fonts/font-awesome.css">
 <link
@@ -231,12 +231,12 @@
         
           
             <a class="social-img" href="#">
-              <img src="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master/\media\images\custom-array-imgSocials-1602229044327-socialImg.jpg" />
+              <img src="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master/\media\images\custom-array-imgSocials-1605855525467-socialImg.jpg" />
               <i class="fa fa-wechat" title="" ></i>
             </a>
           
             <a class="social-img" href="#">
-              <img src="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master/\media\images\custom-array-imgSocials-1602229044332-socialImg.jpg" />
+              <img src="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master/\media\images\custom-array-imgSocials-1605855525472-socialImg.jpg" />
               <i class="fa fa-qq" title="" ></i>
             </a>
           
@@ -449,7 +449,7 @@
   
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/live2d/css/live2d.css" />
 <div class="box-scale">
-  <div id="landlord" style="left: 5px;bottom: 300px;"
+  <div id="landlord" style="left: 5px;bottom: px;"
     data-key="">
     <canvas id="live2d" width="500" height="560" class="live2d"></canvas>
     
@@ -471,15 +471,11 @@
         <div class="live_ico_item type_info" id="showInfoBtn"></div>
         <div class="live_ico_item type_talk" id="showTalkBtn"></div>
         
-        <div class="live_ico_item type_music" id="musicButton"></div>
-        
         <div class="live_ico_item type_youdu" id="youduButton"></div>
         <div class="live_ico_item type_quit" id="hideButton"></div>
         <input name="live_statu_val" id="live_statu_val" value="0" type="hidden" />
         <audio src="" style="display:none;" id="live2d_bgm" data-bgm="0" preload="none"></audio>
         <input id="duType" value="douqilai" type="hidden">
-        
-        <input name="live2dBGM" value="" type="hidden">
         
       </div>
     
@@ -991,12 +987,6 @@
 </script>
   
   
-  
-  <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://player.lmih.cn/player/js/player.js" id="myhk" key="demo" m="1"></script>
-
-
-  
 </div>
 <script>
 
@@ -1144,7 +1134,7 @@
   hljs.initHighlightingOnLoad();
   
   // 离开当前页title变化
-  var leaveTitle = "摸鱼中(～﹃～)~zZ";
+  var leaveTitle = "摸鱼中...ㄟ( ▔, ▔ )ㄏ";
   if (leaveTitle) {
     document.addEventListener('visibilitychange', function () {
       if (document.visibilityState == 'hidden') {
@@ -1731,7 +1721,7 @@ class Solution {
 &lt;h2 id=&#34;对象的生存与死亡&#34;&gt;对象的生存与死亡&lt;/h2&gt;
 &lt;p&gt;在可达性分析算法中判定为不可达的对象，也不是非死不可，要宣告一个对象真正死亡，至少要经历两次标记过程：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;对象在可达性分析后发现没有与GC Roots相连接的引用链会被第一次标记，然后进行一次筛选，筛选的条件是此对象是否有必要执行finalise()方法，当对象没有覆盖finalize()方法或者finalize()方法已经被JVM调用过，那么就没必要执行finalize()方法；&lt;/li&gt;
+&lt;li&gt;对象在可达性分析后发现没有与GC Roots相连接的引用链会被第一次标记，然后进行一次筛选，筛选的条件是此对象是否有必要执行finalize()方法，当对象没有覆盖finalize()方法或者finalize()方法已经被JVM调用过，那么就没必要执行finalize()方法；&lt;/li&gt;
 &lt;li&gt;如果被判定为有必要执行finalize()方法，那么此对象将会放置在一个叫做&lt;strong&gt;F-Queue&lt;/strong&gt;的队列之中，并在稍后由一个虚拟机自动建立的、低优先级的Finalize线程去触发这个方法。&lt;strong&gt;finalize()&lt;strong&gt;方法是对象逃脱死亡的&lt;/strong&gt;最后一次机会&lt;/strong&gt;，稍后GC将对F-Queue中的对象进行&lt;strong&gt;第二次小规模的标记&lt;/strong&gt;，如果对象要在finalize()中成功拯救自己——只要&lt;strong&gt;重新与引用链上的任何一个对象建立关系&lt;/strong&gt;即可，譬如把自己(this关键字)赋值给某个类变量或者对象的成员变量，那么在第二次标记时它将被移出“即将回收”集合；如果对象这时候还没有成功逃脱，那他就会真的被回收了。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
@@ -1846,12 +1836,12 @@ public class FinalizeEscapeGC {
 &lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8777699999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.08125em;&#34;&gt;H&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;o&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;虚&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;拟&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;机&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;的&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;垃&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;圾&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;图中展示了七种作用于不同分代的收集器，如果两个收集器之间存在连线，就说明它们可以搭配使用，收集器所处的区域，则表明它是属于新生代收集器或是老年代收集器。&lt;/p&gt;
 &lt;h2 id=&#34;serial-收集器&#34;&gt;Serial 收集器&lt;/h2&gt;
-&lt;p&gt;Serial 收集器是最基本、发展历史最悠久的收集器，是采用&lt;strong&gt;复制算法&lt;/strong&gt;的&lt;strong&gt;新生代收集器&lt;/strong&gt;，曾经（JDK 1.3.1之前）是虚拟机新生代收集的唯一选择。它是一个单线程收集器，并不仅仅说明它只会使用一个CPU或一条收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集时，必须&lt;strong&gt;暂停其他所有的工作线程&lt;/strong&gt;，直至收集结束为止(“Stop The World”)。这项工作是由虚拟机在后台自动发起和自动完成的，在用户不可见的情况下把用户正常工作的线程全部停掉，这对很多应用来说是难以接收的。&lt;br&gt;
+&lt;p&gt;Serial 收集器是最基本、发展历史最悠久的收集器，是采用&lt;strong&gt;复制算法&lt;/strong&gt;的&lt;strong&gt;新生代收集器&lt;/strong&gt;，曾经（JDK 1.3.1之前）是虚拟机新生代收集的唯一选择。它是一个单线程收集器，并不仅仅说明它只会使用一个CPU或一条收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集时，必须&lt;strong&gt;暂停其他所有的工作线程&lt;/strong&gt;，直至收集结束为止(“Stop The World”)。这项工作是由虚拟机在后台自动发起和自动完成的，在用户不可见的情况下把用户正常工作的线程全部停掉，这对很多应用来说是难以接受的。&lt;br&gt;
 &lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1602839104052.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;p class=&#39;katex-block&#39;&gt;&lt;span class=&#34;katex-display&#34;&gt;&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;/&lt;/mi&gt;&lt;mi&gt;S&lt;/mi&gt;&lt;mi&gt;e&lt;/mi&gt;&lt;mi&gt;r&lt;/mi&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;O&lt;/mi&gt;&lt;mi&gt;l&lt;/mi&gt;&lt;mi&gt;d&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;收&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;集&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;器&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;运&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;行&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;示&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;意&lt;/mi&gt;&lt;mi mathvariant=&#34;normal&#34;&gt;图&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;Serial/Serial Old收集器运行示意图
 &lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:1em;vertical-align:-0.25em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.05764em;&#34;&gt;S&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.02778em;&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34; style=&#34;margin-right:0.01968em;&#34;&gt;l&lt;/span&gt;&lt;span class=&#34;mord mathdefault&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;收&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;集&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;器&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;运&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;行&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;示&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;意&lt;/span&gt;&lt;span class=&#34;mord cjk_fallback&#34;&gt;图&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;为了消除或减少工作线程因内存回收而导致的停顿，HotSpot虚拟机开发团队在JDK 1.3之后的Java发展历程中研发出了各种其他的优秀收集器，这些将在稍后介绍。但是这些收集器的诞生并不意味着Serial收集器已经“老而无用”，实际上到现在为止，它依然是&lt;strong&gt;HotSpot虚拟机运行在客户端模式下的默认的新生代收集器&lt;/strong&gt;。它也有着优于其他收集器的地方：简单而高效（与其他收集器的单线程相比），对于限定单个CPU的环境来说，Serial收集器由于没有线程交互的开销，专心做垃圾收集自然可以获得更高的单线程收集效率。&lt;br&gt;
-在用户的桌面应用场景中，分配给虚拟机管理的内存一般不会很大，收集几十兆甚至一两百兆的新生代（仅仅是新生代使用的内存，桌面应用基本不会再大了），停顿时间完全可以控制在几十毫秒最多一百毫秒以内，只要不频繁发生，这点停顿时间可以接收。所以，Serial收集器对于运行在Client模式下的虚拟机来说是一个很好的选择。&lt;/p&gt;
+在用户的桌面应用场景中，分配给虚拟机管理的内存一般不会很大，收集几十兆甚至一两百兆的新生代（仅仅是新生代使用的内存，桌面应用基本不会再大了），停顿时间完全可以控制在几十毫秒最多一百毫秒以内，只要不频繁发生，这点停顿时间可以接受。所以，Serial收集器对于运行在Client模式下的虚拟机来说是一个很好的选择。&lt;/p&gt;
 &lt;h2 id=&#34;parnew收集器&#34;&gt;ParNew收集器&lt;/h2&gt;
 &lt;p&gt;ParNew收集器就是&lt;strong&gt;Serial收集器的多线程并行版本&lt;/strong&gt;，它也是一个&lt;strong&gt;新生代收集器&lt;/strong&gt;。除了使用多线程进行垃圾收集外，其余行为包括Serial收集器可用的所有控制参数、收集算法（&lt;strong&gt;复制算法&lt;/strong&gt;）、Stop The World、对象分配规则、回收策略等与Serial收集器完全相同，两者共用了相当多的代码。&lt;br&gt;
 &lt;img src=&#34;https://MOMENTUMxx.github.io/post-images/1603079279595.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
@@ -4283,7 +4273,7 @@ Gridea可以让你选择使用不同的主题来满足你的个性化需求，�
 </script>
 
 
-<script src="/media/js/mouse/love.js"></script>
+<script src="/media/js/mouse/peace.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/js/cool.js"></script>
