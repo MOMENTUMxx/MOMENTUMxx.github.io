@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MOMENTUMxx.github.io</id>
     <title>王璐杰的BLOG</title>
-    <updated>2020-11-20T07:05:12.144Z</updated>
+    <updated>2020-11-23T04:02:50.137Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MOMENTUMxx.github.io"/>
     <link rel="self" href="https://MOMENTUMxx.github.io/atom.xml"/>
@@ -10,6 +10,660 @@
     <logo>https://MOMENTUMxx.github.io/images/avatar.png</logo>
     <icon>https://MOMENTUMxx.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 王璐杰的BLOG</rights>
+    <entry>
+        <title type="html"><![CDATA[HashMap与ConcurrentHashMap总结]]></title>
+        <id>https://MOMENTUMxx.github.io/post/hashmap-yu-concurrenthashmap-zong-jie/</id>
+        <link href="https://MOMENTUMxx.github.io/post/hashmap-yu-concurrenthashmap-zong-jie/">
+        </link>
+        <updated>2020-11-21T09:06:27.000Z</updated>
+        <summary type="html"><![CDATA[<p>HashMap与ConcurrentHashMap是面试中常常问到的问题，通常的套路是：</p>
+<ol>
+<li>谈谈你理解的 HashMap，讲讲其中的 get put 过程。</li>
+<li>jdk1.8做了什么优化？</li>
+<li>HashMap是不是线程安全？</li>
+<li>线程不安全会导致那些问题？</li>
+<li>如何解决？有没有线程安全的并发容器？</li>
+<li>ConcurrentHashMap 是如何实现的？ 1.7、1.8 实现有何不同？为什么这么做？</li>
+</ol>
+]]></summary>
+        <content type="html"><![CDATA[<p>HashMap与ConcurrentHashMap是面试中常常问到的问题，通常的套路是：</p>
+<ol>
+<li>谈谈你理解的 HashMap，讲讲其中的 get put 过程。</li>
+<li>jdk1.8做了什么优化？</li>
+<li>HashMap是不是线程安全？</li>
+<li>线程不安全会导致那些问题？</li>
+<li>如何解决？有没有线程安全的并发容器？</li>
+<li>ConcurrentHashMap 是如何实现的？ 1.7、1.8 实现有何不同？为什么这么做？</li>
+</ol>
+<!-- more -->
+<h1 id="hashmap">HashMap</h1>
+<p>众所周知 HashMap 底层是基于 数组 + 链表 组成的，不过在 jdk1.7 和 1.8 中具体实现稍有不同。</p>
+<h2 id="jdk17中的实现">jdk1.7中的实现</h2>
+<figure data-type="image" tabindex="1"><img src="https://MOMENTUMxx.github.io/post-images/1605950483587.png" alt="" loading="lazy"></figure>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi><mi>d</mi><mi>k</mi><mn>1.7</mn><mi mathvariant="normal">中</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">数</mi><mi mathvariant="normal">据</mi><mi mathvariant="normal">结</mi><mi mathvariant="normal">构</mi></mrow><annotation encoding="application/x-tex">jdk1.7中的数据结构
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord">1</span><span class="mord">.</span><span class="mord">7</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">据</span><span class="mord cjk_fallback">结</span><span class="mord cjk_fallback">构</span></span></span></span></span></p>
+<h3 id="几个核心的成员变量">几个核心的成员变量</h3>
+<pre><code class="language-java">// 默认的初始容量是16，必须是2的幂
+// 初始化桶大小，因为底层是数组，所以这是数组默认的大小
+static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4;
+// 最大容量（必须是2的幂且小于2的30次方，传入容量过大将被这个值替换）
+static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;
+// 默认加载因子
+static final float DEFAULT_LOAD_FACTOR = 0.75f;
+// 存储数据的Entry数组，长度是2的幂
+// HashMap是采用拉链法实现的，每一个Entry本质上是一个单向链表
+transient Entry&lt;K, V&gt;[] table = (Entry&lt;K, V&gt;[]) EMPTY_TABLE;
+// HashMap的大小，它是HashMap保存的键值对的数量
+transient int size;
+// HashMap的阈值，用于判断是否需要调整HashMap的容量（threshold = 容量*加载因子）
+int threshold;
+// 加载因子实际大小，可在初始化时显式指定
+final float loadFactor;
+</code></pre>
+<p>重点需要关注一下加载因子：<br>
+由于给定的 HashMap 的容量大小是固定的，比如默认初始化：</p>
+<pre><code class="language-java"> 1    public HashMap() {
+ 2        this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR);
+ 3    }
+ 4
+ 5    public HashMap(int initialCapacity, float loadFactor) {
+ 6        if (initialCapacity &lt; 0)
+ 7            throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +
+ 8                                               initialCapacity);
+ 9        if (initialCapacity &gt; MAXIMUM_CAPACITY)
+10            initialCapacity = MAXIMUM_CAPACITY;
+11        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))
+12            throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +
+13                                               loadFactor);
+14
+15        this.loadFactor = loadFactor;
+16        threshold = initialCapacity;
+17        init();
+18    }
+</code></pre>
+<p>给定的默认容量为 16，负载因子为 0.75。Map 在使用过程中不断的往里面存放数据，当数量达到了 <code>16 * 0.75 = 12</code> 就需要将当前 16 的容量进行扩容，而扩容这个过程涉及到 rehash、复制数据等操作，所以非常消耗性能。<br>
+因此通常建议能提前预估 HashMap 的大小最好，尽量的减少扩容带来的性能损耗。<br>
+根据代码可以看到其实真正存放数据的是<br>
+<code>transient Entry&lt;K,V&gt;[] table = (Entry&lt;K,V&gt;[]) EMPTY_TABLE;</code><br>
+这个数组，那么它又是如何定义的呢？</p>
+<pre><code class="language-java">// Entry是单向链表。
+// 它是 “HashMap链式存储法”对应的链表。
+// 它实现了Map.Entry 接口，即实现getKey(), getValue(), setValue(V value), equals(Object o), hashCode()这些函数
+static class Entry&lt;K, V&gt; implements Map.Entry&lt;K, V&gt;
+{
+    final K key;
+    V value;
+    // 指向下一个节点
+    Entry&lt;K, V&gt; next;
+    int hash;
+
+    // 构造函数。
+    // 输入参数包括&quot;哈希值(h)&quot;, &quot;键(k)&quot;, &quot;值(v)&quot;, &quot;下一节点(n)&quot;
+    Entry(int h, K k, V v, Entry&lt;K, V&gt; n)
+    {
+        value = v;
+        next = n;
+        key = k;
+        hash = h;
+    }
+
+    public final K getKey()
+    {
+        return key;
+    }
+
+    public final V getValue()
+    {
+        return value;
+    }
+
+    public final V setValue(V newValue)
+    {
+        V oldValue = value;
+        value = newValue;
+        return oldValue;
+    }
+}
+</code></pre>
+<h3 id="put方法">put方法</h3>
+<pre><code class="language-java"> 1    public V put(K key, V value) {
+ 2        if (table == EMPTY_TABLE) {
+ 3            inflateTable(threshold);
+ 4        }
+ 5        if (key == null)
+ 6            return putForNullKey(value);
+ 7        int hash = hash(key);
+ 8        int i = indexFor(hash, table.length);
+ 9        for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) {
+10            Object k;
+11            if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) {
+12                V oldValue = e.value;
+13                e.value = value;
+14                e.recordAccess(this);
+15                return oldValue;
+16            }
+17        }
+18
+19        modCount++;
+20        addEntry(hash, key, value, i);
+21        return null;
+22    }
+</code></pre>
+<ul>
+<li>判断当前数组是否需要初始化</li>
+<li>如果key为null，将对应键值对添加到table[0]中</li>
+<li>根据key计算hashcode</li>
+<li>根据计算出的hashcode定位出所在桶</li>
+<li>如果桶是一个链表则需要遍历里面的hashcode、key是否和传入key相等，如果相等则进行覆盖，并返回原来的值</li>
+<li>如果桶是空的，说明当前位置没有数据存入，那么新增一个Entry对象写入当前位置</li>
+</ul>
+<pre><code class="language-java"> 1    void addEntry(int hash, K key, V value, int bucketIndex) {
+ 2        if ((size &gt;= threshold) &amp;&amp; (null != table[bucketIndex])) {
+ 3            resize(2 * table.length);
+ 4            hash = (null != key) ? hash(key) : 0;
+ 5            bucketIndex = indexFor(hash, table.length);
+ 6        }
+ 7
+ 8        createEntry(hash, key, value, bucketIndex);
+ 9    }
+10
+11    void createEntry(int hash, K key, V value, int bucketIndex) {
+12        Entry&lt;K,V&gt; e = table[bucketIndex];
+13        table[bucketIndex] = new Entry&lt;&gt;(hash, key, value, e);
+14        size++;
+15    }
+</code></pre>
+<p>当调用 addEntry 写入 Entry 时需要判断是否需要扩容,如果需要就进行两倍扩充，并将当前的 key 重新 hash 并定位。而在 createEntry 中会将当前位置的桶传入到新建的桶中，如果当前桶有值就会在位置形成链表。</p>
+<h3 id="get方法">get方法</h3>
+<pre><code class="language-java"> 1    public V get(Object key) {
+ 2        if (key == null)
+ 3            return getForNullKey();
+ 4        Entry&lt;K,V&gt; entry = getEntry(key);
+ 5
+ 6        return null == entry ? null : entry.getValue();
+ 7    }
+ 8
+ 9    final Entry&lt;K,V&gt; getEntry(Object key) {
+10        if (size == 0) {
+11            return null;
+12        }
+13
+14        int hash = (key == null) ? 0 : hash(key);
+15        for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];
+16             e != null;
+17             e = e.next) {
+18            Object k;
+19            if (e.hash == hash &amp;&amp;
+20                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+21                return e;
+22        }
+23        return null;
+24    }
+</code></pre>
+<ul>
+<li>根据key计算出hashcode，然后定位到具体的桶中</li>
+<li>判断该位置是否为链表</li>
+<li>不是链表就根据key和hashcode是否相等来返回值</li>
+<li>是链表则需要遍历直到key和hashcode均相等是就返回值</li>
+<li>找不到则返回null</li>
+</ul>
+<h2 id="jdk18中的实现">jdk1.8中的实现</h2>
+<p>在jdk1.7的实现中，有一个很明显的需要优化的地方：</p>
+<blockquote>
+<p>当Hash冲突严重时，在桶上形成的链表会变的越来越长，这样查询时的效率就会越来越低，时间复杂度变为O(n)<br>
+因此jdk1.8中重点优化了这个查询效率。<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1606097978376.png" alt="" loading="lazy"></p>
+</blockquote>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi><mi>d</mi><mi>k</mi><mn>1.8</mn><mi mathvariant="normal">中</mi><mi mathvariant="normal">的</mi><mi>H</mi><mi>a</mi><mi>s</mi><mi>h</mi><mi>M</mi><mi>a</mi><mi>p</mi><mi mathvariant="normal">结</mi><mi mathvariant="normal">构</mi><mi mathvariant="normal">图</mi></mrow><annotation encoding="application/x-tex">jdk1.8中的HashMap结构图
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mord mathdefault">d</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mord">1</span><span class="mord">.</span><span class="mord">8</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">的</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mord cjk_fallback">结</span><span class="mord cjk_fallback">构</span><span class="mord cjk_fallback">图</span></span></span></span></span></p>
+<h3 id="核心的成员变量">核心的成员变量</h3>
+<pre><code class="language-java"> 1    static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16
+ 2
+ 3    /**
+ 4     * The maximum capacity, used if a higher value is implicitly specified
+ 5     * by either of the constructors with arguments.
+ 6     * MUST be a power of two &lt;= 1&lt;&lt;30.
+ 7     */
+ 8    static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;
+ 9
+10    /**
+11     * The load factor used when none specified in constructor.
+12     */
+13    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+14
+15    static final int TREEIFY_THRESHOLD = 8;
+16
+17    transient Node&lt;K,V&gt;[] table;
+18
+19    /**
+20     * Holds cached entrySet(). Note that AbstractMap fields are used
+21     * for keySet() and values().
+22     */
+23    transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
+24
+25    /**
+26     * The number of key-value mappings contained in this map.
+27     */
+28    transient int size;
+</code></pre>
+<p>与1.7相比大体相同，主要有两个区别：</p>
+<ol>
+<li>TREEIFY_THRESHOLD用于判断是否需要将链表转换为红黑树的阈值</li>
+<li>Entry变为Node</li>
+</ol>
+<p>Node 的核心组成其实也是和 1.7 中的 HashEntry 一样，存放的都是 key value hashcode next 等数据，再来看看核心方法。</p>
+<h3 id="put方法-2">put方法</h3>
+<pre><code class="language-java">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
+                boolean evict) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;
+    if ((tab = table) == null || (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    if ((p = tab[i = (n - 1) &amp; hash]) == null)
+        tab[i] = newNode(hash, key, value, null);
+    else {
+        Node&lt;K,V&gt; e; K k;
+        if (p.hash == hash &amp;&amp;
+            ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))
+            e = p;
+        else if (p instanceof TreeNode)
+            e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);
+        else {
+            for (int binCount = 0; ; ++binCount) {
+                if ((e = p.next) == null) {
+                    p.next = newNode(hash, key, value, null);
+                    if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st
+                        treeifyBin(tab, hash);
+                    break;
+                }
+                if (e.hash == hash &amp;&amp;
+                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+                    break;
+                p = e;
+            }
+        }
+        if (e != null) { // existing mapping for key
+            V oldValue = e.value;
+            if (!onlyIfAbsent || oldValue == null)
+                e.value = value;
+            afterNodeAccess(e);
+            return oldValue;
+        }
+    }
+    ++modCount;
+    if (++size &gt; threshold)
+        resize();
+    afterNodeInsertion(evict);
+    return null;
+}
+</code></pre>
+<ol>
+<li>判断当前桶是否为空，为空则需要初始化（resize可以初始化桶数组或者进行扩容）</li>
+<li>根据当前key的hashcode定位到具体的桶中并判断是否为空，为空表明没有Hash冲突就直接在当前位置创建一个桶即可</li>
+<li>如果当前桶有值(Hash冲突)，那么就要比较当前桶中的key、key的hashcode与写入的key是否相等，相等就赋值给e，之后会统一进行赋值及返回</li>
+<li>如果当前桶为红黑树，那就按照红黑树的方式写入数据</li>
+<li>如果是链表，就需要将当前的key、value封装成一个新节点写入到当前桶的后面(形成链表)</li>
+<li>接着判断当前链表的大小是否大于阈值，大于时要转换为红黑树</li>
+<li>如果在遍历过程中找到key和hashcode均相同时直接退出遍历</li>
+<li>如果e不为空则存在相同的key和hashcode，就需要将值覆盖</li>
+<li>最后判断是否需要进行扩容</li>
+</ol>
+<h3 id="get方法-2">get方法</h3>
+<pre><code class="language-java"> 1    public V get(Object key) {
+ 2        Node&lt;K,V&gt; e;
+ 3        return (e = getNode(hash(key), key)) == null ? null : e.value;
+ 4    }
+ 5
+ 6    final Node&lt;K,V&gt; getNode(int hash, Object key) {
+ 7        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;
+ 8        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+ 9            (first = tab[(n - 1) &amp; hash]) != null) {
+10            if (first.hash == hash &amp;&amp; // always check first node
+11                ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))
+12                return first;
+13            if ((e = first.next) != null) {
+14                if (first instanceof TreeNode)
+15                    return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);
+16                do {
+17                    if (e.hash == hash &amp;&amp;
+18                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))
+19                        return e;
+20                } while ((e = e.next) != null);
+21            }
+22        }
+23        return null;
+24    }
+</code></pre>
+<ol>
+<li>将key hash之后取得所定位的桶</li>
+<li>如果桶为空则直接返回null</li>
+<li>否则判断桶的第一个位置(可能是链表或红黑树)的key和hashcode是不是要查找的，如果是返回该node</li>
+<li>如果第一个node不匹配，则判断它的下一个是红黑树还是链表</li>
+<li>红黑树就按照树的查找方式返回值</li>
+<li>否则就按照链表的方式遍历匹配返回值</li>
+</ol>
+<p>从这两个核心方法（get/put）可以看出 1.8 中对大链表做了优化，修改为红黑树之后查询效率直接提高到了 O(logn)。<br>
+但是 HashMap 原有的问题也都存在，比如在并发场景下使用时容易出现死循环。</p>
+<pre><code class="language-java">public class MapTest {
+    public static void main(String[] args) {
+        Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+        for (int i = 0; i &lt; 30; i++) {
+            new Thread(() -&gt; {
+                map.put(Thread.currentThread().getName(), UUID.randomUUID().toString().substring(0, 5));
+                System.out.println(map);
+            }, String.valueOf(i)).start();
+        }
+    }
+}
+</code></pre>
+<p>上面的代码在运行时会出现<code>ConcurrentModificationException</code>异常，原因如下：HashMap在多线程情况下，在put的时候，插入的元素超过了容量（由负载因子决定）的范围就会触发扩容操作，就是rehash，这个会重新将原数组的内容<strong>重新hash到新的扩容数组</strong>中，在多线程的环境下，存在同时其他的元素也在进行put操作，如果hash值相同，可能出现同时在同一数组下用链表表示，造成<strong>闭环</strong>，导致在get时会出现<strong>死循环</strong>，所以HashMap是线程不安全的。</p>
+<h2 id="遍历方式">遍历方式</h2>
+<p>通常HashMap有两种常用的遍历方式：</p>
+<pre><code class="language-java"> 1  Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; entryIterator = map.entrySet().iterator();
+ 2        while (entryIterator.hasNext()) {
+ 3            Map.Entry&lt;String, Integer&gt; next = entryIterator.next();
+ 4            System.out.println(&quot;key=&quot; + next.getKey() + &quot; value=&quot; + next.getValue());
+ 5        }
+ 6
+ 7  Iterator&lt;String&gt; iterator = map.keySet().iterator();
+ 8        while (iterator.hasNext()){
+ 9            String key = iterator.next();
+10            System.out.println(&quot;key=&quot; + key + &quot; value=&quot; + map.get(key));
+11
+12        }
+</code></pre>
+<p><strong>强烈建议</strong>使用第一种 EntrySet 进行遍历,第一种可以把 key value 同时取出，第二种还得需要通过 key 取一次 value，效率较低。<br>
+小结：无论是 1.7 还是 1.8 其实都能看出 JDK 没有对它做任何的同步操作，所以并发会出问题，甚至出现死循环导致系统不可用。因此 JDK 推出了专项专用的 ConcurrentHashMap ，该类位于 java.util.concurrent 包下，专门用于解决并发问题。</p>
+<h1 id="concurrenthashmap">ConcurrentHashMap</h1>
+<h2 id="jdk17的实现方式">jdk1.7的实现方式</h2>
+<figure data-type="image" tabindex="2"><img src="https://MOMENTUMxx.github.io/post-images/1606101893541.png" alt="" loading="lazy"></figure>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>C</mi><mi>o</mi><mi>n</mi><mi>c</mi><mi>u</mi><mi>r</mi><mi>r</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>H</mi><mi>a</mi><mi>s</mi><mi>h</mi><mi>M</mi><mi>a</mi><mi>p</mi><mi mathvariant="normal">在</mi><mn>1.7</mn><mi mathvariant="normal">中</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">结</mi><mi mathvariant="normal">构</mi></mrow><annotation encoding="application/x-tex">ConcurrentHashMap在1.7中的结构
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mord cjk_fallback">在</span><span class="mord">1</span><span class="mord">.</span><span class="mord">7</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">结</span><span class="mord cjk_fallback">构</span></span></span></span></span></p>
+<h3 id="核心成员变量">核心成员变量</h3>
+<pre><code class="language-java">1    /**
+2     * Segment 数组，存放数据时首先需要定位到具体的 Segment 中。
+3     */
+4    final Segment&lt;K,V&gt;[] segments;
+5
+6    transient Set&lt;K&gt; keySet;
+7    transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet;
+</code></pre>
+<p>Segment 是 ConcurrentHashMap 的一个内部类，主要的组成如下：</p>
+<pre><code class="language-java"> 1    static final class Segment&lt;K,V&gt; extends ReentrantLock implements Serializable {
+ 2
+ 3        private static final long serialVersionUID = 2249069246763182397L;
+ 4
+ 5        // 和 HashMap 中的 HashEntry 作用一样，真正存放数据的桶
+ 6        transient volatile HashEntry&lt;K,V&gt;[] table;
+ 7
+ 8        transient int count;
+ 9
+10        transient int modCount;
+11
+12        transient int threshold;
+13
+14        final float loadFactor;
+15
+16    }
+</code></pre>
+<p>看看其中 HashEntry 的组成：</p>
+<pre><code class="language-java">static final class HashEntry&lt;K,V&gt; {
+        final int hash;
+        final K key;
+        volatile V value;
+        volatile HashEntry&lt;K,V&gt; next;
+
+        HashEntry(int hash, K key, V value, HashEntry&lt;K,V&gt; next) {
+            this.hash = hash;
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+}
+</code></pre>
+<p>和 HashMap 非常类似，唯一的区别就是其中的核心数据如 value ，以及链表都是 volatile 修饰的，保证了获取时的可见性。<br>
+原理上来说：ConcurrentHashMap 采用了分段锁技术，其中 Segment 继承于 ReentrantLock。不会像 HashTable 那样不管是 put 还是 get 操作都需要做同步处理，理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。每当一个线程占用锁访问一个 Segment 时，不会影响到其他的 Segment。<br>
+下面也来看看核心的 put get 方法。</p>
+<h3 id="put方法-3">put方法</h3>
+<pre><code class="language-java"> 1    public V put(K key, V value) {
+ 2        Segment&lt;K,V&gt; s;
+ 3        if (value == null)
+ 4            throw new NullPointerException();
+ 5        int hash = hash(key);
+ 6        int j = (hash &gt;&gt;&gt; segmentShift) &amp; segmentMask;
+ 7        if ((s = (Segment&lt;K,V&gt;)UNSAFE.getObject          // nonvolatile; recheck
+ 8             (segments, (j &lt;&lt; SSHIFT) + SBASE)) == null) //  in ensureSegment
+ 9            s = ensureSegment(j);
+10        return s.put(key, hash, value, false);
+11    }
+</code></pre>
+<p>首先是通过 key 定位到 Segment，之后在对应的 Segment 中进行具体的 put。</p>
+<pre><code class="language-java"> 1        final V put(K key, int hash, V value, boolean onlyIfAbsent) {
+ 2            HashEntry&lt;K,V&gt; node = tryLock() ? null :
+ 3                scanAndLockForPut(key, hash, value);
+ 4            V oldValue;
+ 5            try {
+ 6                HashEntry&lt;K,V&gt;[] tab = table;
+ 7                int index = (tab.length - 1) &amp; hash;
+ 8                HashEntry&lt;K,V&gt; first = entryAt(tab, index);
+ 9                for (HashEntry&lt;K,V&gt; e = first;;) {
+10                    if (e != null) {
+11                        K k;
+12                        if ((k = e.key) == key ||
+13                            (e.hash == hash &amp;&amp; key.equals(k))) {
+14                            oldValue = e.value;
+15                            if (!onlyIfAbsent) {
+16                                e.value = value;
+17                                ++modCount;
+18                            }
+19                            break;
+20                        }
+21                        e = e.next;
+22                    }
+23                    else {
+24                        if (node != null)
+25                            node.setNext(first);
+26                        else
+27                            node = new HashEntry&lt;K,V&gt;(hash, key, value, first);
+28                        int c = count + 1;
+29                        if (c &gt; threshold &amp;&amp; tab.length &lt; MAXIMUM_CAPACITY)
+30                            rehash(node);
+31                        else
+32                            setEntryAt(tab, index, node);
+33                        ++modCount;
+34                        count = c;
+35                        oldValue = null;
+36                        break;
+37                    }
+38                }
+39            } finally {
+40                unlock();
+41            }
+42            return oldValue;
+43        }
+</code></pre>
+<ol>
+<li>将当前 Segment 中的 table 通过 key 的 hashcode 定位到 HashEntry。</li>
+<li>遍历该 HashEntry，如果不为空则判断传入的 key 和当前遍历的 key 是否相等，相等则覆盖旧的 value。</li>
+<li>不为空则需要新建一个 HashEntry 并加入到 Segment 中，同时会先判断是否需要扩容。</li>
+<li>最后会解除在 1 中所获取当前 Segment 的锁。<br>
+虽然 HashEntry 中的 value 是用 volatile 关键词修饰的，但是并不能保证并发的原子性，所以 put 操作时仍然需要加锁处理。<br>
+首先第一步的时候会尝试获取锁，如果获取失败肯定就有其他线程存在竞争，则利用 scanAndLockForPut() 自旋获取锁。</li>
+</ol>
+<pre><code class="language-java">private HashEntry&lt;K,V&gt; scanAndLockForPut(K key, int hash, V value) {
+    HashEntry&lt;K,V&gt; first = entryForHash(this, hash);
+    HashEntry&lt;K,V&gt; e = first;
+    HashEntry&lt;K,V&gt; node = null;
+    int retries = -1; // negative while locating node
+    while (!tryLock()) {
+        HashEntry&lt;K,V&gt; f; // to recheck first below
+        if (retries &lt; 0) {
+            if (e == null) {
+                if (node == null) // speculatively create node
+                    node = new HashEntry&lt;K,V&gt;(hash, key, value, null);
+                retries = 0;
+            }
+            else if (key.equals(e.key))
+                retries = 0;
+            else
+                e = e.next;
+        }
+        else if (++retries &gt; MAX_SCAN_RETRIES) {
+            lock();
+            break;
+        }
+        else if ((retries &amp; 1) == 0 &amp;&amp;
+                    (f = entryForHash(this, hash)) != first) {
+            e = first = f; // re-traverse if entry changed
+            retries = -1;
+        }
+    }
+    return node;
+}
+</code></pre>
+<ol>
+<li>尝试自旋获取锁。</li>
+<li>如果重试的次数达到了 MAX_SCAN_RETRIES 则改为阻塞锁获取，保证能获取成功。</li>
+</ol>
+<h3 id="get方法-3">get方法</h3>
+<pre><code class="language-java"> 1    public V get(Object key) {
+ 2        Segment&lt;K,V&gt; s; // manually integrate access methods to reduce overhead
+ 3        HashEntry&lt;K,V&gt;[] tab;
+ 4        int h = hash(key);
+ 5        long u = (((h &gt;&gt;&gt; segmentShift) &amp; segmentMask) &lt;&lt; SSHIFT) + SBASE;
+ 6        if ((s = (Segment&lt;K,V&gt;)UNSAFE.getObjectVolatile(segments, u)) != null &amp;&amp;
+ 7            (tab = s.table) != null) {
+ 8            for (HashEntry&lt;K,V&gt; e = (HashEntry&lt;K,V&gt;) UNSAFE.getObjectVolatile
+ 9                     (tab, ((long)(((tab.length - 1) &amp; h)) &lt;&lt; TSHIFT) + TBASE);
+10                 e != null; e = e.next) {
+11                K k;
+12                if ((k = e.key) == key || (e.hash == h &amp;&amp; key.equals(k)))
+13                    return e.value;
+14            }
+15        }
+16        return null;
+17    }
+</code></pre>
+<p>get 逻辑比较简单：<br>
+只需要将 Key 通过 Hash 之后定位到具体的 Segment ，再通过一次 Hash 定位到具体的元素上。<br>
+由于 HashEntry 中的 value 属性是用 volatile 关键词修饰的，保证了内存可见性，所以每次获取时都是最新值。<br>
+ConcurrentHashMap 的 get 方法是非常高效的，因为整个过程都不需要加锁。</p>
+<h2 id="jdk18的实现方式">jdk1.8的实现方式</h2>
+<p>1.7 已经解决了并发问题，并且能支持 N 个 Segment 这么多次数的并发，但依然存在 HashMap 在 1.7 版本中的问题。</p>
+<blockquote>
+<p>那就是查询遍历链表效率太低。</p>
+</blockquote>
+<p>因此 1.8 做了一些数据结构上的调整。<br>
+<img src="https://MOMENTUMxx.github.io/post-images/1606103251170.png" alt="" loading="lazy"></p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>C</mi><mi>o</mi><mi>n</mi><mi>c</mi><mi>u</mi><mi>r</mi><mi>r</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>H</mi><mi>a</mi><mi>s</mi><mi>h</mi><mi>M</mi><mi>a</mi><mi>p</mi><mi mathvariant="normal">在</mi><mn>1.8</mn><mi mathvariant="normal">中</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">实</mi><mi mathvariant="normal">现</mi></mrow><annotation encoding="application/x-tex">ConcurrentHashMap在1.8中的实现
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">c</span><span class="mord mathdefault">u</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">a</span><span class="mord mathdefault">p</span><span class="mord cjk_fallback">在</span><span class="mord">1</span><span class="mord">.</span><span class="mord">8</span><span class="mord cjk_fallback">中</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">实</span><span class="mord cjk_fallback">现</span></span></span></span></span></p>
+<p>其中抛弃了原有的 Segment 分段锁，而采用了 CAS + synchronized 来保证并发安全性。<br>
+也将 1.7 中存放数据的 HashEntry 改为 Node，但作用都是相同的。其中的 val next 都用了 volatile 修饰，保证了可见性。</p>
+<h3 id="put方法-4">put方法</h3>
+<pre><code class="language-java">final V putVal(K key, V value, boolean onlyIfAbsent) {
+    if (key == null || value == null) throw new NullPointerException();
+    int hash = spread(key.hashCode());
+    int binCount = 0;
+    for (Node&lt;K,V&gt;[] tab = table;;) {
+        Node&lt;K,V&gt; f; int n, i, fh;
+        if (tab == null || (n = tab.length) == 0)
+            tab = initTable();
+        else if ((f = tabAt(tab, i = (n - 1) &amp; hash)) == null) {
+            if (casTabAt(tab, i, null,
+                            new Node&lt;K,V&gt;(hash, key, value, null)))
+                break;                   // no lock when adding to empty bin
+        }
+        else if ((fh = f.hash) == MOVED)
+            tab = helpTransfer(tab, f);
+        else {
+            V oldVal = null;
+            synchronized (f) {
+                if (tabAt(tab, i) == f) {
+                    if (fh &gt;= 0) {
+                        binCount = 1;
+                        for (Node&lt;K,V&gt; e = f;; ++binCount) {
+                            K ek;
+                            if (e.hash == hash &amp;&amp;
+                                ((ek = e.key) == key ||
+                                    (ek != null &amp;&amp; key.equals(ek)))) {
+                                oldVal = e.val;
+                                if (!onlyIfAbsent)
+                                    e.val = value;
+                                break;
+                            }
+                            Node&lt;K,V&gt; pred = e;
+                            if ((e = e.next) == null) {
+                                pred.next = new Node&lt;K,V&gt;(hash, key,
+                                                            value, null);
+                                break;
+                            }
+                        }
+                    }
+                    else if (f instanceof TreeBin) {
+                        Node&lt;K,V&gt; p;
+                        binCount = 2;
+                        if ((p = ((TreeBin&lt;K,V&gt;)f).putTreeVal(hash, key,
+                                                        value)) != null) {
+                            oldVal = p.val;
+                            if (!onlyIfAbsent)
+                                p.val = value;
+                        }
+                    }
+                }
+            }
+            if (binCount != 0) {
+                if (binCount &gt;= TREEIFY_THRESHOLD)
+                    treeifyBin(tab, i);
+                if (oldVal != null)
+                    return oldVal;
+                break;
+            }
+        }
+    }
+    addCount(1L, binCount);
+    return null;
+}
+</code></pre>
+<ol>
+<li>根据 key 计算出 hashcode 。</li>
+<li>判断是否需要进行初始化。</li>
+<li>f 即为当前 key 定位出的 Node，如果为空表示当前位置可以写入数据，利用 CAS 尝试写入，失败则自旋保证成功。</li>
+<li>如果当前位置的 hashcode == MOVED == -1,则需要进行扩容。</li>
+<li>如果都不满足，则利用 synchronized 锁写入数据。</li>
+<li>如果数量大于 TREEIFY_THRESHOLD 则要转换为红黑树。</li>
+</ol>
+<h3 id="get方法-4">get方法</h3>
+<pre><code class="language-java">public V get(Object key) {
+    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; e, p; int n, eh; K ek;
+    int h = spread(key.hashCode());
+    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;
+        (e = tabAt(tab, (n - 1) &amp; h)) != null) {
+        if ((eh = e.hash) == h) {
+            if ((ek = e.key) == key || (ek != null &amp;&amp; key.equals(ek)))
+                return e.val;
+        }
+        else if (eh &lt; 0)
+            return (p = e.find(h, key)) != null ? p.val : null;
+        while ((e = e.next) != null) {
+            if (e.hash == h &amp;&amp;
+                ((ek = e.key) == key || (ek != null &amp;&amp; key.equals(ek))))
+                return e.val;
+        }
+    }
+    return null;
+}
+</code></pre>
+<ol>
+<li>根据计算出来的 hashcode 寻址，如果就在桶上那么直接返回值。</li>
+<li>如果是红黑树那就按照树的方式获取值。</li>
+<li>就不满足那就按照链表的方式遍历获取值。</li>
+</ol>
+<p>小结：</p>
+<blockquote>
+<p>1.8 在 1.7 的数据结构上做了大的改动，采用红黑树之后可以保证查询效率（O(logn)），甚至取消了 ReentrantLock 改为了 synchronized。可以看出JDK1.8版本的ConcurrentHashMap的数据结构已经接近HashMap，相对而言，ConcurrentHashMap只是增加了同步的操作来控制并发，从JDK1.7版本的ReentrantLock+Segment+HashEntry，到JDK1.8版本中synchronized+CAS+HashEntry+红黑树。</p>
+</blockquote>
+<p>参考文章：<a href="https://blog.csdn.net/weixin_44460333/article/details/86770169">https://blog.csdn.net/weixin_44460333/article/details/86770169</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[LeetCode刷题]]></title>
         <id>https://MOMENTUMxx.github.io/post/leetcode-shua-ti/</id>
