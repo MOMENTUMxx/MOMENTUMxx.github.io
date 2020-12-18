@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://MOMENTUMxx.github.io</id>
     <title>王璐杰的BLOG</title>
-    <updated>2020-11-23T04:02:50.137Z</updated>
+    <updated>2020-12-18T09:51:12.019Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://MOMENTUMxx.github.io"/>
     <link rel="self" href="https://MOMENTUMxx.github.io/atom.xml"/>
@@ -372,7 +372,10 @@ static class Entry&lt;K, V&gt; implements Map.Entry&lt;K, V&gt;
 12        }
 </code></pre>
 <p><strong>强烈建议</strong>使用第一种 EntrySet 进行遍历,第一种可以把 key value 同时取出，第二种还得需要通过 key 取一次 value，效率较低。<br>
-小结：无论是 1.7 还是 1.8 其实都能看出 JDK 没有对它做任何的同步操作，所以并发会出问题，甚至出现死循环导致系统不可用。因此 JDK 推出了专项专用的 ConcurrentHashMap ，该类位于 java.util.concurrent 包下，专门用于解决并发问题。</p>
+小结：</p>
+<blockquote>
+<p>无论是 1.7 还是 1.8 其实都能看出 JDK 没有对它做任何的同步操作，所以并发会出问题，甚至出现死循环导致系统不可用。因此 JDK 推出了专项专用的 ConcurrentHashMap ，该类位于 java.util.concurrent 包下，专门用于解决并发问题。</p>
+</blockquote>
 <h1 id="concurrenthashmap">ConcurrentHashMap</h1>
 <h2 id="jdk17的实现方式">jdk1.7的实现方式</h2>
 <figure data-type="image" tabindex="2"><img src="https://MOMENTUMxx.github.io/post-images/1606101893541.png" alt="" loading="lazy"></figure>
@@ -3317,7 +3320,7 @@ end repeat【标签】;
 与虚拟机栈一样，本地方法栈区域也会抛出<code>StackOverflowError</code>和<code>OutOfMemoryError</code>异常。</p>
 <h1 id="java堆">Java堆</h1>
 <p>Java堆是<strong>被所有线程共享</strong>的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是<strong>存放对象实例</strong>，所有的对象实例以及数组都要在堆上分配。Java堆是垃圾收集器管理的主要区域，因此很多时候也被称做“<strong>GC堆</strong>”。<br>
-从内存回收的角度看，由于现代垃圾收集器大部分都是基于分代收集理论设计的，所以Java堆还可以细分为<strong>新生代</strong>、<strong>老年代</strong>和<strong>永久代</strong>，新生代又包括<code>Eden</code>空间、<code>From Survivor</code>空间和<code>To Survivor</code>空间。<br>
+从内存回收的角度看，由于现代垃圾收集器大部分都是基于分代收集理论设计的，所以Java堆还可以细分为<strong>新生代</strong>、<strong>老年代</strong>和<strong>永久代</strong>(Java8被移除)，新生代又包括<code>Eden</code>空间、<code>From Survivor</code>空间和<code>To Survivor</code>空间。<br>
 从内存分配的角度看，所有线程共享的Java堆中可以划分出多个线程私有的<strong>分配缓冲区</strong>（Thread Local Allocation Buffer, <strong>TLAB</strong>），以提升对象分配时的效率。<br>
 根据《Java虚拟机规范》的规定，Java堆可以处于物理上不连续的内存空间中，只要逻辑上是连续的即可。在实现时，既可以实现成固定大小的，也可以是可扩展的，不过当前主流的虚拟机都是按照可扩展来实现的。<br>
 如果在Java堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出<code>OutOfMemoryError</code>异常。</p>
