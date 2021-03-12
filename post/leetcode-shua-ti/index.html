@@ -9,7 +9,7 @@
 <meta name="description" content="行百里者半九十">
 <meta name="theme-color" content="#74c0fc">
 <title>LeetCode刷题 | 王璐杰的BLOG</title>
-<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1608285063676">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//favicon.ico?v=1615553491792">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/css/gemini.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/MOMENTUMxx/MOMENTUMxx.github.io@master//media/fonts/font-awesome.css">
 <link
@@ -281,9 +281,18 @@
 <li><a href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%920-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98">动态规划0-1背包问题</a></li>
 <li><a href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85">动态规划完全背包</a></li>
 <li><a href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%8D%9A%E5%BC%88%E8%AE%BA">动态规划博弈论</a></li>
+<li><a href="#%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98">经典问题</a></li>
 </ul>
 </li>
+<li><a href="#%E6%95%B0%E7%BB%84">数组</a>
+<ul>
 <li><a href="#%E6%97%8B%E8%BD%AC%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84">旋转排序数组</a></li>
+<li><a href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97">下一个排列</a></li>
+<li><a href="#%E5%8F%8C%E6%8C%87%E9%92%88">双指针</a></li>
+<li><a href="#%E6%91%86%E5%8A%A8">摆动</a></li>
+<li><a href="#k%E4%B8%AA%E4%B8%8D%E5%90%8C%E6%95%B4%E6%95%B0%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84">K个不同整数的子数组</a></li>
+</ul>
+</li>
 <li><a href="#%E5%9B%9E%E6%96%87">回文</a></li>
 <li><a href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E5%B7%A6%E5%8F%B3%E8%BE%B9%E7%95%8C">二分查找左右边界</a></li>
 <li><a href="#%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6">缓存机制</a></li>
@@ -297,15 +306,38 @@
 </ul>
 </li>
 <li><a href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C">二叉树搜索树的插入操作</a></li>
-<li><a href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0">完全二叉树的节点个数</a></li>
+<li><a href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C">二叉树搜索树的删除操作</a></li>
+<li><a href="#%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0">节点个数</a></li>
+<li><a href="#%E8%B7%AF%E5%BE%84%E5%92%8C">路径和</a></li>
+<li><a href="#%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88">最近公共祖先</a></li>
 <li><a href="#%E5%89%8D%E7%BC%80%E6%A0%91">前缀树</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91">构造二叉树</a></li>
+<li><a href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91">完全二叉树&amp;&amp;二叉搜索树&amp;&amp;对称二叉树</a></li>
 </ul>
 </li>
+<li><a href="#%E5%AD%90%E5%BA%8F%E5%88%97">子序列</a>
+<ul>
 <li><a href="#%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97lis">最长递增子序列（LIS）</a></li>
+<li><a href="#%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97lcs">最长公共子序列（LCS）</a></li>
+<li><a href="#%E5%9B%BA%E5%AE%9A%E9%95%BF%E5%BA%A6">固定长度</a></li>
+</ul>
+</li>
+<li><a href="#dfs">DFS</a>
+<ul>
+<li><a href="#%E6%9F%93%E8%89%B2%E6%B3%95">染色法</a></li>
 <li><a href="#%E8%AE%B0%E5%BF%86%E5%8C%96dfs%E8%BF%94%E5%9B%9E%E5%80%BCint">记忆化DFS（返回值int）</a></li>
+<li><a href="#%E5%9B%9E%E6%BA%AF">回溯</a></li>
+</ul>
+</li>
+<li><a href="#bfs">BFS</a></li>
 <li><a href="#%E5%B9%B6%E6%9F%A5%E9%9B%86">并查集</a></li>
 <li><a href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3">滑动窗口</a></li>
+<li><a href="#%E6%A0%88">栈</a>
+<ul>
 <li><a href="#%E5%8D%95%E8%B0%83%E6%A0%88">单调栈</a></li>
+<li><a href="#%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98">括号匹配问题</a></li>
+</ul>
+</li>
 <li><a href="#%E6%8E%92%E5%BA%8F">排序</a>
 <ul>
 <li><a href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F">归并排序</a></li>
@@ -316,6 +348,8 @@
 <ul>
 <li><a href="#%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%E6%89%BE%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9">快慢指针找中间节点</a></li>
 <li><a href="#%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8">翻转链表</a></li>
+<li><a href="#%E9%93%BE%E8%A1%A8%E6%8E%92%E5%BA%8F">链表排序</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E8%8A%82%E7%82%B9">删除链表节点</a></li>
 </ul>
 </li>
 </ul>
@@ -611,12 +645,12 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>13<span class="language" data-lan="minute">分钟</span></span>
+      <span>23<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>2469<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>4492<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
     
@@ -689,51 +723,69 @@
 <p>3、<a href="https://leetcode-cn.com/problems/target-sum/">目标和</a></p>
 <h2 id="动态规划完全背包">动态规划完全背包</h2>
 <p>1、<a href="https://leetcode-cn.com/problems/coin-change/">零钱兑换</a></p>
-<p>2、<a href="https://leetcode-cn.com/problems/coin-lcci/">硬币</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/coin-change-2/">零钱兑换 II</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/coin-lcci/">硬币</a></p>
 <h2 id="动态规划博弈论">动态规划博弈论</h2>
 <p>1、<a href="https://leetcode-cn.com/problems/predict-the-winner/">预测赢家</a></p>
 <p>2、<a href="https://leetcode-cn.com/problems/stone-game/">石子游戏</a></p>
-<h1 id="旋转排序数组">旋转排序数组</h1>
+<h2 id="经典问题">经典问题</h2>
+<p>1、<a href="https://leetcode-cn.com/problemset/all/?search=%E8%82%A1%E7%A5%A8">股票</a></p>
+<p>2、<a href="https://www.nowcoder.com/practice/05fed41805ae4394ab6607d0d745c8e4?tpId=190&amp;&amp;tqId=35213&amp;rp=1&amp;ru=/ta/job-code-high-rd&amp;qru=/ta/job-code-high-rd/question-ranking">最小编辑代价</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/super-egg-drop/">鸡蛋掉落</a></p>
+<h1 id="数组">数组</h1>
+<h2 id="旋转排序数组">旋转排序数组</h2>
 <p>1、<a href="https://leetcode-cn.com/problems/search-rotate-array-lcci/">搜索旋转数组</a></p>
 <p>2、<a href="https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/">旋转数组的最小数字</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/rotate-array/">旋转数组</a></p>
+<h2 id="下一个排列">下一个排列</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/next-permutation/">下一个排列</a></p>
+<h2 id="双指针">双指针</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/4sum/">四数之和</a></p>
+<h2 id="摆动">摆动</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/wiggle-subsequence/">摆动序列</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/longest-turbulent-subarray/">最长湍流子数组</a></p>
+<h2 id="k个不同整数的子数组">K个不同整数的子数组</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/subarrays-with-k-different-integers/">K 个不同整数的子数组</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/">至多包含 K 个不同字符的最长子串</a></p>
 <h1 id="回文">回文</h1>
 <p>1、<a href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">最长回文子序列</a></p>
 <p>2、<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">最长回文子串</a></p>
 <h1 id="二分查找左右边界">二分查找左右边界</h1>
 <pre><code class="language-java">private int binarySearch(int[] array, int target) {
-        int leftBound, rightBound, left = 0, right = array.length;
-        //找左边界
-        while (left &lt; right) {
-            int mid = ((right - left) &gt;&gt; 1) + left;
-            if (array[mid] &gt;= target) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+    int leftBound, rightBound, left = 0, right = array.length - 1;
+    //找左边界，向左侧逼近
+    while (left &lt; right) {
+        int mid = ((right - left) &gt;&gt; 1) + left;
+        if (array[mid] &lt; target) {
+            left = mid + 1;
+        } else {
+            right = mid;
         }
-        leftBound = left &gt;= array.length ? -1 : left;
-        System.out.println(&quot;leftBound:&quot; + leftBound);
-        //没找到左边界,说明没有要查找的数,直接退出
-        if (leftBound == -1) {
-            return 0;
-        }
-        left = leftBound;
-        right = array.length;
-        //找右边界
-        while (left &lt; right) {
-            int mid = ((right - left) &gt;&gt; 1) + left;
-            if (array[mid] &lt;= target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
-        }
-        rightBound = left - 1;
-        System.out.println(&quot;rightBound:&quot; + rightBound);
-        System.out.println(rightBound - leftBound + 1);
-        return rightBound - leftBound + 1;
     }
+    leftBound = left &gt;= array.length || array[left] ！= target ? -1 : left;
+    System.out.println(&quot;leftBound:&quot; + leftBound);
+    //没找到左边界,说明没有要查找的数,直接退出
+    if (leftBound == -1) {
+        return 0;
+    }
+    //注意right的初始值（很巧妙）
+    right = array.length;
+    //找的是右边界+1的位置，向右侧逼近
+    while (left &lt; right) {
+        int mid = ((right - left) &gt;&gt; 1) + left;
+        if (array[mid] &lt;= target) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    rightBound = left - 1;
+    System.out.println(&quot;rightBound:&quot; + rightBound);
+    System.out.println(rightBound - leftBound + 1);
+    return rightBound - leftBound + 1;
+}
 </code></pre>
+<p>1、<a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">在排序数组中查找元素的第一个和最后一个位置</a></p>
 <h1 id="缓存机制">缓存机制</h1>
 <p>1、<a href="https://leetcode-cn.com/problems/lru-cache/">LRU （Least Recently Used）</a></p>
 <p>2、<a href="https://leetcode-cn.com/problems/lfu-cache/">LFU （Least Frequently Used）</a></p>
@@ -788,7 +840,7 @@
     public List&lt;Integer&gt; postorderTraversal(TreeNode root) {
         List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();
         if (root == null) {
-            return ans;q
+            return ans;
         }
         Deque&lt;TreeNode&gt; stack = new ArrayDeque&lt;&gt;();
         stack.add(root);
@@ -808,6 +860,7 @@
     }
 }
 </code></pre>
+<p>1、<a href="https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/">重建二叉树</a></p>
 <h2 id="二叉树搜索树的插入操作">二叉树搜索树的插入操作</h2>
 <ol>
 <li>
@@ -857,24 +910,417 @@
 </code></pre>
 </li>
 </ol>
-<h2 id="完全二叉树的节点个数">完全二叉树的节点个数</h2>
+<h2 id="二叉树搜索树的删除操作">二叉树搜索树的删除操作</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/delete-node-in-a-bst/">删除二叉搜索树中的节点</a></p>
+<h2 id="节点个数">节点个数</h2>
 <p>1、<a href="https://leetcode-cn.com/problems/count-complete-tree-nodes/">完全二叉树的节点个数</a></p>
+<h2 id="路径和">路径和</h2>
+<p>1、<a href="https://www.nowcoder.com/practice/da785ea0f64b442488c125b441a4ba4a?tpId=190&amp;&amp;tqId=35180&amp;rp=1&amp;ru=/ta/job-code-high-rd&amp;qru=/ta/job-code-high-rd/question-ranking">二叉树的最大路径和</a></p>
+<h2 id="最近公共祖先">最近公共祖先</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/">二叉树的最近公共祖先</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">二叉搜索树的最近公共祖先</a></p>
 <h2 id="前缀树">前缀树</h2>
+<pre><code class="language-java">class Trie {
+
+    class TrieNode {
+        //指向子节点的连接
+        private TrieNode[] links;
+        private final int R = 26;
+        private boolean isEnd;
+
+        private TrieNode() {
+            links = new TrieNode[R];
+        }
+
+        public boolean containsKey(char ch) {
+            return links[ch - 'a'] != null;
+        }
+
+        public TrieNode get(char ch) {
+            return links[ch - 'a'];
+        }
+
+        public void put(char ch, TrieNode node) {
+            links[ch - 'a'] = node;
+        }
+
+        public void setEnd() {
+            isEnd = true;
+        }
+
+        public boolean isEnd() {
+            return isEnd;
+        }
+    }
+
+    private TrieNode root;
+
+    /**
+     * Initialize your data structure here.
+     */
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    /**
+     * Inserts a word into the trie.
+     */
+    public void insert(String word) {
+        TrieNode node = root;
+        for (int i = 0; i &lt; word.length(); i++) {
+            char currentChar = word.charAt(i);
+            if (!node.containsKey(currentChar)) {
+                node.put(currentChar, new TrieNode());
+            }
+            node = node.get(currentChar);
+        }
+        node.setEnd();
+    }
+
+    //在前缀树中查找键前缀或者整个键
+    private TrieNode searchPrefix(String word) {
+        TrieNode node = root;
+        for (int i = 0; i &lt; word.length(); i++) {
+            char curLetter = word.charAt(i);
+            if (node.containsKey(curLetter)) {
+                node = node.get(curLetter);
+            } else {
+                return null;
+            }
+        }
+        return node;
+    }
+
+    /**
+     * Returns if the word is in the trie.
+     */
+    public boolean search(String word) {
+        TrieNode node = searchPrefix(word);
+        return node != null &amp;&amp; node.isEnd();
+    }
+
+    /**
+     * Returns if there is any word in the trie that starts with the given prefix.
+     */
+    public boolean startsWith(String prefix) {
+        TrieNode node = searchPrefix(prefix);
+        return node != null;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
+</code></pre>
 <p>1、<a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/">实现 Trie (前缀树)</a></p>
 <p>2、<a href="https://leetcode-cn.com/problems/t9-lcci/">T9键盘</a></p>
-<h1 id="最长递增子序列lis">最长递增子序列（LIS）</h1>
-<p>1、<a href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">最长上升子序列</a></p>
+<h2 id="构造二叉树">构造二叉树</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">从前序与中序遍历序列构造二叉树</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">从中序与后序遍历序列构造二叉树</a></p>
+<h2 id="完全二叉树二叉搜索树对称二叉树">完全二叉树&amp;&amp;二叉搜索树&amp;&amp;对称二叉树</h2>
+<p>1、完全二叉树</p>
+<p>1）DFS</p>
+<pre><code class="language-java">class Solution {
+    int size = 0, maxIdx = 0;
+	//树的size是否等于最后一个节点的indexCode
+    public boolean isCompleteTree(TreeNode root) {
+        dfs(root, 1);
+        return size == maxIdx;
+    }
+
+    private void dfs(TreeNode root, int idx) {
+        if (root == null) {
+            return;
+        }
+        size++;
+        maxIdx = Math.max(maxIdx, idx);
+        dfs(root.left, 2 * idx);
+        dfs(root.right, 2 * idx + 1);
+    }
+}
+</code></pre>
+<p>2）BFS</p>
+<pre><code class="language-java">class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node != null) {
+                queue.offer(node.left);
+                queue.offer(node.right);
+            } else {
+                //遇到空节点break
+                break;
+            }
+        }
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            //完全二叉树的空节点以后不能有非空节点存在
+            if (node != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+</code></pre>
+<p>2、二叉搜索树</p>
+<pre><code class="language-java">class Solution {
+    long pre = Long.MIN_VALUE;
+    //利用中序遍历的有序性
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+        if (root.val &lt;= pre) {
+            return false;
+        }
+        pre = root.val;
+        return isValidBST(root.right);
+    }
+}
+</code></pre>
+<p>3、对称二叉树</p>
+<p>1）递归</p>
+<pre><code class="language-java">public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return helper(root, root);
+    }
+
+    private boolean helper(TreeNode root1, TreeNode root2) {
+        if (root1 == null &amp;&amp; root2 == null) {
+            return true;
+        }
+        if (root1 != null &amp;&amp; root2 == null) {
+            return false;
+        }
+        if (root2 != null &amp;&amp; root1 == null) {
+            return false;
+        }
+        return root1.val == root2.val &amp;&amp; helper(root1.left, root2.right) &amp;&amp; helper(root1.right, root2.left);
+    }
+}
+</code></pre>
+<p>2）迭代</p>
+<pre><code class="language-java">public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue&lt;TreeNode&gt; queue1 = new LinkedList&lt;&gt;();
+        Queue&lt;TreeNode&gt; queue2 = new LinkedList&lt;&gt;();
+        queue1.offer(root);
+        queue2.offer(root);
+        while (!queue1.isEmpty()) {
+            int size = queue1.size();
+            for (int i = 0; i &lt; size; i++) {
+                TreeNode node1 = queue1.poll();
+                TreeNode node2 = queue2.poll();
+                if (node1 != null &amp;&amp; node2 != null) {
+                    if (node1.val != node2.val) {
+                        return false;
+                    }
+                } else if (node1 == null &amp;&amp; node2 != null) {
+                    return false;
+                } else if (node2 == null &amp;&amp; node1 != null) {
+                    return false;
+                }
+                if (node1 != null) {
+                    queue1.offer(node1.left);
+                    queue1.offer(node1.right);
+                }
+                if (node2 != null) {
+                    queue2.offer(node2.right);
+                    queue2.offer(node2.left);
+                }
+            }
+        }
+        return true;
+    }
+}
+</code></pre>
+<h1 id="子序列">子序列</h1>
+<h2 id="最长递增子序列lis">最长递增子序列（LIS）</h2>
+<p>给你一个整数数组 <code>nums</code> ，找到其中最长严格递增子序列的长度</p>
+<p>解法一：动态规划--时间复杂度O(n2)，大数据量会超时</p>
+<pre><code class="language-java">import java.util.Arrays;
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int len = nums.length;
+        if (len &lt; 2) {
+            return len;
+        }
+        //dp[i]表示以nums[i]结尾的最长上升子序列的长度
+        int[] dp = new int[len];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i &lt; len; i++) {
+            for (int j = 0; j &lt; i; j++) {
+                if (nums[i] &gt; nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i &lt; len; i++) {
+            ans = Math.max(ans, dp[i]);
+        }
+        return ans;
+    }
+}
+</code></pre>
+<p>给定数组arr，设长度为n，输出arr的最长递增子序列。（如果有多个答案，请输出其中字典序最小的）</p>
+<p>解法二：贪心+二分--时间复杂度O(nlogn)</p>
+<pre><code class="language-java">import java.util.Arrays;
+
+//参考题解https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/
+public class Solution {
+    public int[] LIS(int[] nums) {
+        int n = nums.length;
+        //tail[i]表示长度为i+1的LIS的结尾的最小值
+        //tail是有序的
+        int[] tail = new int[n];
+        //dp[i]表示以nums[i]结尾的LIS的长度
+        int[] dp = new int[n];
+        tail[0] = nums[0];
+        dp[0] = 1;
+        //end表示有序数组tail的最后一个已经赋值的元素的索引
+        int end = 0;
+        for (int i = 1; i &lt; n; i++) {
+            //LIS的长度加一
+            if (nums[i] &gt; tail[end]) {
+                end++;
+                tail[end] = nums[i];
+                dp[i] = end + 1;
+            } else {
+                //二分法在有序数组tail中找到第一个大于等于arr[i]的元素，尝试让那个元素更小
+                int left = 0, right = end;
+                while (left &lt; right) {
+                    int mid = ((right - left) &gt;&gt;&gt; 1) + left;
+                    if (tail[mid] &lt; nums[i]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+                tail[left] = nums[i];
+                dp[i] = left + 1;
+            }
+        }
+        //System.out.println(Arrays.toString(dp));
+        //end+1即为LIS的长度
+        int[] ans = new int[end + 1];
+        int idx = ans.length;
+        //因为要字典序，所以从后向前遍历
+        for (int i = n - 1; i &gt;= 0; i--) {
+            if (dp[i] == idx) {
+                idx--;
+                ans[idx] = nums[i];
+            }
+        }
+        return ans;
+    }
+}
+</code></pre>
 <p>2、<a href="https://leetcode-cn.com/problems/russian-doll-envelopes/">俄罗斯套娃信封问题</a></p>
 <p>3、<a href="https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/comments/">最长递增子序列的个数</a></p>
-<h1 id="记忆化dfs返回值int">记忆化DFS（返回值int）</h1>
+<h2 id="最长公共子序列lcs">最长公共子序列（LCS）</h2>
+<p>1、<a href="https://www.nowcoder.com/practice/6d29638c85bb4ffd80c020fe244baf11?tpId=190&amp;tqId=35360&amp;rp=1&amp;ru=%2Fta%2Fjob-code-high-rd&amp;qru=%2Fta%2Fjob-code-high-rd%2Fquestion-ranking">最长公共子序列</a></p>
+<h2 id="固定长度">固定长度</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/create-maximum-number/">拼接最大数</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/find-the-most-competitive-subsequence/">找出最具竞争力的子序列</a></p>
+<h1 id="dfs">DFS</h1>
+<h2 id="染色法">染色法</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/possible-bipartition/">可能的二分法</a></p>
+<h2 id="记忆化dfs返回值int">记忆化DFS（返回值int）</h2>
 <p>1、<a href="https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/">矩阵中的最长递增路径</a></p>
+<h2 id="回溯">回溯</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/permutations/">全排列</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/permutations-ii/">全排列 II</a></p>
+<h1 id="bfs">BFS</h1>
+<p>1、<a href="https://leetcode-cn.com/problems/word-ladder/">单词接龙</a></p>
 <h1 id="并查集">并查集</h1>
+<pre><code class="language-java">class UF {
+    //集合的个数
+    private int count;
+    //记录节点的根
+    private int[] parent;
+    //记录根节点的深度
+    private int[] rank;
+
+    public UF(int N) {
+        count = N;
+        parent = new int[N];
+        rank = new int[N];
+        for (int i = 0; i &lt; N; i++) {
+            parent[i] = i;
+            rank[i] = 1;
+        }
+    }
+
+    public int count() {
+        return count;
+    }
+
+    public boolean connected(int p, int q) {
+        return find(p) == find(q);
+    }
+
+    //路径压缩
+    public int find(int p) {
+        if (p != parent[p]) {
+            parent[p] = find(parent[p]);
+        }
+        return parent[p];
+    }
+
+    public void union(int p, int q) {
+        int pRoot = find(p);
+        int qRoot = find(q);
+        if (pRoot == qRoot) {
+            return;
+        }
+        //按秩合并，加快查找速度
+        if (rank[pRoot] &lt; rank[qRoot]) {
+            parent[pRoot] = qRoot;
+        } else if (rank[pRoot] &gt; rank[qRoot]) {
+            parent[qRoot] = pRoot;
+        } else {
+            parent[pRoot] = qRoot;
+            rank[qRoot]++;
+        }
+        count--;
+    }
+}
+</code></pre>
 <p>1、<a href="https://leetcode-cn.com/problems/friend-circles/">朋友圈</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/redundant-connection/">冗余连接</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/redundant-connection-ii/">冗余连接 II</a></p>
 <h1 id="滑动窗口">滑动窗口</h1>
 <p>1、<a href="https://leetcode-cn.com/problems/longest-repeating-character-replacement/submissions/">替换后的最长重复字符</a></p>
-<h1 id="单调栈">单调栈</h1>
+<p>2、<a href="https://leetcode-cn.com/problems/sliding-window-maximum/">滑动窗口最大值</a></p>
+<h1 id="栈">栈</h1>
+<h2 id="单调栈">单调栈</h2>
 <p>1、<a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">柱状图中最大的矩形</a></p>
-<p>2、<a href="https://leetcode-cn.com/problems/trapping-rain-water/submissions/">接雨水</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/maximal-rectangle/">最大矩形</a></p>
+<p>3、<a href="https://leetcode-cn.com/problems/trapping-rain-water/submissions/">接雨水</a></p>
+<p>4、<a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">包含min函数的栈</a></p>
+<h2 id="括号匹配问题">括号匹配问题</h2>
+<p>1、<a href="https://leetcode-cn.com/problems/valid-parenthesis-string/">有效的括号字符串</a></p>
 <h1 id="排序">排序</h1>
 <h2 id="归并排序">归并排序</h2>
 <pre><code class="language-java">//自顶向下的归并排序
@@ -897,7 +1343,7 @@ class Solution {
             insertionSort(nums, left, right);
             return;
         }
-        int mid = left + ((right - left) &gt;&gt; 1);
+        int mid = left + ((right - left) &gt;&gt;&gt; 1);
         mergeSort(nums, left, mid, tmp);
         mergeSort(nums, mid + 1, right, tmp);
         //如果数组的这个子区间本身有序,无需合并
@@ -1089,8 +1535,7 @@ public class Solution {
 }
 </code></pre>
 <p>1、<a href="https://leetcode-cn.com/problems/sort-colors/">颜色分类</a></p>
-<p>2、<a href="https://leetcode-cn.com/problems/kth-largest-element-in-an-array/">数组中的第K个最大元素</a></p>
-<p>3、<a href="https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/">最小的k个数</a></p>
+<p>2、<a href="https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/">最小的k个数</a></p>
 <h1 id="链表">链表</h1>
 <h2 id="快慢指针找中间节点">快慢指针找中间节点</h2>
 <pre><code class="language-java">//找第一个中间节点
@@ -1117,6 +1562,7 @@ class Solution {
     }
 }
 </code></pre>
+<p>1、<a href="https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=190&amp;tags=&amp;title=&amp;diffculty=0&amp;judgeStatus=0&amp;rp=1">两个链表的第一个公共节点</a></p>
 <h2 id="翻转链表">翻转链表</h2>
 <pre><code class="language-java">//以1-&gt;2-&gt;3-&gt;4为例，翻转过程如下
 //1. 1   2-&gt;3-&gt;4
@@ -1141,6 +1587,93 @@ class Solution {
 </code></pre>
 <p>1、<a href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">删除链表的倒数第N个节点</a></p>
 <p>2、<a href="https://leetcode-cn.com/problems/reorder-list/">重排链表</a></p>
+<p>3、<strong><a href="https://www.nowcoder.com/practice/b49c3dc907814e9bbfa8437c251b028e?tpId=190&amp;&amp;tqId=35192&amp;rp=1&amp;ru=/ta/job-code-high-rd&amp;qru=/ta/job-code-high-rd/question-ranking">链表中的节点每k个一组翻转</a></strong></p>
+<h2 id="链表排序">链表排序</h2>
+<p>1、插入排序</p>
+<pre><code class="language-java">/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head; 
+        ListNode cur = dummyHead.next;
+        while (cur != null &amp;&amp; cur.next != null) {
+            //是否需要插入排序
+            if (cur.val &gt; cur.next.val) {
+                //移除待排序元素
+                ListNode tmp = cur.next;
+                cur.next = cur.next.next;
+                //找到在序列中适当的位置并将其插入
+                ListNode ptr = dummyHead;
+                //注意写成&lt;=会慢很多
+                while (ptr.next != null &amp;&amp; ptr.next.val &lt; tmp.val) {
+                    ptr = ptr.next;
+                }
+                tmp.next = ptr.next;
+                ptr.next = tmp;
+                //不用更新cur的位置
+            } else {
+                cur = cur.next;
+            }
+        }
+        return dummyHead.next;
+    }
+}
+</code></pre>
+<p>2、归并排序</p>
+<pre><code class="language-java">/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        //快慢指针找中间节点(节点个数为偶数时找的是中间位置左边的节点)
+        ListNode fast = head, slow = head;
+        while (fast.next != null &amp;&amp; fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        //将链表分两段
+        ListNode secondHalf = slow.next;
+        slow.next = null;
+        //分
+        ListNode left = sortList(head);
+        ListNode right = sortList(secondHalf);
+		//合
+        ListNode dummyHead = new ListNode(0);
+        ListNode ptr = dummyHead;
+        while (left != null &amp;&amp; right != null) {
+            if (left.val &lt; right.val) {
+                ptr.next = left;
+                left = left.next;
+            } else {
+                ptr.next = right;
+                right = right.next;
+            }
+            ptr = ptr.next;
+        }
+        ptr.next = left == null ? right : left;
+        return dummyHead.next;
+    }
+}
+</code></pre>
+<h2 id="删除链表节点">删除链表节点</h2>
+<p>1、<a href="https://www.nowcoder.com/practice/f95dcdafbde44b22a6d741baf71653f6?tpId=190&amp;tags=&amp;title=&amp;diffculty=0&amp;judgeStatus=0&amp;rp=1">删除链表的倒数第n个节点</a></p>
 
             </div>
             
@@ -2953,51 +3486,69 @@ ConcurrentHashMap 的 get 方法是非常高效的，因为整个过程都不需
 &lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/target-sum/&#34;&gt;目标和&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;动态规划完全背包&#34;&gt;动态规划完全背包&lt;/h2&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/coin-change/&#34;&gt;零钱兑换&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/coin-lcci/&#34;&gt;硬币&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/coin-change-2/&#34;&gt;零钱兑换 II&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/coin-lcci/&#34;&gt;硬币&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;动态规划博弈论&#34;&gt;动态规划博弈论&lt;/h2&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/predict-the-winner/&#34;&gt;预测赢家&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/stone-game/&#34;&gt;石子游戏&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;旋转排序数组&#34;&gt;旋转排序数组&lt;/h1&gt;
+&lt;h2 id=&#34;经典问题&#34;&gt;经典问题&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problemset/all/?search=%E8%82%A1%E7%A5%A8&#34;&gt;股票&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://www.nowcoder.com/practice/05fed41805ae4394ab6607d0d745c8e4?tpId=190&amp;amp;&amp;amp;tqId=35213&amp;amp;rp=1&amp;amp;ru=/ta/job-code-high-rd&amp;amp;qru=/ta/job-code-high-rd/question-ranking&#34;&gt;最小编辑代价&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/super-egg-drop/&#34;&gt;鸡蛋掉落&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;数组&#34;&gt;数组&lt;/h1&gt;
+&lt;h2 id=&#34;旋转排序数组&#34;&gt;旋转排序数组&lt;/h2&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/search-rotate-array-lcci/&#34;&gt;搜索旋转数组&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/xuan-zhuan-shu-zu-de-zui-xiao-shu-zi-lcof/&#34;&gt;旋转数组的最小数字&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/rotate-array/&#34;&gt;旋转数组&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;下一个排列&#34;&gt;下一个排列&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/next-permutation/&#34;&gt;下一个排列&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;双指针&#34;&gt;双指针&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/4sum/&#34;&gt;四数之和&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;摆动&#34;&gt;摆动&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/wiggle-subsequence/&#34;&gt;摆动序列&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-turbulent-subarray/&#34;&gt;最长湍流子数组&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;k个不同整数的子数组&#34;&gt;K个不同整数的子数组&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/subarrays-with-k-different-integers/&#34;&gt;K 个不同整数的子数组&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-substring-with-at-most-k-distinct-characters/&#34;&gt;至多包含 K 个不同字符的最长子串&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;回文&#34;&gt;回文&lt;/h1&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-palindromic-subsequence/&#34;&gt;最长回文子序列&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-palindromic-substring/&#34;&gt;最长回文子串&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;二分查找左右边界&#34;&gt;二分查找左右边界&lt;/h1&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;private int binarySearch(int[] array, int target) {
-        int leftBound, rightBound, left = 0, right = array.length;
-        //找左边界
-        while (left &amp;lt; right) {
-            int mid = ((right - left) &amp;gt;&amp;gt; 1) + left;
-            if (array[mid] &amp;gt;= target) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+    int leftBound, rightBound, left = 0, right = array.length - 1;
+    //找左边界，向左侧逼近
+    while (left &amp;lt; right) {
+        int mid = ((right - left) &amp;gt;&amp;gt; 1) + left;
+        if (array[mid] &amp;lt; target) {
+            left = mid + 1;
+        } else {
+            right = mid;
         }
-        leftBound = left &amp;gt;= array.length ? -1 : left;
-        System.out.println(&amp;quot;leftBound:&amp;quot; + leftBound);
-        //没找到左边界,说明没有要查找的数,直接退出
-        if (leftBound == -1) {
-            return 0;
-        }
-        left = leftBound;
-        right = array.length;
-        //找右边界
-        while (left &amp;lt; right) {
-            int mid = ((right - left) &amp;gt;&amp;gt; 1) + left;
-            if (array[mid] &amp;lt;= target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
-        }
-        rightBound = left - 1;
-        System.out.println(&amp;quot;rightBound:&amp;quot; + rightBound);
-        System.out.println(rightBound - leftBound + 1);
-        return rightBound - leftBound + 1;
     }
+    leftBound = left &amp;gt;= array.length || array[left] ！= target ? -1 : left;
+    System.out.println(&amp;quot;leftBound:&amp;quot; + leftBound);
+    //没找到左边界,说明没有要查找的数,直接退出
+    if (leftBound == -1) {
+        return 0;
+    }
+    //注意right的初始值（很巧妙）
+    right = array.length;
+    //找的是右边界+1的位置，向右侧逼近
+    while (left &amp;lt; right) {
+        int mid = ((right - left) &amp;gt;&amp;gt; 1) + left;
+        if (array[mid] &amp;lt;= target) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    rightBound = left - 1;
+    System.out.println(&amp;quot;rightBound:&amp;quot; + rightBound);
+    System.out.println(rightBound - leftBound + 1);
+    return rightBound - leftBound + 1;
+}
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/&#34;&gt;在排序数组中查找元素的第一个和最后一个位置&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;缓存机制&#34;&gt;缓存机制&lt;/h1&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/lru-cache/&#34;&gt;LRU （Least Recently Used）&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/lfu-cache/&#34;&gt;LFU （Least Frequently Used）&lt;/a&gt;&lt;/p&gt;
@@ -3052,7 +3603,7 @@ ConcurrentHashMap 的 get 方法是非常高效的，因为整个过程都不需
     public List&amp;lt;Integer&amp;gt; postorderTraversal(TreeNode root) {
         List&amp;lt;Integer&amp;gt; ans = new ArrayList&amp;lt;&amp;gt;();
         if (root == null) {
-            return ans;q
+            return ans;
         }
         Deque&amp;lt;TreeNode&amp;gt; stack = new ArrayDeque&amp;lt;&amp;gt;();
         stack.add(root);
@@ -3072,6 +3623,7 @@ ConcurrentHashMap 的 get 方法是非常高效的，因为整个过程都不需
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/&#34;&gt;重建二叉树&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;二叉树搜索树的插入操作&#34;&gt;二叉树搜索树的插入操作&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -3121,24 +3673,417 @@ ConcurrentHashMap 的 get 方法是非常高效的，因为整个过程都不需
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;完全二叉树的节点个数&#34;&gt;完全二叉树的节点个数&lt;/h2&gt;
+&lt;h2 id=&#34;二叉树搜索树的删除操作&#34;&gt;二叉树搜索树的删除操作&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/delete-node-in-a-bst/&#34;&gt;删除二叉搜索树中的节点&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;节点个数&#34;&gt;节点个数&lt;/h2&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/count-complete-tree-nodes/&#34;&gt;完全二叉树的节点个数&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;路径和&#34;&gt;路径和&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://www.nowcoder.com/practice/da785ea0f64b442488c125b441a4ba4a?tpId=190&amp;amp;&amp;amp;tqId=35180&amp;amp;rp=1&amp;amp;ru=/ta/job-code-high-rd&amp;amp;qru=/ta/job-code-high-rd/question-ranking&#34;&gt;二叉树的最大路径和&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;最近公共祖先&#34;&gt;最近公共祖先&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/&#34;&gt;二叉树的最近公共祖先&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/&#34;&gt;二叉搜索树的最近公共祖先&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;前缀树&#34;&gt;前缀树&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class Trie {
+
+    class TrieNode {
+        //指向子节点的连接
+        private TrieNode[] links;
+        private final int R = 26;
+        private boolean isEnd;
+
+        private TrieNode() {
+            links = new TrieNode[R];
+        }
+
+        public boolean containsKey(char ch) {
+            return links[ch - &#39;a&#39;] != null;
+        }
+
+        public TrieNode get(char ch) {
+            return links[ch - &#39;a&#39;];
+        }
+
+        public void put(char ch, TrieNode node) {
+            links[ch - &#39;a&#39;] = node;
+        }
+
+        public void setEnd() {
+            isEnd = true;
+        }
+
+        public boolean isEnd() {
+            return isEnd;
+        }
+    }
+
+    private TrieNode root;
+
+    /**
+     * Initialize your data structure here.
+     */
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    /**
+     * Inserts a word into the trie.
+     */
+    public void insert(String word) {
+        TrieNode node = root;
+        for (int i = 0; i &amp;lt; word.length(); i++) {
+            char currentChar = word.charAt(i);
+            if (!node.containsKey(currentChar)) {
+                node.put(currentChar, new TrieNode());
+            }
+            node = node.get(currentChar);
+        }
+        node.setEnd();
+    }
+
+    //在前缀树中查找键前缀或者整个键
+    private TrieNode searchPrefix(String word) {
+        TrieNode node = root;
+        for (int i = 0; i &amp;lt; word.length(); i++) {
+            char curLetter = word.charAt(i);
+            if (node.containsKey(curLetter)) {
+                node = node.get(curLetter);
+            } else {
+                return null;
+            }
+        }
+        return node;
+    }
+
+    /**
+     * Returns if the word is in the trie.
+     */
+    public boolean search(String word) {
+        TrieNode node = searchPrefix(word);
+        return node != null &amp;amp;&amp;amp; node.isEnd();
+    }
+
+    /**
+     * Returns if there is any word in the trie that starts with the given prefix.
+     */
+    public boolean startsWith(String prefix) {
+        TrieNode node = searchPrefix(prefix);
+        return node != null;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/implement-trie-prefix-tree/&#34;&gt;实现 Trie (前缀树)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/t9-lcci/&#34;&gt;T9键盘&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;最长递增子序列lis&#34;&gt;最长递增子序列（LIS）&lt;/h1&gt;
-&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-increasing-subsequence/&#34;&gt;最长上升子序列&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;构造二叉树&#34;&gt;构造二叉树&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/&#34;&gt;从前序与中序遍历序列构造二叉树&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/&#34;&gt;从中序与后序遍历序列构造二叉树&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;完全二叉树二叉搜索树对称二叉树&#34;&gt;完全二叉树&amp;amp;&amp;amp;二叉搜索树&amp;amp;&amp;amp;对称二叉树&lt;/h2&gt;
+&lt;p&gt;1、完全二叉树&lt;/p&gt;
+&lt;p&gt;1）DFS&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class Solution {
+    int size = 0, maxIdx = 0;
+	//树的size是否等于最后一个节点的indexCode
+    public boolean isCompleteTree(TreeNode root) {
+        dfs(root, 1);
+        return size == maxIdx;
+    }
+
+    private void dfs(TreeNode root, int idx) {
+        if (root == null) {
+            return;
+        }
+        size++;
+        maxIdx = Math.max(maxIdx, idx);
+        dfs(root.left, 2 * idx);
+        dfs(root.right, 2 * idx + 1);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2）BFS&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue&amp;lt;TreeNode&amp;gt; queue = new LinkedList&amp;lt;&amp;gt;();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node != null) {
+                queue.offer(node.left);
+                queue.offer(node.right);
+            } else {
+                //遇到空节点break
+                break;
+            }
+        }
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            //完全二叉树的空节点以后不能有非空节点存在
+            if (node != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2、二叉搜索树&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class Solution {
+    long pre = Long.MIN_VALUE;
+    //利用中序遍历的有序性
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+        if (root.val &amp;lt;= pre) {
+            return false;
+        }
+        pre = root.val;
+        return isValidBST(root.right);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;3、对称二叉树&lt;/p&gt;
+&lt;p&gt;1）递归&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return helper(root, root);
+    }
+
+    private boolean helper(TreeNode root1, TreeNode root2) {
+        if (root1 == null &amp;amp;&amp;amp; root2 == null) {
+            return true;
+        }
+        if (root1 != null &amp;amp;&amp;amp; root2 == null) {
+            return false;
+        }
+        if (root2 != null &amp;amp;&amp;amp; root1 == null) {
+            return false;
+        }
+        return root1.val == root2.val &amp;amp;&amp;amp; helper(root1.left, root2.right) &amp;amp;&amp;amp; helper(root1.right, root2.left);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2）迭代&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue&amp;lt;TreeNode&amp;gt; queue1 = new LinkedList&amp;lt;&amp;gt;();
+        Queue&amp;lt;TreeNode&amp;gt; queue2 = new LinkedList&amp;lt;&amp;gt;();
+        queue1.offer(root);
+        queue2.offer(root);
+        while (!queue1.isEmpty()) {
+            int size = queue1.size();
+            for (int i = 0; i &amp;lt; size; i++) {
+                TreeNode node1 = queue1.poll();
+                TreeNode node2 = queue2.poll();
+                if (node1 != null &amp;amp;&amp;amp; node2 != null) {
+                    if (node1.val != node2.val) {
+                        return false;
+                    }
+                } else if (node1 == null &amp;amp;&amp;amp; node2 != null) {
+                    return false;
+                } else if (node2 == null &amp;amp;&amp;amp; node1 != null) {
+                    return false;
+                }
+                if (node1 != null) {
+                    queue1.offer(node1.left);
+                    queue1.offer(node1.right);
+                }
+                if (node2 != null) {
+                    queue2.offer(node2.right);
+                    queue2.offer(node2.left);
+                }
+            }
+        }
+        return true;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;子序列&#34;&gt;子序列&lt;/h1&gt;
+&lt;h2 id=&#34;最长递增子序列lis&#34;&gt;最长递增子序列（LIS）&lt;/h2&gt;
+&lt;p&gt;给你一个整数数组 &lt;code&gt;nums&lt;/code&gt; ，找到其中最长严格递增子序列的长度&lt;/p&gt;
+&lt;p&gt;解法一：动态规划--时间复杂度O(n2)，大数据量会超时&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Arrays;
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int len = nums.length;
+        if (len &amp;lt; 2) {
+            return len;
+        }
+        //dp[i]表示以nums[i]结尾的最长上升子序列的长度
+        int[] dp = new int[len];
+        Arrays.fill(dp, 1);
+        for (int i = 1; i &amp;lt; len; i++) {
+            for (int j = 0; j &amp;lt; i; j++) {
+                if (nums[i] &amp;gt; nums[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i &amp;lt; len; i++) {
+            ans = Math.max(ans, dp[i]);
+        }
+        return ans;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;给定数组arr，设长度为n，输出arr的最长递增子序列。（如果有多个答案，请输出其中字典序最小的）&lt;/p&gt;
+&lt;p&gt;解法二：贪心+二分--时间复杂度O(nlogn)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.util.Arrays;
+
+//参考题解https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/
+public class Solution {
+    public int[] LIS(int[] nums) {
+        int n = nums.length;
+        //tail[i]表示长度为i+1的LIS的结尾的最小值
+        //tail是有序的
+        int[] tail = new int[n];
+        //dp[i]表示以nums[i]结尾的LIS的长度
+        int[] dp = new int[n];
+        tail[0] = nums[0];
+        dp[0] = 1;
+        //end表示有序数组tail的最后一个已经赋值的元素的索引
+        int end = 0;
+        for (int i = 1; i &amp;lt; n; i++) {
+            //LIS的长度加一
+            if (nums[i] &amp;gt; tail[end]) {
+                end++;
+                tail[end] = nums[i];
+                dp[i] = end + 1;
+            } else {
+                //二分法在有序数组tail中找到第一个大于等于arr[i]的元素，尝试让那个元素更小
+                int left = 0, right = end;
+                while (left &amp;lt; right) {
+                    int mid = ((right - left) &amp;gt;&amp;gt;&amp;gt; 1) + left;
+                    if (tail[mid] &amp;lt; nums[i]) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+                tail[left] = nums[i];
+                dp[i] = left + 1;
+            }
+        }
+        //System.out.println(Arrays.toString(dp));
+        //end+1即为LIS的长度
+        int[] ans = new int[end + 1];
+        int idx = ans.length;
+        //因为要字典序，所以从后向前遍历
+        for (int i = n - 1; i &amp;gt;= 0; i--) {
+            if (dp[i] == idx) {
+                idx--;
+                ans[idx] = nums[i];
+            }
+        }
+        return ans;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/russian-doll-envelopes/&#34;&gt;俄罗斯套娃信封问题&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/number-of-longest-increasing-subsequence/comments/&#34;&gt;最长递增子序列的个数&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;记忆化dfs返回值int&#34;&gt;记忆化DFS（返回值int）&lt;/h1&gt;
+&lt;h2 id=&#34;最长公共子序列lcs&#34;&gt;最长公共子序列（LCS）&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://www.nowcoder.com/practice/6d29638c85bb4ffd80c020fe244baf11?tpId=190&amp;amp;tqId=35360&amp;amp;rp=1&amp;amp;ru=%2Fta%2Fjob-code-high-rd&amp;amp;qru=%2Fta%2Fjob-code-high-rd%2Fquestion-ranking&#34;&gt;最长公共子序列&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;固定长度&#34;&gt;固定长度&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/create-maximum-number/&#34;&gt;拼接最大数&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/find-the-most-competitive-subsequence/&#34;&gt;找出最具竞争力的子序列&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;dfs&#34;&gt;DFS&lt;/h1&gt;
+&lt;h2 id=&#34;染色法&#34;&gt;染色法&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/possible-bipartition/&#34;&gt;可能的二分法&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;记忆化dfs返回值int&#34;&gt;记忆化DFS（返回值int）&lt;/h2&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/&#34;&gt;矩阵中的最长递增路径&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;回溯&#34;&gt;回溯&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/permutations/&#34;&gt;全排列&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/permutations-ii/&#34;&gt;全排列 II&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;bfs&#34;&gt;BFS&lt;/h1&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/word-ladder/&#34;&gt;单词接龙&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;并查集&#34;&gt;并查集&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;class UF {
+    //集合的个数
+    private int count;
+    //记录节点的根
+    private int[] parent;
+    //记录根节点的深度
+    private int[] rank;
+
+    public UF(int N) {
+        count = N;
+        parent = new int[N];
+        rank = new int[N];
+        for (int i = 0; i &amp;lt; N; i++) {
+            parent[i] = i;
+            rank[i] = 1;
+        }
+    }
+
+    public int count() {
+        return count;
+    }
+
+    public boolean connected(int p, int q) {
+        return find(p) == find(q);
+    }
+
+    //路径压缩
+    public int find(int p) {
+        if (p != parent[p]) {
+            parent[p] = find(parent[p]);
+        }
+        return parent[p];
+    }
+
+    public void union(int p, int q) {
+        int pRoot = find(p);
+        int qRoot = find(q);
+        if (pRoot == qRoot) {
+            return;
+        }
+        //按秩合并，加快查找速度
+        if (rank[pRoot] &amp;lt; rank[qRoot]) {
+            parent[pRoot] = qRoot;
+        } else if (rank[pRoot] &amp;gt; rank[qRoot]) {
+            parent[qRoot] = pRoot;
+        } else {
+            parent[pRoot] = qRoot;
+            rank[qRoot]++;
+        }
+        count--;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/friend-circles/&#34;&gt;朋友圈&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/redundant-connection/&#34;&gt;冗余连接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/redundant-connection-ii/&#34;&gt;冗余连接 II&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;滑动窗口&#34;&gt;滑动窗口&lt;/h1&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/longest-repeating-character-replacement/submissions/&#34;&gt;替换后的最长重复字符&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;单调栈&#34;&gt;单调栈&lt;/h1&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/sliding-window-maximum/&#34;&gt;滑动窗口最大值&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;栈&#34;&gt;栈&lt;/h1&gt;
+&lt;h2 id=&#34;单调栈&#34;&gt;单调栈&lt;/h2&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/largest-rectangle-in-histogram/&#34;&gt;柱状图中最大的矩形&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/submissions/&#34;&gt;接雨水&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;最大矩形&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/trapping-rain-water/submissions/&#34;&gt;接雨水&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;4、&lt;a href=&#34;https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/&#34;&gt;包含min函数的栈&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;括号匹配问题&#34;&gt;括号匹配问题&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/valid-parenthesis-string/&#34;&gt;有效的括号字符串&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;排序&#34;&gt;排序&lt;/h1&gt;
 &lt;h2 id=&#34;归并排序&#34;&gt;归并排序&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//自顶向下的归并排序
@@ -3161,7 +4106,7 @@ class Solution {
             insertionSort(nums, left, right);
             return;
         }
-        int mid = left + ((right - left) &amp;gt;&amp;gt; 1);
+        int mid = left + ((right - left) &amp;gt;&amp;gt;&amp;gt; 1);
         mergeSort(nums, left, mid, tmp);
         mergeSort(nums, mid + 1, right, tmp);
         //如果数组的这个子区间本身有序,无需合并
@@ -3353,8 +4298,7 @@ public class Solution {
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/sort-colors/&#34;&gt;颜色分类&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/kth-largest-element-in-an-array/&#34;&gt;数组中的第K个最大元素&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;3、&lt;a href=&#34;https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/&#34;&gt;最小的k个数&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/zui-xiao-de-kge-shu-lcof/&#34;&gt;最小的k个数&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;链表&#34;&gt;链表&lt;/h1&gt;
 &lt;h2 id=&#34;快慢指针找中间节点&#34;&gt;快慢指针找中间节点&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//找第一个中间节点
@@ -3381,6 +4325,7 @@ class Solution {
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://www.nowcoder.com/practice/6ab1d9a29e88450685099d45c9e31e46?tpId=190&amp;amp;tags=&amp;amp;title=&amp;amp;diffculty=0&amp;amp;judgeStatus=0&amp;amp;rp=1&#34;&gt;两个链表的第一个公共节点&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;翻转链表&#34;&gt;翻转链表&lt;/h2&gt;
 &lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;//以1-&amp;gt;2-&amp;gt;3-&amp;gt;4为例，翻转过程如下
 //1. 1   2-&amp;gt;3-&amp;gt;4
@@ -3405,6 +4350,93 @@ class Solution {
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;1、&lt;a href=&#34;https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/&#34;&gt;删除链表的倒数第N个节点&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2、&lt;a href=&#34;https://leetcode-cn.com/problems/reorder-list/&#34;&gt;重排链表&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;strong&gt;&lt;a href=&#34;https://www.nowcoder.com/practice/b49c3dc907814e9bbfa8437c251b028e?tpId=190&amp;amp;&amp;amp;tqId=35192&amp;amp;rp=1&amp;amp;ru=/ta/job-code-high-rd&amp;amp;qru=/ta/job-code-high-rd/question-ranking&#34;&gt;链表中的节点每k个一组翻转&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;链表排序&#34;&gt;链表排序&lt;/h2&gt;
+&lt;p&gt;1、插入排序&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head; 
+        ListNode cur = dummyHead.next;
+        while (cur != null &amp;amp;&amp;amp; cur.next != null) {
+            //是否需要插入排序
+            if (cur.val &amp;gt; cur.next.val) {
+                //移除待排序元素
+                ListNode tmp = cur.next;
+                cur.next = cur.next.next;
+                //找到在序列中适当的位置并将其插入
+                ListNode ptr = dummyHead;
+                //注意写成&amp;lt;=会慢很多
+                while (ptr.next != null &amp;amp;&amp;amp; ptr.next.val &amp;lt; tmp.val) {
+                    ptr = ptr.next;
+                }
+                tmp.next = ptr.next;
+                ptr.next = tmp;
+                //不用更新cur的位置
+            } else {
+                cur = cur.next;
+            }
+        }
+        return dummyHead.next;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;2、归并排序&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        //快慢指针找中间节点(节点个数为偶数时找的是中间位置左边的节点)
+        ListNode fast = head, slow = head;
+        while (fast.next != null &amp;amp;&amp;amp; fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        //将链表分两段
+        ListNode secondHalf = slow.next;
+        slow.next = null;
+        //分
+        ListNode left = sortList(head);
+        ListNode right = sortList(secondHalf);
+		//合
+        ListNode dummyHead = new ListNode(0);
+        ListNode ptr = dummyHead;
+        while (left != null &amp;amp;&amp;amp; right != null) {
+            if (left.val &amp;lt; right.val) {
+                ptr.next = left;
+                left = left.next;
+            } else {
+                ptr.next = right;
+                right = right.next;
+            }
+            ptr = ptr.next;
+        }
+        ptr.next = left == null ? right : left;
+        return dummyHead.next;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;删除链表节点&#34;&gt;删除链表节点&lt;/h2&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://www.nowcoder.com/practice/f95dcdafbde44b22a6d741baf71653f6?tpId=190&amp;amp;tags=&amp;amp;title=&amp;amp;diffculty=0&amp;amp;judgeStatus=0&amp;amp;rp=1&#34;&gt;删除链表的倒数第n个节点&lt;/a&gt;&lt;/p&gt;
 ">LeetCode刷题</a>
       </div>
       
